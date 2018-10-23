@@ -7,5 +7,6 @@ public class Hola {
 		System.out.println("hola mundo");
 		System.out.println("hola richard");
 	}
-
+//comentario Diego
+	//sdasd
 }
