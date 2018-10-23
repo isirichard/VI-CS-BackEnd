@@ -6,5 +6,5 @@ public class Hola {
 		// TODO Auto-generated method stub
 		System.out.println("hola mundo");
 	}
-
+//comentario Diego
 }
