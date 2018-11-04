@@ -12,9 +12,20 @@ public class AppMain {
 		//mi primer comentario mmaraza
 		//mi primer comentario sxxx
 		//este ocmentario es de la rama MARAZA
+<<<<<<< HEAD
 
 		//mi primer comentario mmar
          // mi primer comentario waldir
 
+=======
+		if(true) {
+			//IF CONDICIONAL
+			mara(5);
+		}
+	}
+	
+	public static void mara(int i) {
+x	x		
+>>>>>>> maraza
 	}
 }
