@@ -13,6 +13,13 @@ public class AppMain {
 		//mi primer comentario mmar
          // mi primer comentario waldir
          // fusion de rama waldir con master
+		
 
+	}
+	public static void hola() {
+		if(true) {
+			//metodo por waldir
+		}
+		
 	}
 }
