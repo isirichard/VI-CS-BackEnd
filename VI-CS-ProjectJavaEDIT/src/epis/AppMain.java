@@ -5,8 +5,7 @@ public class AppMain {
 	public int yonathancito (int dato) {
 		return dato+1;
 	}
-	
-	
+
 	public static void main(String[] args) {
 		System.out.println("Hola Mundo");
 		int contador=0;
