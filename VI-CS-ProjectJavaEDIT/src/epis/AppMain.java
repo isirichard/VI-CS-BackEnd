@@ -11,6 +11,7 @@ public class AppMain {
 		//mi primer comentario mmaraza
 =======
 		//mi primer comentario mmar
+         // mi primer comentario waldir
 >>>>>>> 355410e83ad3320092c92f80dfd7b69d7a350fde
 	}
 }
