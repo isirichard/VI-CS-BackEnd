@@ -1,8 +1,12 @@
 package epis;
 
 public class AppMain {
+	
 	public int yonathancito (int dato) {
 		return dato+1;
+	}
+	public void yonathancito2(int dato) {
+		dato=dato+2;
 	}
 	public static void main(String[] args) {
 		System.out.println("Hola Mundo");
