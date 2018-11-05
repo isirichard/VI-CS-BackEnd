@@ -5,6 +5,9 @@ public class AppMain {
 	public int yonathancito (int dato) {
 		return dato+1;
 	}
+	public int yonathancito3 (int dato) {
+		return dato+1;
+	}
 	public static void main(String[] args) {
 		System.out.println("Hola Mundo");
 		//mi primer comentario
