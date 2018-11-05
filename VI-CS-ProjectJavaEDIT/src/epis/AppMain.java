@@ -12,6 +12,9 @@ public class AppMain {
 	public int yonathancito4 (int dato) {
 		return dato+1;
 	}
+	public int RAMAFINAL (int dato) {
+		return dato+1;
+	}
 
 	public static void main(String[] args) {
 		System.out.println("Hola Mundo");
