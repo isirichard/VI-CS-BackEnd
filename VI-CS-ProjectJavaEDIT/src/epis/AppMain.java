@@ -13,10 +13,16 @@ public class AppMain {
 	public int yonathancito4 (int dato) {
 		return dato+1;
 	}
+<<<<<<< HEAD
 	public int creandoramafinal (int dato) {
 		return dato+1;
 	}
 
+=======
+	public int RAMAFINAL (int dato) {
+		return dato+1;
+	}
+>>>>>>> yonathancito
 
 	public static void main(String[] args) {
 		System.out.println("Hola Mundo");
