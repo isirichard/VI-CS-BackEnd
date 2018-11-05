@@ -6,6 +6,15 @@ public class AppMain {
 		return dato+1;
 	}
 
+
+	public int yonathancito3 (int dato) {
+		return dato+1;
+	}
+	public int yonathancito4 (int dato) {
+		return dato+1;
+	}
+
+
 	public static void main(String[] args) {
 		System.out.println("Hola Mundo");
 		int contador=0;
@@ -20,19 +29,19 @@ public class AppMain {
 		//mi primer comentario
 
 
-		//mi primer comentario mmarasodaskñmdñaskm
+		//mi primer comentario mmarasodaskÃ±mdÃ±askm
 
 		//mi segundo comentario
 
 		//mi primer comentario mmaraza
 
 
-		//comentario de mi rama mi m�todo
-
-		//mi primer comentario mmarasodask�md�askm
-
+		//comentario de mi rama mi método
 
 		//mi primer comentario mmarasodaskñmdñaskm
+
+
+		//mi primer comentario mmarasodaskÃ±mdÃ±askm
 
 
 
