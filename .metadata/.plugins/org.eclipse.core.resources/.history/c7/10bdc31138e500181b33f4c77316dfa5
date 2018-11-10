@@ -1,0 +1,9 @@
+package com.edit.model;
+
+public class Colaborador {
+
+	public Colaborador() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

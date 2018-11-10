@@ -1,0 +1,9 @@
+package com.edit.model;
+
+public class Documento {
+
+	public Documento() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

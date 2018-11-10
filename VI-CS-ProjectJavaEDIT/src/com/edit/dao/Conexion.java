@@ -15,6 +15,7 @@ public class Conexion {
 		Properties properties = new Properties();
 		
 		try{
+			
 			properties.load(inputStream);
 			String driver = properties.getProperty("driver");
 			String url = properties.getProperty("url");
@@ -22,6 +23,7 @@ public class Conexion {
 			String password = properties.getProperty("password");
 			Class.forName(driver);
 			cx = DriverManager.getConnection(url, user, password);
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}				

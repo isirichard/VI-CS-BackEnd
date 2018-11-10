@@ -1,0 +1,9 @@
+package com.edit.model;
+
+public class Tipo_Cliente {
+
+	public Tipo_Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

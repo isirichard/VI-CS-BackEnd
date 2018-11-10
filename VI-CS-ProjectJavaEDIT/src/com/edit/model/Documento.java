@@ -10,7 +10,7 @@ public class Documento {
 	private Date FecEmi;
 	private Pedido DocPed;
 	private Estado DocEst;
-	private TipoPago DocTipPag;
+	private Tipo_Pago DocTipPag;
 	private Date DocFecVenCre;
 	private int DocConDia;
 	
@@ -62,11 +62,11 @@ public class Documento {
 		DocEst = docEst;
 	}
 
-	public TipoPago getDocTipPag() {
+	public Tipo_Pago getDocTipPag() {
 		return DocTipPag;
 	}
 
-	public void setDocTipPag(TipoPago docTipPag) {
+	public void setDocTipPag(Tipo_Pago docTipPag) {
 		DocTipPag = docTipPag;
 	}
 

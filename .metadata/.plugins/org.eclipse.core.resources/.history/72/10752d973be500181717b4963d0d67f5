@@ -1,0 +1,9 @@
+package Pricipal;
+
+public class probando {
+
+	public probando() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.edit.model;
+
+public class Acceso {
+
+	public Acceso() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

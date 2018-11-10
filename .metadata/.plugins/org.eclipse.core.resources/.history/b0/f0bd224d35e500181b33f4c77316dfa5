@@ -1,0 +1,5 @@
+package com.edit.model;
+
+public class Tipo_Pago {
+
+}

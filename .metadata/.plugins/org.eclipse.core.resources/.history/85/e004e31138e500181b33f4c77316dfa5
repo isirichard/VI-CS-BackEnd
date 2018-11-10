@@ -1,0 +1,9 @@
+package com.edit.model;
+
+public class Empresa {
+
+	public Empresa() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

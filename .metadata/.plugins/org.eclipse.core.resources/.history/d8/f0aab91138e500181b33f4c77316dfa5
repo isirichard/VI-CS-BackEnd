@@ -1,0 +1,9 @@
+package com.edit.model;
+
+public class Historial_Movimientos {
+
+	public Historial_Movimientos() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

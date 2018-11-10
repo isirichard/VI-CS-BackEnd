@@ -1,0 +1,13 @@
+package com.edit.model;
+
+public class Tipo_Cliente {
+
+	private int TipCliCod;
+	private String TipCliDes;
+	private Estado TipCliEst;
+	
+	public Tipo_Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
