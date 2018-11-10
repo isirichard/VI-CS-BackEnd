@@ -21,9 +21,9 @@ public class Conexion {
 			String url = properties.getProperty("url");
 			String user = properties.getProperty("user");
 			String password = properties.getProperty("password");
-			Class.forName(driver);
+			//Class.forName(driver);
 			cx = DriverManager.getConnection(url, user, password);
-			
+			System.out.println("Me concte");
 		}catch(Exception e){
 			e.printStackTrace();
 		}				
