@@ -6,22 +6,22 @@ public class Colaborador {
 	private Acceso ColAcc;
 	
 	
-	public int getCodigo() {
+	public int getColCod() {
 		return ColCod;
 	}
 
 
-	public void setCodigo(int colCod) {
+	public void setColCod(int colCod) {
 		ColCod = colCod;
 	}
 
 
-	public Acceso getAcceso() {
+	public Acceso getColAcc() {
 		return ColAcc;
 	}
 
 
-	public void setAcceso(Acceso colAcc) {
+	public void setColAcc(Acceso colAcc) {
 		ColAcc = colAcc;
 	}
 

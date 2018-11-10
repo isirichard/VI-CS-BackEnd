@@ -11,22 +11,22 @@ public class Tipo_Pago {
 	public Tipo_Pago() {
 		// TODO Auto-generated constructor stub
 	}
-	public int getCodigo() {
+	public int getTipPagCod() {
 		return TipPagCod;
 	}
-	public void setCodigo(int tipPagCod) {
+	public void setTipPagCod(int tipPagCod) {
 		TipPagCod = tipPagCod;
 	}
-	public String getDescripcion() {
+	public String getTipPagDes() {
 		return TipPagDes;
 	}
-	public void setDescripcion(String tipPagDes) {
+	public void setTipPagDes(String tipPagDes) {
 		TipPagDes = tipPagDes;
 	}
-	public Estado getEstado() {
+	public Estado getTipPagEst() {
 		return TipPagEst;
 	}
-	public void setEEstado(Estado tipPagEst) {
+	public void setTipPagEst(Estado tipPagEst) {
 		TipPagEst = tipPagEst;
 	}
 	
