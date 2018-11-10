@@ -8,37 +8,30 @@ public class Pedido {
 	private int DetCan;
 	private double DetPreTot;
 	private Inventario DetInv;
-	public List<Producto> getProductos() {
+	public List<Producto> getDetProd() {
 		return DetProd;
 	}
-	public void setProductos(List<Producto> detProd) {
+	public void setDetProd(List<Producto> detProd) {
 		DetProd = detProd;
 	}
-	public int getCantidad() {
+	public int getDetCan() {
 		return DetCan;
 	}
-	public void setCantidad(int detCan) {
+	public void setDetCan(int detCan) {
 		DetCan = detCan;
 	}
-	public double getTotal() {
+	public double getDetPreTot() {
 		return DetPreTot;
 	}
-	public void setTotal(double detPreTot) {
+	public void setDetPreTot(double detPreTot) {
 		DetPreTot = detPreTot;
 	}
-	public Inventario getInventario() {
+	public Inventario getDetInv() {
 		return DetInv;
 	}
-	public void setInventario(Inventario detInv) {
+	public void setDetInv(Inventario detInv) {
 		DetInv = detInv;
 	}
-	
-	public void verificaStock() {
-		
-	}
-	
-	
-	
 	public Pedido() {
 		// TODO Auto-generated constructor stub
 	}

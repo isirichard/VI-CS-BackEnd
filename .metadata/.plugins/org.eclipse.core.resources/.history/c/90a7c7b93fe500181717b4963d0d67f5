@@ -14,62 +14,67 @@ public class Documento {
 	private Date DocFecVenCre;
 	private int DocConDia;
 	
-	public int getNumeroDocumento() {
+	public int getDocNum() {
 		return DocNum;
 	}
 
-	public void setNumeroDocumento(int docNum) {
+	public void setDocNum(int docNum) {
 		DocNum = docNum;
 	}
 
+	public Empresa getDocEmp() {
+		return DocEmp;
+	}
 
-	
+	public void setDocEmp(Empresa docEmp) {
+		DocEmp = docEmp;
+	}
 
-	public Colaborador getColaborador() {
+	public Colaborador getDocCol() {
 		return DocCol;
 	}
 
-	public void setColaborador(Colaborador docCol) {
+	public void setDocCol(Colaborador docCol) {
 		DocCol = docCol;
 	}
 
-	public Date getFechaEmision() {
+	public Date getFecEmi() {
 		return FecEmi;
 	}
 
-	public void setFechaEmision(Date fecEmi) {
+	public void setFecEmi(Date fecEmi) {
 		FecEmi = fecEmi;
 	}
 
-	public Pedido getPedido() {
+	public Pedido getDocPed() {
 		return DocPed;
 	}
 
-	public void setPedido(Pedido docPed) {
+	public void setDocPed(Pedido docPed) {
 		DocPed = docPed;
 	}
 
-	public Estado getEstado() {
+	public Estado getDocEst() {
 		return DocEst;
 	}
 
-	public void setEstado(Estado docEst) {
+	public void setDocEst(Estado docEst) {
 		DocEst = docEst;
 	}
 
-	public Tipo_Pago getTipoPago() {
+	public Tipo_Pago getDocTipPag() {
 		return DocTipPag;
 	}
 
-	public void setTipoPago(Tipo_Pago docTipPag) {
+	public void setDocTipPag(Tipo_Pago docTipPag) {
 		DocTipPag = docTipPag;
 	}
 
-	public Date getFechaVencimientoCredito() {
+	public Date getDocFecVenCre() {
 		return DocFecVenCre;
 	}
 
-	public void setFechaVencimientoCredito(Date docFecVenCre) {
+	public void setDocFecVenCre(Date docFecVenCre) {
 		DocFecVenCre = docFecVenCre;
 	}
 
@@ -85,15 +90,4 @@ public class Documento {
 		// TODO Auto-generated constructor stub
 	}
 
-public void Aprobacion() {
-		
-	}
-	
-public void ContadorDias() {
-	
-}
-
-
-	
-	
 }

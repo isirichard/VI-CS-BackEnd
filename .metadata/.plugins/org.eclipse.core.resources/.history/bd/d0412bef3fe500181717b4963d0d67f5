@@ -10,27 +10,27 @@ public class Acceso {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getCodigo() {
+	public int getAccCod() {
 		return AccCod;
 	}
 
-	public void setCodigo(int accCod) {
+	public void setAccCod(int accCod) {
 		AccCod = accCod;
 	}
 
-	public String getDescripcion() {
+	public String getAccDes() {
 		return AccDes;
 	}
 
-	public void setDescripcion(String accDes) {
+	public void setAccDes(String accDes) {
 		AccDes = accDes;
 	}
 
-	public Estado getEstado() {
+	public Estado getAccEst() {
 		return AccEst;
 	}
 
-	public void setEstado(Estado accEst) {
+	public void setAccEst(Estado accEst) {
 		AccEst = accEst;
 	}
 
