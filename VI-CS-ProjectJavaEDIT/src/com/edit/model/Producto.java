@@ -4,7 +4,7 @@ public class Producto {
 	private int ProdCod;
 	private String ProdDes;
 	private Proveedor ProdTipPro;
-	private Tipo_Producto ProdTipPro;
+	private Tipo_Producto ProdTipPro2;
 	private int ProdCan;
 	private double ProdPre;
 	
@@ -16,7 +16,7 @@ public class Producto {
 	public Proveedor getProveedor() {
 		return ProdTipPro;
 	}
-	public Tipo_Producto() {
+	public Proveedor Tipo_Producto() {
 		return ProdTipPro;
 	}
 	public int getCantidad() {

@@ -11,15 +11,15 @@ public class Test {
 		IPersonaDAO dao = new PersonaDAOImpl();
 		Persona per = new Persona();
 		
-		per.setNombres("Mito");
-		per.setApellidos("Code");
+		//per.setNombres("Mito");
+		//per.setApellidos("Code");
 		//dao.agregar(per);
 		
 		List<Persona> lista = dao.listarTodos();
 		//lista.forEach(x -> System.out.println(x.getId() + "-" + x.getNombres() + "-" + x.getApellidos()));
 		
 		for(Persona x : lista){
-			System.out.println(x.getId() + "-" + x.getNombres() + "-" + x.getApellidos());
+			//System.out.println(x.getId() + "-" + x.getNombres() + "-" + x.getApellidos());
 		}
 	}
 }

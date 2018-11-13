@@ -1,4 +1,4 @@
-package Pricipal;
+package Principal;
 
 import java.sql.*;
 public class probando {

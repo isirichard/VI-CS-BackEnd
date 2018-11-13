@@ -1,16 +1,12 @@
 package com.edit.model;
 
 public class Tipo_Cliente {
-<<<<<<< HEAD
-
-=======
->>>>>>> waldir_codigo
 	private int TipCliCod;
 	private String TipCliDes;
 	private Estado TipCliEst;
 	
 	public Tipo_Cliente() {
-<<<<<<< HEAD
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -38,13 +34,6 @@ public class Tipo_Cliente {
 		TipCliEst = tipCliEst;
 	}
 
-	
-	
-	
-	
-=======
-		
-	}
 
 	public int getCodigo() {
 		return TipCliCod;
@@ -71,5 +60,4 @@ public class Tipo_Cliente {
 	}
 	
 
->>>>>>> waldir_codigo
 }

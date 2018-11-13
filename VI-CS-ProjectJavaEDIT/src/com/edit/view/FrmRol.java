@@ -1,4 +1,4 @@
-package Interfaz;
+package com.edit.view;
 
 import java.awt.Color;
 import java.awt.Font;

@@ -1,5 +1,7 @@
 package com.edit.model;
 
+import java.util.Date;
+
 public class Nota_Venta {
 	
 	private Cliente NotVenCli;

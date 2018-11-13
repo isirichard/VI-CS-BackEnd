@@ -22,8 +22,8 @@ public class PersonaDAOImpl implements IPersonaDAO {
 		try {
 			String sql = "INSERT INTO PERSONA(nombres, apellidos) VALUES (?,?)";
 			PreparedStatement preparedStatement = cx.prepareStatement(sql);
-			preparedStatement.setString(1, persona.getNombres());
-			preparedStatement.setString(2, persona.getApellidos());
+			//preparedStatement.setString(1, persona.getNombres());
+			//preparedStatement.setString(2, persona.getApellidos());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (Exception e) {
@@ -49,9 +49,9 @@ public class PersonaDAOImpl implements IPersonaDAO {
 		try {
 			String sql = "UPDATE PERSONA SET NOMBRES = ?, APELLIDOS = ? WHERE ID = ?";
 			PreparedStatement preparedStatement = cx.prepareStatement(sql);
-			preparedStatement.setString(1, persona.getNombres());
-			preparedStatement.setString(2, persona.getApellidos());
-			preparedStatement.setInt(3, persona.getId());
+			//preparedStatement.setString(1, persona.getNombres());
+			//preparedStatement.setString(2, persona.getApellidos());
+			//preparedStatement.setInt(3, persona.getId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (Exception e) {
@@ -68,9 +68,9 @@ public class PersonaDAOImpl implements IPersonaDAO {
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM Persona");
 			while (resultSet.next()) {
 				Persona persona = new Persona();
-				persona.setId(resultSet.getInt("id"));
-				persona.setNombres(resultSet.getString("nombres"));
-				persona.setApellidos(resultSet.getString("apellidos"));
+				//persona.setId(resultSet.getInt("id"));
+				//persona.setNombres(resultSet.getString("nombres"));
+				//persona.setApellidos(resultSet.getString("apellidos"));
 				personas.add(persona);
 			}
 			resultSet.close();
@@ -90,9 +90,9 @@ public class PersonaDAOImpl implements IPersonaDAO {
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				persona.setId(resultSet.getInt("id"));
-				persona.setNombres(resultSet.getString("nombres"));
-				persona.setApellidos(resultSet.getString("apellidos"));
+				//persona.setId(resultSet.getInt("id"));
+				//persona.setNombres(resultSet.getString("nombres"));
+				//persona.setApellidos(resultSet.getString("apellidos"));
 			}
 			resultSet.close();
 			preparedStatement.close();

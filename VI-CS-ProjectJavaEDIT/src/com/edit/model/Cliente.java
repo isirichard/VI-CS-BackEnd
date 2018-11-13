@@ -37,6 +37,7 @@ public class Cliente extends Persona {
 	}
 	
 	public String toString() {
+		return null;
 		
 	}
 	
@@ -48,7 +49,6 @@ public class Cliente extends Persona {
 	public void setCliLinCre(double cliLinCre) {
 		CliLinCre = cliLinCre;
 	}
+		
 	
-	
-
 }
