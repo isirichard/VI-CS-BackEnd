@@ -16,5 +16,8 @@ public class Principal {
 	public static void main(String args[]) {
 		FrmLogin l=new FrmLogin();
 		l.setVisible(true);
+		
+		
+		
 	}
 }

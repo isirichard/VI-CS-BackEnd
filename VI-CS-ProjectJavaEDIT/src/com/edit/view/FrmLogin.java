@@ -13,11 +13,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import com.edit.controller.Coordinador;
+import com.edit.model.Estado;
+
 public class FrmLogin extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField txtcontraseña;
 	private JLabel lblUsuario,lblContraseña,lblimagen;
 	private JButton btnIngresar,btnCancelar;
+	private Coordinador miCoordinador;
 	public FrmLogin() {
 		setTitle("LOGIN");
 		setSize(300, 420);
@@ -79,12 +83,21 @@ public class FrmLogin extends JFrame {
 		
 	}
 	private void btnIngresarAccion(ActionEvent e) {
-		MDIPrincipal principal = new MDIPrincipal();
-		principal.setVisible(true);
-		setLocationRelativeTo(null);
-		this.dispose();
+		System.out.println(txtUsuario.getText());
+		boolean estado = miCoordinador.validar(txtUsuario.getText());
+		if(estado == true) {
+			MDIPrincipal principal = new MDIPrincipal();
+			principal.setVisible(true);
+			setLocationRelativeTo(null);
+			this.dispose();
+		}	
+		System.out.println(estado);
 	}
 	private void btnCancelarAccion(ActionEvent e) {
 		System.exit(0);
+	}
+	public void setCoordinador(Coordinador miCoordinador) {
+		this.miCoordinador=miCoordinador;
+		
 	}
 }

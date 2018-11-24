@@ -14,7 +14,7 @@ public class Persona {
 	public Persona() {
 		
 	}
-
+	
 	public int getCodigo() {
 		return PerCod;
 	}
