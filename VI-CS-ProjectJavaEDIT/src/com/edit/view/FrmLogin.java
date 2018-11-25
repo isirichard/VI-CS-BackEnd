@@ -59,9 +59,13 @@ public class FrmLogin extends JFrame {
 		btnIngresar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnIngresar.setBounds(38, 319, 89, 23);
 		getContentPane().add(btnIngresar);
+		
+		
+		
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnIngresarAccion(e);
+				
 			}
 		});
 		
@@ -70,6 +74,7 @@ public class FrmLogin extends JFrame {
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnCancelar.setBounds(159, 319, 89, 23);
 		getContentPane().add(btnCancelar);
+		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnCancelarAccion(e);
@@ -82,12 +87,12 @@ public class FrmLogin extends JFrame {
 		
 	}
 	private void btnIngresarAccion(ActionEvent e) {
-		if(miCoordinador.validar(txtUsuario.getText())) {
+//		if(miCoordinador.validar(txtUsuario.getText())) {
 			MDIPrincipal principal = new MDIPrincipal();
 			principal.setVisible(true);
 			setLocationRelativeTo(null);
 			this.dispose();
-		}
+//		}
 	}
 	private void btnCancelarAccion(ActionEvent e) {
 		System.exit(0);

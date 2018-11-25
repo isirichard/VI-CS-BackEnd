@@ -2,12 +2,19 @@ package com.edit.model;
 
 public class Tipo_Documento {
 	private int TipDocCod;
-	private int TipDocDes;
+	private String TipDocDes;
 	private Estado TipDocEst;
 	
 	public Tipo_Documento() {
-		
 	}
+	
+
+	public Tipo_Documento(int tipDocCod, String tipDocDes) {
+		super();
+		TipDocCod = tipDocCod;
+		TipDocDes = tipDocDes;
+	}
+
 
 	public int getCodigo() {
 		return TipDocCod;
@@ -17,11 +24,11 @@ public class Tipo_Documento {
 		this.TipDocCod = tipDocCod;
 	}
 
-	public int getDescripcion() {
+	public String getDescripcion() {
 		return TipDocDes;
 	}
 
-	public void setDescripcion(int tipDocDes) {
+	public void setDescripcion(String tipDocDes) {
 		this.TipDocDes = tipDocDes;
 	}
 

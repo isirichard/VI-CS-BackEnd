@@ -874,6 +874,7 @@ public class MDIPrincipal extends JFrame {
 	}
 	private void accionBTNINGRESARTIPODOC(ActionEvent e) {
 		FrmTipoDOC tipodoc=new FrmTipoDOC();
+		
 		tipodoc.setVisible(true);
 	}
 

@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,10 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import com.edit.dao.CRUD;
+
+import com.edit.model.Tipo_Pago;
+
 public class FrmTipoPago extends JFrame{
 	private JPanel JPTipoPago,JPtabla;
-	private JLabel lblTipoPago;
-	private JTextField txtTipoPago;
+	private JLabel lblTipoPago,lblTipoPagoCod;
+	private JTextField txtTipoPago,txtTipoPagoCod;
 	private JScrollPane JSTabla;
 	private JTabbedPane JTable;
 	private JButton btnGuardar,btnSalir,btnBuscar;
@@ -40,14 +46,25 @@ public class FrmTipoPago extends JFrame{
 		getContentPane().add(JPTipoPago);
 		JPTipoPago.setLayout(null);
 		
+		lblTipoPagoCod = new JLabel("Codigo: ");
+		lblTipoPagoCod.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblTipoPagoCod.setBounds(30, 20, 69, 44);
+		JPTipoPago.add(lblTipoPagoCod);
+		
 		lblTipoPago = new JLabel("Descripcion: ");
 		lblTipoPago.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblTipoPago.setBounds(30, 41, 69, 14);
+		lblTipoPago.setBounds(30, 51, 69, 44);
 		JPTipoPago.add(lblTipoPago);
+		
+		txtTipoPagoCod = new JTextField();
+		txtTipoPagoCod.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtTipoPagoCod.setBounds(100, 28, 180, 25);
+		JPTipoPago.add(txtTipoPagoCod);
+		txtTipoPagoCod.setColumns(10);
 		
 		txtTipoPago = new JTextField();
 		txtTipoPago.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtTipoPago.setBounds(100, 38, 180, 25);
+		txtTipoPago.setBounds(100, 58, 180, 25);
 		JPTipoPago.add(txtTipoPago);
 		txtTipoPago.setColumns(10);
 		
@@ -75,11 +92,24 @@ public class FrmTipoPago extends JFrame{
 		btnGuardar.setBounds(94, 359, 80, 42);
 		getContentPane().add(btnGuardar);
 		
+		
 		btnSalir = new JButton("");
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(216, 359, 80, 42);
 		getContentPane().add(btnSalir);
-			
+		
+		
+		btnGuardar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnGuardarAccion(e);
+				
+			}
+		});
+		
+	}
+	
+	private void btnGuardarAccion(ActionEvent e) {
 		
 	}
 	

@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,15 +17,19 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import com.edit.controller.Coordinador;
+
 public class FrmTipoDOC extends JFrame{
 	private JPanel JPTipoDOC,JPtabla;
-	private JLabel lblTipoDOC;
-	private JTextField txtTipoDOC;
+	private JLabel lblTipoDOCDes,lblTipoDOCCod,lblTipoDOCER;
+	private JTextField txtTipoDOCDes,txtTipoDOC2Cod;
 	private JScrollPane JSTabla;
 	private JTabbedPane JTable;
 	private JButton btnGuardar,btnSalir,btnBuscar;
+	private Coordinador miCoordinador = new Coordinador();
 	
 	public FrmTipoDOC() {
+		
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Tipo DOC");
 		setResizable(false);
@@ -40,16 +46,36 @@ public class FrmTipoDOC extends JFrame{
 		getContentPane().add(JPTipoDOC);
 		JPTipoDOC.setLayout(null);
 		
-		lblTipoDOC = new JLabel("Descripcion: ");
-		lblTipoDOC.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblTipoDOC.setBounds(30, 41, 69, 14);
-		JPTipoDOC.add(lblTipoDOC);
+		lblTipoDOCCod=new JLabel("Codigo: ");
+		lblTipoDOCCod.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblTipoDOCCod.setBounds(30, 20, 69, 14);
+		JPTipoDOC.add(lblTipoDOCCod);
 		
-		txtTipoDOC = new JTextField();
-		txtTipoDOC.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtTipoDOC.setBounds(100, 38, 180, 25);
-		JPTipoDOC.add(txtTipoDOC);
-		txtTipoDOC.setColumns(10);
+		
+		lblTipoDOCDes = new JLabel("Descripcion: ");
+		lblTipoDOCDes.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblTipoDOCDes.setBounds(30, 51, 69, 14);
+		JPTipoDOC.add(lblTipoDOCDes);
+		
+		lblTipoDOCER = new JLabel("Estado Registro:  A ");
+		lblTipoDOCER.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblTipoDOCER.setBounds(30, 81, 119, 14);
+		JPTipoDOC.add(lblTipoDOCER);
+		
+		
+		
+		txtTipoDOC2Cod=new JTextField();
+		txtTipoDOC2Cod.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtTipoDOC2Cod.setBounds(100, 8, 180, 25);
+		JPTipoDOC.add(txtTipoDOC2Cod);
+		txtTipoDOC2Cod.setColumns(10);
+		
+		txtTipoDOCDes = new JTextField();
+		txtTipoDOCDes.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtTipoDOCDes.setBounds(100, 38, 180, 25);
+		JPTipoDOC.add(txtTipoDOCDes);
+		txtTipoDOCDes.setColumns(10);
+		
 		
 		btnBuscar=new JButton("");
 		btnBuscar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/buscar.png")));
@@ -80,6 +106,25 @@ public class FrmTipoDOC extends JFrame{
 		btnSalir.setBounds(216, 359, 80, 42);
 		getContentPane().add(btnSalir);
 			
+		
+		btnGuardar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(txtTipoDOC2Cod.getText()+txtTipoDOCDes.getText());
+				String a=txtTipoDOC2Cod.getText();
+				String a2=txtTipoDOCDes.getText();
+				miCoordinador.agregar(a,a2);
+			
+				//miCoordinador.registrarTipoDoc(a,a2);
+				//System.out.println(txtTipoDOC2Cod.getText());
+			}
+		});
+		
+	}
+	
+	
+	public void setCoordinador(Coordinador miCoordinador) {
+		this.miCoordinador = miCoordinador;
 		
 	}
 	

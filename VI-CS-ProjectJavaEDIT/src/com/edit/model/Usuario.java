@@ -6,7 +6,6 @@ public class Usuario {
 	private Colaborador Usucol;
 	
 	public Usuario(){
-		
 	}
 	
 	public String getUsuario() {
@@ -20,16 +19,18 @@ public class Usuario {
 	public void setUsuario(String _Usu) {
 		Usu = _Usu;
 	}
+	
 	public void setPassword(String _Pas) {
 		Pas = _Pas;
 	}
 	
-	public void VerificarIngreso() {
-		
+	public void VerificarIngreso() {	
 	}
+	
 	public void verificarColaborador(){
 		
 	}
+	
 	
 		
 	

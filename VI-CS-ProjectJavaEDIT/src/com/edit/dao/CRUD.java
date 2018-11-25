@@ -10,5 +10,6 @@ public interface CRUD<T> {
 	public void agregar(T t);
 	public void eliminar(int id);
 	public void actualizar(T t);
+	
 		
 }

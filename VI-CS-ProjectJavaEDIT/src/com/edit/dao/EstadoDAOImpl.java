@@ -14,9 +14,6 @@ public class EstadoDAOImpl implements EstadoDAO {
 		cx = Conexion.conectar();
 	}
 
-
-
-
 	@Override
 	public void agregar(Estado t) {
 		try {
@@ -29,7 +26,6 @@ public class EstadoDAOImpl implements EstadoDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
