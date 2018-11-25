@@ -10,17 +10,6 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 
 	private Coordinador miCoordinador;
 
-	@Override
-	public List<Persona> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Persona listarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void agregar(Usuario t) {
@@ -48,6 +37,18 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	public boolean validar(String text) {
 		System.out.println("Validando dotas en UsuarioDAOImpl");
 		return false;
+	}
+
+	@Override
+	public List<Usuario> listarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Usuario listarPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

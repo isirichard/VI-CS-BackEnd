@@ -14,17 +14,8 @@ public class EstadoDAOImpl implements EstadoDAO {
 		cx = Conexion.conectar();
 	}
 
-	@Override
-	public List<Persona> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Persona listarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public void agregar(Estado t) {
@@ -51,6 +42,22 @@ public class EstadoDAOImpl implements EstadoDAO {
 	public void actualizar(Estado t) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	@Override
+	public List<Estado> listarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Estado listarPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
