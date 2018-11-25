@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,7 +33,7 @@ public class FrmServicioCliente extends JFrame{
 			setResizable(false);
 			setSize(642,556);
 			setLocationRelativeTo(null);
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			setIconImage(logo);
 			
@@ -266,8 +268,52 @@ public class FrmServicioCliente extends JFrame{
 			btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 			btnSalir.setBounds(368, 445, 80, 42);
 			getContentPane().add(btnSalir);
-		
+			
+			btnHistorialCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnHistorialCliente(e);
+				}
+			});
+			btnHistorialCambios.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnHistorialCambios(e);
+				}
+			});
+			btnBloquearCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnBloquearCliente(e);
+				}
+			});
+			
+			btnAumentarLinea.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnAumentarLinea(e);
+				}
+			});
 	
 
+		}
+		private void btnHistorialCliente(ActionEvent e) {
+			FrmHistorialCliente principal = new FrmHistorialCliente();
+			principal.setVisible(true);
+			setLocationRelativeTo(null);
+		}
+		private void btnHistorialCambios(ActionEvent e) {
+			FrmHistorialCambios h = new FrmHistorialCambios();
+			h.setVisible(true);
+			setLocationRelativeTo(null);
+		}
+		private void btnBloquearCliente(ActionEvent e) {
+			FrmBloqueoCliente principal = new FrmBloqueoCliente();
+			principal.setVisible(true);
+			setLocationRelativeTo(null);
+			
+		}
+		
+		private void btnAumentarLinea(ActionEvent e) {
+			FrmAumentoLinea principal = new FrmAumentoLinea();
+			principal.setVisible(true);
+			setLocationRelativeTo(null);
+			
 		}
 }

@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import com.edit.controller.Coordinador;
-import com.edit.model.Estado;
 
 public class FrmLogin extends JFrame {
 	private JTextField txtUsuario;
@@ -83,21 +82,16 @@ public class FrmLogin extends JFrame {
 		
 	}
 	private void btnIngresarAccion(ActionEvent e) {
-		System.out.println(txtUsuario.getText());
-		boolean estado = miCoordinador.validar(txtUsuario.getText());
-		if(estado == true) {
-			MDIPrincipal principal = new MDIPrincipal();
-			principal.setVisible(true);
-			setLocationRelativeTo(null);
-			this.dispose();
-		}	
-		System.out.println(estado);
+		MDIPrincipal principal = new MDIPrincipal();
+		principal.setVisible(true);
+		setLocationRelativeTo(null);
+		this.dispose();
 	}
 	private void btnCancelarAccion(ActionEvent e) {
 		System.exit(0);
 	}
 	public void setCoordinador(Coordinador miCoordinador) {
-		this.miCoordinador=miCoordinador;
+		this.miCoordinador = miCoordinador;
 		
 	}
 }

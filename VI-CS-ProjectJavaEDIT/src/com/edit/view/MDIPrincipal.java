@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -15,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -35,8 +38,15 @@ public class MDIPrincipal extends JFrame {
 	private Image fondo;
 	private JLabel lblFondo;
 	private JDesktopPane JDEscritorio;
+	private JButton btnAtras;
+	private void close() {
+		if(JOptionPane.showConfirmDialog(rootPane, "Desea salir del sistema","Salir del sistema",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+
 	public MDIPrincipal() {
-		
+
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("COMERCIALIZADORA EDITH EIRL");
 		//setExtendedState(MAXIMIZED_BOTH);
@@ -44,17 +54,22 @@ public class MDIPrincipal extends JFrame {
 		Dimension screensize=Toolkit.getDefaultToolkit().getScreenSize();
 		setResizable(false);
 		setSize(849,412);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new java.awt.event.WindowAdapter() {
+			public void windowClosing(java.awt.event.WindowEvent e) {
+				close();
+			}
+		});
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 		setIconImage(logo);
-		
+
 		lblFondo=new JLabel();
 		scroll=new JScrollPane();
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setBounds(0, 0, 200, 373);
 		getContentPane().add(scroll);
-		
+
 
 		JPModulos=new JPanel();
 		JPModulos.setLayout(null);
@@ -110,7 +125,13 @@ public class MDIPrincipal extends JFrame {
 		JPPedido=new JPanel();
 		JPServicioCliente=new JPanel();
 		JPServicioProveedor=new JPanel();
-		
+
+
+
+
+
+
+
 		//inciando los modulos
 
 		ocultarTodo();
@@ -167,8 +188,8 @@ public class MDIPrincipal extends JFrame {
 				accionTipoPago(e);
 			}
 		});
-		
-		
+
+
 		btnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionCliente(e);
@@ -192,11 +213,11 @@ public class MDIPrincipal extends JFrame {
 		btnNotaVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionNotaVenta(e);
-				
-				
+
+
 			}
 		});
-		
+
 		btnNotaPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionNotaPedido(e);
@@ -259,18 +280,18 @@ public class MDIPrincipal extends JFrame {
 		btnTipoPago.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnTipoPago.setBounds(456, 153, 130, 50);
 		JPMaestro.add(btnTipoPago);
-		
-		
+
+
 		lblFondo.setBounds(456, 153, 130, 50);
-		
+
 		ImageIcon imagen=new ImageIcon(getClass().getResource("/Imagenes/Fondo.jpg"));
-		
-//		lblimagen.setIcon(new ImageIcon(getClass().getResource("/Imagenes/Usuario.png")));
+
+		//		lblimagen.setIcon(new ImageIcon(getClass().getResource("/Imagenes/Usuario.png")));
 		Icon icono=new ImageIcon(imagen.getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(),Image.SCALE_DEFAULT));
 		lblFondo.setIcon(icono);
 		JPMaestro.add(lblFondo);
 		JPMaestro.setVisible(v);
-		
+
 		JDEscritorio =new JDesktopPane();
 		getContentPane().add(JDEscritorio);
 
@@ -349,10 +370,10 @@ public class MDIPrincipal extends JFrame {
 		btnRegVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNREGISTROVENTA(e);
-				
+
 			}
 		});
-		
+
 
 		btnAnularVenta = new JButton("Anular Venta");
 		btnAnularVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -366,13 +387,24 @@ public class MDIPrincipal extends JFrame {
 		btnHistorialVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNHISTORIALVENTA(e);
-				
+
 			}
 		});
+
+		btnAtras = new JButton("");
+		btnAtras.setIcon(new ImageIcon(MDIPrincipal.class.getResource("/Imagenes/atras1.png")));
+		btnAtras.setBounds(570, 329, 33, 33);
+		JPVenta.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionVenta_Pedido(e);
+			}
+		});
+
 		JPVenta.setVisible(v);
-		
-		
-		
+
+
+
 	}
 	private void mostrarJPPedido(boolean v) {
 		JPPedido.setBounds(210, 0, 613, 373);
@@ -386,8 +418,8 @@ public class MDIPrincipal extends JFrame {
 		btnRegPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionRegistroNotaPedido(e);
-				
-				
+
+
 			}
 		});
 		btnAnularPedido = new JButton("Anular Pedido");
@@ -402,10 +434,21 @@ public class MDIPrincipal extends JFrame {
 		btnHistorialPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionHistorialPedido(e);
-				
-				
+
+
 			}
 		});
+		btnAtras = new JButton("");
+		btnAtras.setIcon(new ImageIcon(MDIPrincipal.class.getResource("/Imagenes/atras1.png")));
+		btnAtras.setBounds(570, 329, 33, 33);
+		JPPedido.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionVenta_Pedido(e);
+			}
+		});
+
+
 		JPPedido.setVisible(v);
 	}
 
@@ -439,6 +482,17 @@ public class MDIPrincipal extends JFrame {
 				accionBTNINGRESARCATEGORIAPRODUCTO(e);
 			}
 		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionMaestro(e);
+			}
+		});
+
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionCliente_Proveedor(e);
+			}
+		});
 
 	}
 
@@ -450,6 +504,12 @@ public class MDIPrincipal extends JFrame {
 				accionBTNINGRESARTIPODOC(e);
 			}
 		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionMaestro(e);
+			}
+		});
+
 	}
 	private void mostrarJPEmpresa(boolean v) {
 
@@ -457,6 +517,11 @@ public class MDIPrincipal extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNINGRESAREMPRESA(e);
+			}
+		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionMaestro(e);
 			}
 		});
 	}
@@ -468,6 +533,11 @@ public class MDIPrincipal extends JFrame {
 				accionBTNINGRESARTIPOCLIENTE(e);
 			}
 		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionMaestro(e);
+			}
+		});
 	}
 	private void mostrarJPTipoPago(boolean v) {
 
@@ -477,6 +547,11 @@ public class MDIPrincipal extends JFrame {
 				accionBTNINGRESARTIPOPAGO(e);
 			}
 		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionMaestro(e);
+			}
+		});
 	}
 	private void mostrarJPRol(boolean v) {
 
@@ -484,27 +559,42 @@ public class MDIPrincipal extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNINGRESARROL(e);
-				
+
+			}
+		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionMaestro(e);
 			}
 		});
 	}
 	private void mostrarCliente(boolean v) {
-		
+
 		mostrarCRUD("Cliente",JPCliente,v);
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNINGRESARCLIENTE(e);
-				
+
 			}
 		});
-		
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionRegistrar(e);
+			}
+		});
+
 	}
 	private void mostrarProveedor(boolean v) {
 		mostrarCRUD("Proveedor", JPProveedor, v);
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNINGRESARPROVEEDOR(e);
-				
+
+			}
+		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionRegistrar(e);
 			}
 		});
 	}
@@ -513,16 +603,27 @@ public class MDIPrincipal extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNINGRESARPRODUCTO(e);
-				
+
+			}
+		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionRegistrar(e);
 			}
 		});
 	}
+
 	private void mostrarColaborador(boolean v) {
 		mostrarCRUD("Colaborador", JPColaborador, v);
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBTNINGRESARCOLABORADOR(e);
-				
+
+			}
+		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionRegistrar(e);
 			}
 		});
 	}
@@ -545,11 +646,17 @@ public class MDIPrincipal extends JFrame {
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnEliminar.setBounds(456, 28, 130, 50);
 		jp.add(btnEliminar);
+
+		btnAtras = new JButton("");
+		btnAtras.setIcon(new ImageIcon(MDIPrincipal.class.getResource("/Imagenes/atras1.png")));
+		btnAtras.setBounds(570, 329, 33, 33);
+		jp.add(btnAtras);
+
 		jp.setVisible(v);
 	}
-	
-	
-	
+
+
+
 	private void mostrarJPServicioCliente(boolean v) {
 		JPServicioCliente.setBounds(210, 0, 613, 373);
 		getContentPane().add(JPServicioCliente);
@@ -562,7 +669,7 @@ public class MDIPrincipal extends JFrame {
 		btnServicioCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionBtnServicioCliente(e);
-				
+
 			}
 		});
 
@@ -570,7 +677,25 @@ public class MDIPrincipal extends JFrame {
 		btnAumentoLinea.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnAumentoLinea.setBounds(456, 28, 130, 50);
 		JPServicioCliente.add(btnAumentoLinea);
+		btnAumentoLinea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionBtnAumentoLinea(e);
+
+			}
+		});
+
+		btnAtras = new JButton("");
+		btnAtras.setIcon(new ImageIcon(MDIPrincipal.class.getResource("/Imagenes/atras1.png")));
+		btnAtras.setBounds(570, 329, 33, 33);
+		JPServicioCliente.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionCliente_Proveedor(e);
+			}
+		});
+
 		JPServicioCliente.setVisible(v);
+
 	}
 	private void mostrarJPServicioProveedor(boolean v) {
 		JPServicioProveedor.setBounds(210, 0, 613, 373);
@@ -581,7 +706,21 @@ public class MDIPrincipal extends JFrame {
 		btnServicioProveedor.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnServicioProveedor.setBounds(40, 28, 130, 50);
 		JPServicioProveedor.add(btnServicioProveedor);
+		btnServicioProveedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionBtnServicioProveedor(e);
 
+			}
+		});
+		btnAtras = new JButton("");
+		btnAtras.setIcon(new ImageIcon(MDIPrincipal.class.getResource("/Imagenes/atras1.png")));
+		btnAtras.setBounds(570, 329, 33, 33);
+		JPServicioProveedor.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionCliente_Proveedor(e);
+			}
+		});
 		JPServicioProveedor.setVisible(v);
 	}
 
@@ -592,6 +731,7 @@ public class MDIPrincipal extends JFrame {
 
 
 	}
+
 	private void accionRegistrar(ActionEvent e) {
 		ocultarTodo();
 
@@ -614,14 +754,14 @@ public class MDIPrincipal extends JFrame {
 		ocultarTodo();
 
 		mostrarJPCategoria_Productos(true);
-		
+
 
 	}
 	private void accionTipoDOC(ActionEvent e) {
 		ocultarTodo();
 
 		mostrarJPTipoDOC(true);
-		
+
 
 	}
 	private void accionRol(ActionEvent e) {
@@ -634,21 +774,21 @@ public class MDIPrincipal extends JFrame {
 		ocultarTodo();
 
 		mostrarJPEmpresa(true);
-		
+
 
 	}
 	private void accionTipoCliente(ActionEvent e) {
 		ocultarTodo();
 
 		mostrarJPTipoCliente(true);
-		
+
 
 	}
 	private void accionTipoPago(ActionEvent e) {
 		ocultarTodo();
 
 		mostrarJPTipoPago(true);
-		
+
 
 	}
 	private void accionCliente(ActionEvent e) {
@@ -683,17 +823,17 @@ public class MDIPrincipal extends JFrame {
 		ocultarTodo();
 		mostrarJPServicioProveedor(true);
 	}
-	
+
 	private void accionBTNREGISTROVENTA(ActionEvent e) {
 		FrmRegistroVenta Rventa=new FrmRegistroVenta();
 		Rventa.setVisible(true);
-		
+
 	}
 	private void accionBTNHISTORIALVENTA(ActionEvent e) {
 		FrmHistorialVenta Hventa=new FrmHistorialVenta();
 		Hventa.setVisible(true);
 	}
-		
+
 
 	private void ocultarTodo() {
 		//modulos
@@ -715,19 +855,19 @@ public class MDIPrincipal extends JFrame {
 		mostrarProveedor(false);
 		mostrarProducto(false);
 		mostrarColaborador(false);
-		
+
 		//modulo venta/pedido
 		mostrarJPVenta(false);
 		mostrarJPPedido(false);
-		
+
 		//modulo ServicioCliente/Proveedor
 		mostrarJPServicioCliente(false);
 		mostrarJPServicioProveedor(false);
-		
-		
+
+
 
 	}
-	
+
 	private void accionBTNINGRESARCATEGORIAPRODUCTO(ActionEvent e) {
 		FrmCategoriaProductos categoriaProductos=new FrmCategoriaProductos();
 		categoriaProductos.setVisible(true);
@@ -736,7 +876,7 @@ public class MDIPrincipal extends JFrame {
 		FrmTipoDOC tipodoc=new FrmTipoDOC();
 		tipodoc.setVisible(true);
 	}
-	
+
 	private void accionBTNINGRESARTIPOCLIENTE(ActionEvent e) {
 		FrmTipoCliente tipocli=new FrmTipoCliente();
 		tipocli.setVisible(true);
@@ -749,7 +889,7 @@ public class MDIPrincipal extends JFrame {
 		FrmEmpresa empresa=new FrmEmpresa();
 		empresa.setVisible(true);
 	}
-	
+
 	private void accionBTNINGRESARTIPOPAGO(ActionEvent e) {
 		FrmTipoPago tipopag=new FrmTipoPago();
 		tipopag.setVisible(true);
@@ -780,6 +920,15 @@ public class MDIPrincipal extends JFrame {
 	}
 	private void accionBtnServicioCliente(ActionEvent e) {
 		FrmServicioCliente cliente=new FrmServicioCliente();
+		cliente.setVisible(true);
+	}
+	private void accionBtnAumentoLinea(ActionEvent e) {
+		FrmAumentoLinea cliente=new FrmAumentoLinea();
+		cliente.setVisible(true);
+
+	}
+	private void accionBtnServicioProveedor(ActionEvent e) {
+		FrmServicioProveedor cliente=new FrmServicioProveedor();
 		cliente.setVisible(true);
 	}
 }
