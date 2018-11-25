@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +17,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+import com.edit.dao.IPersonaDAO;
+import com.edit.dao.PersonaDAOImpl;
+import com.edit.model.Estado;
+import com.edit.model.Persona;
+import com.edit.model.Tipo_Documento;
 
 public class FrmRegistroCliente extends JFrame{
 	private JPanel JPDatoCliente,JPDireccion,JPTipoCliente;
@@ -170,12 +178,45 @@ public class FrmRegistroCliente extends JFrame{
 		btnGuardar.setBounds(68, 382, 80, 42);
 		getContentPane().add(btnGuardar);
 		
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnRegistrarAccion(e);
+			}
+		});
+		
 		btnSalir = new JButton("");
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(196, 382, 80, 42);
 		getContentPane().add(btnSalir);
 		
 
+	}
+	
+	private void btnRegistrarAccion(ActionEvent e) {
+		IPersonaDAO dao = new PersonaDAOImpl();
+		Persona per = new Persona();
+		Estado est = new Estado();
+		Tipo_Documento documento = new Tipo_Documento();
+		documento.setCodigo(1);
+		documento.setDescripcion(1);
+		documento.setEstado(est);
+		
+		est.setCodigo(1);
+		est.setDescripcion("activo");
+		
+		per.setNombre("Mito");
+		per.setApellido("Code");
+		per.setDireccion("calle venezuela");
+		per.setEstado(est);
+		per.setTelefono("322322");
+		per.setNumeroDocumento("48200011");
+		per.setTipoDocumento(documento);
+		dao.agregar(per);
+		
+		MDIPrincipal principal = new MDIPrincipal();
+		principal.setVisible(true);
+		setLocationRelativeTo(null);
+		this.dispose();
 	}
 	
 }
