@@ -25,6 +25,7 @@ public class Conexion {
 			cx = DriverManager.getConnection(url, user, password);
 			System.out.println("Me concte");
 		}catch(Exception e){
+			System.out.println("NO SE CONECTO");
 			e.printStackTrace();
 		}				
 		return cx;
