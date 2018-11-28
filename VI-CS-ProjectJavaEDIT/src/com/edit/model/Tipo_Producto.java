@@ -1,9 +1,9 @@
 package com.edit.model;
 
 public class Tipo_Producto {
-	private int TipProCod;
-	private String TipProDes;
-	private Estado TipProEst;
+		private int TipProCod;
+		private String TipProDes;
+		private Estado TipProEst;
 	
 	public Tipo_Producto() {}
 	
