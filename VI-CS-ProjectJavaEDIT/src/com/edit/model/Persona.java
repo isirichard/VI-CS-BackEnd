@@ -9,11 +9,6 @@ public class Persona {
 	private String PerApe;
 	private String PerDir;
 	private String PerTel;
-
-	private String Celular;
-	private Estado PerEst; //estado de registro
-	
-
 	private String PerCel;
 	public String getCeluar() {
 		return PerCel;
@@ -24,28 +19,11 @@ public class Persona {
 	}
 
 	private Estado PerEst;
-
 	
 	public Persona() {
 		
 	}
-
 	
-	public Persona(int perCod, Tipo_Documento perTipDoc, String perNumDoc, String perNom, String perApe, String perDir,
-			String perTel, String celular, Estado perEst) {
-		super();
-		PerCod = perCod;
-		
-		PerTipDoc = perTipDoc;
-		PerNumDoc = perNumDoc;
-		PerNom = perNom;
-		PerApe = perApe;
-		PerDir = perDir;
-		PerTel = perTel;
-		Celular = celular;
-		PerEst = perEst;
-	}
-
 	public int getCodigo() {
 		return PerCod;
 	}
@@ -108,11 +86,6 @@ public class Persona {
 
 	public void setEstado(Estado perEst) {
 		this.PerEst = perEst;
-	}
-
-	public String getCeluar() {
-		// TODO Auto-generated method stub
-		return Celular;
 	}
 	
 }

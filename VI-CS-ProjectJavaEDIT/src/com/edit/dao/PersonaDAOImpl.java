@@ -114,18 +114,13 @@ public class PersonaDAOImpl implements IPersonaDAO {
 		try {
 			Statement statement = cx.createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT*FROM persona order by PerCod desc limit 1");
-
-            //System.out.println( resultSet.getInt("PerCod") + " " + resultSet.getString("PerNom")+" " +resultSet.getString("PerApe") );
-			if(resultSet.next()){
-			persona.setCodigo(resultSet.getInt("PerCod"));
-			persona.setNombre(resultSet.getString("PerNom"));
-		
-			}
-			  System.out.println("acabe de sacar");
-
 			// System.out.println( resultSet.getInt("PerCod") + " " +
 			// resultSet.getString("PerNom")+" " +resultSet.getString("PerApe") );
+			if (resultSet.next()) {
+				persona.setCodigo(resultSet.getInt("PerCod"));
+				persona.setNombre(resultSet.getString("PerNom"));
 
+			}
 
 			resultSet.close();
 			statement.close();
