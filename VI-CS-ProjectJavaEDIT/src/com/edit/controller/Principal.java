@@ -11,10 +11,12 @@ import com.edit.view.FrmRegistrarProveedor;
 import com.edit.view.FrmRegistroCliente;
 import com.edit.view.FrmRegistroPedido;
 import com.edit.view.FrmRegistroVenta;
+import com.edit.view.FrmRol;
 import com.edit.view.FrmServicioCliente;
 
 public class Principal {
 	public static void main(String args[]) {
+		
 		//::::::::::.......LOGIN.........::::::::
 		Coordinador miCoordinador;
 		UsuarioDAOImpl miUsuario;
@@ -23,11 +25,18 @@ public class Principal {
 		//instanciando
 		miLogin = new FrmLogin();
 		miLogin.setVisible(true);
+		FrmRol d = new FrmRol();
+		d.setVisible(true);
+		
 		miUsuario = new UsuarioDAOImpl();
 		miCoordinador = new Coordinador();		
+	
+		
 		//establecemos las relaciones entre clases
 		miLogin.setCoordinador(miCoordinador);
 		miUsuario.setCoordinador(miCoordinador);
+		
+		
 		//enviarle una instancia de cada clase al coordinador
 		miCoordinador.setFrmLogin(miLogin);
 		miCoordinador.setUsuarioDAOImpl(miUsuario);

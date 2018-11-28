@@ -9,6 +9,14 @@ public class Usuario {
 		
 	}
 	
+	public Colaborador getColaborador() {
+		return Usucol;
+	}
+
+	public void setColaborador(Colaborador usucol) {
+		Usucol = usucol;
+	}
+
 	public String getUsuario() {
 		return Usu;
 	}

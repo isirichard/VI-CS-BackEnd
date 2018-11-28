@@ -9,9 +9,22 @@ public class Persona {
 	private String PerApe;
 	private String PerDir;
 	private String PerTel;
+
 	private String Celular;
 	private Estado PerEst; //estado de registro
 	
+
+	private String PerCel;
+	public String getCeluar() {
+		return PerCel;
+	}
+
+	public void setCelular(String perCel) {
+		PerCel = perCel;
+	}
+
+	private Estado PerEst;
+
 	
 	public Persona() {
 		

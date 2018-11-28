@@ -14,8 +14,22 @@ public class EstadoDAOImpl implements EstadoDAO {
 		cx = Conexion.conectar();
 	}
 
+<<<<<<< HEAD
 
 
+=======
+	@Override
+	public List<Estado> listarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Estado listarPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+>>>>>>> maraza
 
 	@Override
 	public void agregar(Estado t) {
