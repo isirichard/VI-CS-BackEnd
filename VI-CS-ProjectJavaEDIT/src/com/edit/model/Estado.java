@@ -8,6 +8,12 @@ public class Estado {
 		
 	}
 
+	public Estado(int estCod, String estDes) {
+		super();
+		EstCod = estCod;
+		EstDes = estDes;
+	}
+
 	public int getCodigo() {
 		return EstCod;
 	}
