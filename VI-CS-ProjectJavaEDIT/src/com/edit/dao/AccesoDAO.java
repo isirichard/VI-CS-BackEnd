@@ -4,4 +4,7 @@ import com.edit.model.Acceso;
 
 public interface AccesoDAO extends CRUD<Acceso>{
 
+
+
+
 }

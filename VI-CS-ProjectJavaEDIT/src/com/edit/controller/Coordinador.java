@@ -47,6 +47,7 @@ public class Coordinador {
 	private Tipo_ProductoDAOImpl tipo_producto = new Tipo_ProductoDAOImpl() ;
 	private AccesoDAOImpl ac = new AccesoDAOImpl();
 >>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
+//ss
 	public void setFrmLogin(FrmLogin miLogin) {
 		this.miLogin = miLogin;	
 	}
