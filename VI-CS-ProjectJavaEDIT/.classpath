@@ -2,7 +2,12 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="D:/CS_FINAL/proyecto/VI-CS-ProjectJavaEDIT/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar"/>
 	<classpathentry kind="lib" path="D:/CS_FINAL/proyecto/VI-CS-ProjectJavaEDIT/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/Diego/Desktop/CS_24_11/VI-CS-ProjectJavaEDIT/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Diego/Desktop/CS_24_11/VI-CS-ProjectJavaEDIT/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 	<classpathentry kind="output" path="bin"/>
 </classpath>

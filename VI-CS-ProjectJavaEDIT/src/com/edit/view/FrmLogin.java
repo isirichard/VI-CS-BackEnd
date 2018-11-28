@@ -82,11 +82,21 @@ public class FrmLogin extends JFrame {
 		
 	}
 	private void btnIngresarAccion(ActionEvent e) {
+<<<<<<< HEAD
 		//if(miCoordinador.validar(txtUsuario.getText())) {}
+=======
+	
+		//if(miCoordinador.validar(txtUsuario.getText())) {
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 			MDIPrincipal principal = new MDIPrincipal();
 			principal.setVisible(true);
 			setLocationRelativeTo(null);
 			this.dispose();
+<<<<<<< HEAD
+=======
+		//}
+		
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 		
 	}
 	private void btnCancelarAccion(ActionEvent e) {

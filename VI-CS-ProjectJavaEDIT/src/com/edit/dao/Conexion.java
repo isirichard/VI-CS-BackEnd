@@ -25,8 +25,14 @@ public class Conexion {
 			String password = properties.getProperty("password");
 			// Class.forName(driver);
 			cx = DriverManager.getConnection(url, user, password);
+<<<<<<< HEAD
 
 		} catch (Exception e) {
+=======
+			System.out.println("Me concte");
+		}catch(Exception e){
+			System.out.println("NO SE CONECTO");
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 			e.printStackTrace();
 		}
 		return cx;

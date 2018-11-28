@@ -36,8 +36,12 @@ public class AccesoDAOImpl implements AccesoDAO{
 				Estado e= new Estado();
 				//e.setCodigo(resultSet.getInt(3));
 				
+<<<<<<< HEAD
 				
 				e.setDescripcion(DescripcionEstado(e.getCodigo()));
+=======
+				e.setDescripcion(DescripcionEstado(resultSet.getInt(3)));
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 				ac.setEstado(e);
 				
 				
@@ -58,11 +62,16 @@ public class AccesoDAOImpl implements AccesoDAO{
 		String descrip = null;
 		try {
 			Statement st = cx.createStatement();
+<<<<<<< HEAD
 			String sql = "SELECT * FROM `estado` WHERE `EstCod`=1";
+=======
+			String sql = "SELECT * FROM `estado` WHERE `EstCod`="+id;
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 			ResultSet rs = st.executeQuery(sql);
 
 			
 			while(rs.next()) {
+<<<<<<< HEAD
 				descrip = rs.getString(2);
 			}
 		
@@ -82,6 +91,13 @@ public class AccesoDAOImpl implements AccesoDAO{
 			
 			while(rs.next()) {
 				descrip = rs.getInt("AccCod");
+=======
+				
+				descrip = rs.getString(2);
+				
+				
+				
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 			}
 		
 		}catch(Exception e) {

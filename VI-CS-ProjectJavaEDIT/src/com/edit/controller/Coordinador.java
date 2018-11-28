@@ -1,7 +1,12 @@
 package com.edit.controller;
 
+import java.util.List;
+
+import com.edit.dao.AccesoDAOImpl;
+import com.edit.dao.Tipo_ProductoDAOImpl;
 import com.edit.dao.UsuarioDAOImpl;
 import com.edit.model.Acceso;
+<<<<<<< HEAD
 import com.edit.model.Colaborador;
 import com.edit.model.Estado;
 import com.edit.model.Persona;
@@ -15,12 +20,16 @@ import javax.swing.JComboBox;
 import com.edit.dao.AccesoDAOImpl;
 import com.edit.dao.ColaboradorDAOImpl;
 import com.edit.dao.PersonaDAOImpl;
+=======
+import com.edit.model.Tipo_Producto;
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 import com.edit.view.FrmLogin;
 
 public class Coordinador {
 
 	private FrmLogin miLogin;
 	private UsuarioDAOImpl miUsuario;
+<<<<<<< HEAD
 	private ColaboradorDAOImpl miColaborador;
     private PersonaDAOImpl miPersona;
     private AccesoDAOImpl miAcceso;
@@ -34,6 +43,10 @@ public class Coordinador {
     	this.miAcceso = new AccesoDAOImpl();
     }
     
+=======
+	private Tipo_ProductoDAOImpl tipo_producto = new Tipo_ProductoDAOImpl() ;
+	private AccesoDAOImpl ac = new AccesoDAOImpl();
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 	public void setFrmLogin(FrmLogin miLogin) {
 		this.miLogin = miLogin;	
 	}
@@ -106,5 +119,28 @@ public class Coordinador {
 		boolean estado = miUsuario.validar(text);
 		return estado;
 	}
+	
+	
+	public void setTipoProducto(Tipo_Producto t) {
+		tipo_producto.agregar(t);
+		System.out.println("SETTIPOPRODUCTO");
+	}
+	
+	
+	//ACCESO
+	public void setAcceso(Acceso a) {
+		ac.agregar(a);
+	}
+	
+	public List<Acceso> getAccesos() {
+		return ac.listarTodos();
+	}
+	
+	
+	
+	//ACCESO
+	
+	
+	
 
 }

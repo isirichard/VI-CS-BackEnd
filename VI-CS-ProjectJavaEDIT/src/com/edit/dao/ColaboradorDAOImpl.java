@@ -1,5 +1,6 @@
 package com.edit.dao;
 
+<<<<<<< HEAD
 import java.sql.PreparedStatement;
 import java.util.List;
 
@@ -21,17 +22,37 @@ public class ColaboradorDAOImpl implements ColaboradorDAO {
 
 	@Override
 	public List<Usuario> listarTodos() {
+=======
+import java.util.List;
+
+import com.edit.model.Colaborador;
+import com.edit.model.Persona;
+
+public class ColaboradorDAOImpl implements ColaboradorDAO{
+
+	public ColaboradorDAOImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public List<Colaborador> listarTodos() {
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+<<<<<<< HEAD
 	public Usuario listarPorId(int id) {
+=======
+	public Colaborador listarPorId(int id) {
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void agregar(Usuario t) {
 		try {
 			String sql = "INSERT INTO COLABORADOR(PerCod, ColUsu, ColPas, AccCod, EstCod) VALUES (?,?,?,?,?)";
@@ -47,21 +68,36 @@ public class ColaboradorDAOImpl implements ColaboradorDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+=======
+	public void agregar(Colaborador t) {
+		// TODO Auto-generated method stub
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 		
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void eliminar(int id) {
+=======
+	public void eliminar(int PersonaId) {
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void actualizar(Usuario t) {
+=======
+	public void actualizar(Colaborador t) {
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 		// TODO Auto-generated method stub
 		
 	}
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e24174e866ff4dc0a173328f6ae678157ad3720f
 }
