@@ -1,6 +1,6 @@
 package com.edit.model;
 
-public class Colaborador extends Persona {
+public class Colaborador {
 
 	private int ColCod;
 	private Acceso ColAcc;

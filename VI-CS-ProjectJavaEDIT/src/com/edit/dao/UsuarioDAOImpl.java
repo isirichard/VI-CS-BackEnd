@@ -10,20 +10,6 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 
 	private Coordinador miCoordinador;
 
-<<<<<<< HEAD
-=======
-	@Override
-	public List<Usuario> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Usuario listarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
->>>>>>> maraza
 
 	@Override
 	public void agregar(Usuario t) {
