@@ -197,13 +197,28 @@ public class FrmRegistroCliente extends JFrame{
 	}
 	public void autogenerar() {
 		cliente.setPerNumDoc(txtNroDOC.getText());
-		logica.ValidarPersona(cliente);
+		logica.validarCliente(cliente);
+		
+		if(logica.validarCliente(cliente)==true) {
+			System.out.println("clientee");
+			llenarCliente();
+		}
+		else {
+			if(logica.ValidarPersona(cliente)==true) {
+				System.out.println("personaa");
+				llenarCliente();
+			}
+		}
+		//		JCTipoDOC.setSelectedIndex(cliente.getPerTipDoc().getCodigo());
+		
+	}
+	public void llenarCliente() {
 		txtNombre.setText(cliente.getPerNom());
 		txtCelular.setText(cliente.getPerCel());
 		txtTelefono.setText(cliente.getPerTel());
 		txtNroDOC.setText(cliente.getPerNumDoc());
-		System.out.println(cliente.getPerNom());
-//		JCTipoDOC.setSelectedIndex(cliente.getPerTipDoc().getCodigo());
+		txtLineaCredito.setText(""+cliente.getLinea());
+		
 		
 	}
 	
