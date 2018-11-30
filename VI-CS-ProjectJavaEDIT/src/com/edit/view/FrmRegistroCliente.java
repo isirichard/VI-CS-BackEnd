@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import com.edit.controller.LogicaPersona;
+import com.edit.model.Cliente;
+
 public class FrmRegistroCliente extends JFrame{
 	private JPanel JPDatoCliente,JPDireccion,JPTipoCliente;
 	private JLabel lblTipoDOC,lblNroDOC,lblNombre,lblApellido,lblTelefono,lblCelular,lblDireccion,lblTipoCliente,lblLineaCredito;
@@ -24,8 +29,12 @@ public class FrmRegistroCliente extends JFrame{
 	private JButton btnBuscar,btnGuardar,btnSalir;
 	private JTabbedPane JTableta;
 	private JTextArea JTDireccion;
+	private Cliente cliente;
+	private LogicaPersona logica;
 	
 	public FrmRegistroCliente() {
+		cliente=new Cliente();
+		logica = new LogicaPersona();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setSize(426, 478);
 		setLocationRelativeTo(null);
@@ -174,8 +183,28 @@ public class FrmRegistroCliente extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(196, 382, 80, 42);
 		getContentPane().add(btnSalir);
+		btnBuscar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				autogenerar();
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 
+	}
+	public void autogenerar() {
+		cliente.setPerNumDoc(txtNroDOC.getText());
+		logica.ValidarPersona(cliente);
+		txtNombre.setText(cliente.getPerNom());
+		txtCelular.setText(cliente.getPerCel());
+		txtTelefono.setText(cliente.getPerTel());
+		txtNroDOC.setText(cliente.getPerNumDoc());
+		System.out.println(cliente.getPerNom());
+//		JCTipoDOC.setSelectedIndex(cliente.getPerTipDoc().getCodigo());
+		
 	}
 	
 }
