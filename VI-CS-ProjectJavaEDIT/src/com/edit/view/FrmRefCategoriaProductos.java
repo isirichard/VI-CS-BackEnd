@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,20 +12,34 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
+
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-public class FrmCategoriaProductos extends JFrame{
+import com.edit.controller.Control_Referencial;
+import com.edit.controller.LogicaReferencial;
+import com.edit.model.Estado;
+import com.edit.model.Referencial;
+import com.edit.model.Tipo_Producto;
+
+
+
+public class FrmRefCategoriaProductos extends JFrame{
 	private JPanel JPCategoria,JPtabla;
 	private JLabel lblCategoria;
 	private JTextField txtCategoria;
 	private JScrollPane JSTabla;
-	private JTabbedPane JTable;
+	private  JTable JTable;
 	private JButton btnGuardar,btnSalir,btnBuscar;
-	
-	public FrmCategoriaProductos() {
+	private LogicaReferencial controlReferencial;
+	private Tipo_Producto tipoProducto;
+	private Estado estado=new Estado();
+	public FrmRefCategoriaProductos() {
+		controlReferencial=new LogicaReferencial();
+		estado=new Estado();
+		tipoProducto=new Tipo_Producto();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Categoria Productos");
 		setResizable(false);
@@ -67,6 +83,7 @@ public class FrmCategoriaProductos extends JFrame{
 		JSTabla = new JScrollPane();
 		JSTabla.setBounds(30, 28, 300, 149);
 		JPtabla.add(JSTabla);
+		JTable=new JTable();
 		JSTabla.setViewportView(JTable);
 		
 		//botones
@@ -79,9 +96,70 @@ public class FrmCategoriaProductos extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(216, 359, 80, 42);
 		getContentPane().add(btnSalir);
+		mostrarTabla();
+		
+		btnGuardar.addActionListener(new ActionListener() {
 			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tipoProducto.setDescripcion(txtCategoria.getText().toUpperCase());
+				estado.setCodigo(1);
+				tipoProducto.setEstCod(estado);
+				controlReferencial.btnGuardar(tipoProducto);
+				mostrarTabla();
+				txtCategoria.setText("");
+			}
+		});
 		
 	}
+
+	public JTextField getTxtCategoria() {
+		return txtCategoria;
+	}
+
+	public void setTxtCategoria(JTextField txtCategoria) {
+		this.txtCategoria = txtCategoria;
+	}
+
+	public JTable getJTable() {
+		return JTable;
+	}
+
+	public void setJTable(JTable jTable) {
+		JTable = jTable;
+	}
+
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+
+	public void setBtnGuardar(JButton btnGuardar) {
+		this.btnGuardar = btnGuardar;
+	}
+
+	public JButton getBtnSalir() {
+		return btnSalir;
+	}
+
+	public void setBtnSalir(JButton btnSalir) {
+		this.btnSalir = btnSalir;
+	}
+
+	public JButton getBtnBuscar() {
+		return btnBuscar;
+	}
+
+	public void setBtnBuscar(JButton btnBuscar) {
+		this.btnBuscar = btnBuscar;
+	}
+	
+	
+	public void mostrarTabla() {
+		JTable.setModel(controlReferencial.mostrarTodoReferencial("Tipo_Producto","TipPro"));
+	}
+	
+	
+	
 	
 	
 }

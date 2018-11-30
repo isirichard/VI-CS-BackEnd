@@ -3,28 +3,72 @@ package com.edit.model;
 public class Producto {
 	private int ProdCod;
 	private String ProdDes;
-	private Proveedor ProdTipPro;
-	private Tipo_Producto ProdTipPro2;
-	private int ProdCan;
-	private double ProdPre;
+	
+	private Tipo_Producto TipProCod;
+	private int ProStk;//stock 
+	private Marca MarCod;
+	private Unidad_Medida UniMedCod;
+	private Estado EstCod;
 	
 	public Producto() {}
-	
-	public String getDescripcion() {
+
+	public int getProdCod() {
+		return ProdCod;
+	}
+
+	public void setProdCod(int prodCod) {
+		ProdCod = prodCod;
+	}
+
+	public String getProdDes() {
 		return ProdDes;
 	}
-	public Proveedor getProveedor() {
-		return ProdTipPro;
+
+	public void setProdDes(String prodDes) {
+		ProdDes = prodDes;
 	}
-	public Proveedor Tipo_Producto() {
-		return ProdTipPro;
+
+	public Tipo_Producto getTipProCod() {
+		return TipProCod;
 	}
-	public int getCantidad() {
-		return ProdCan;
+
+	public void setTipProCod(Tipo_Producto tipProCod) {
+		TipProCod = tipProCod;
 	}
-	public double getPrecio() {
-		return ProdPre;
+
+	public int getProStk() {
+		return ProStk;
 	}
+
+	public void setProStk(int proStk) {
+		ProStk = proStk;
+	}
+
+	public Marca getMarCod() {
+		return MarCod;
+	}
+
+	public void setMarCod(Marca marCod) {
+		MarCod = marCod;
+	}
+
+	public Unidad_Medida getUniMedCod() {
+		return UniMedCod;
+	}
+
+	public void setUniMedCod(Unidad_Medida uniMedCod) {
+		UniMedCod = uniMedCod;
+	}
+
+	public Estado getEstCod() {
+		return EstCod;
+	}
+
+	public void setEstCod(Estado estCod) {
+		EstCod = estCod;
+	}
+	
+	
 	
 
 }

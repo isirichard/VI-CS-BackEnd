@@ -4,6 +4,8 @@ public class Colaborador {
 
 	private int ColCod;
 	private Acceso ColAcc;
+	private String ColUsu;
+	private String ColPass;
 	
 	
 	public int getCodigo() {
@@ -29,5 +31,26 @@ public class Colaborador {
 	public Colaborador() {
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public String getColUsu() {
+		return ColUsu;
+	}
+
+
+	public void setColUsu(String colUsu) {
+		ColUsu = colUsu;
+	}
+
+
+	public String getColPass() {
+		return ColPass;
+	}
+
+
+	public void setColPass(String colPass) {
+		ColPass = colPass;
+	}
+	
 
 }

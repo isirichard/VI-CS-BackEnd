@@ -3,6 +3,10 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+
 public class FrmHistorialCambios extends JFrame{
 	private JPanel jpCliente,jpFecha,jpHistorial;
 	private JLabel lblTipoDOC,lblNro,lblCliente,lblDireccion,lblDistrito,lblDesde,lblHasta;
@@ -25,7 +30,8 @@ public class FrmHistorialCambios extends JFrame{
 	private JTable tabla;
 	private JScrollPane jsTabla;
 	private JButton btnFiltrar;
-
+	
+	private FrmServicioCliente servicioCliente=FrmServicioCliente.Iniciar();
 	public FrmHistorialCambios() {
 		
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
@@ -142,17 +148,32 @@ public class FrmHistorialCambios extends JFrame{
 		jpHistorial.add(jsTabla);
 
 		tabla = new JTable();
-		tabla.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null, null, null},
-					{null, null, null, null},
-					{null, null, null, null},
-				},
-				new String[] {
-						"New column", "New column", "New column", "New column"
-				}
-				));
+//		tabla.setModel(logica.mostrarRegistroCambios(registro, servicioCliente.getCliente(), colaborador));
 		jsTabla.setViewportView(tabla);
+		actualizar();
 	}
+	public void actualizar() {
+//		txtTipoDOC.setText(servicioCliente.getCliente().getTipDocCod().getDescripcion());
+//		txtNro.setText(servicioCliente.getCliente().getPerNro());
+//		txtCliente.setText(servicioCliente.getCliente().getPerNom());
+//		txtDireccion.setText(servicioCliente.getCliente().getPerDir());
+//		fechaActual(jdDesde);
+	}
+//	
+//	public void fechaActual(JDateChooser date) {
+//		SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
+//		Date fecha=new Date();
+//		formato.parse(fecha);
+//		Calendar calendar=new GregorianCalendar();
+//		int año=calendar.get(Calendar.YEAR);
+//		int dia=calendar.get(Calendar.DAY_OF_MONTH);
+//		int mes=calendar.get(Calendar.MONTH);
+//		
+//		calendar.set(año,mes, dia);
+//		System.out.println(calendar);
+		
+//		date.setCalendar(calendar);
+		
+//	}
 
 }

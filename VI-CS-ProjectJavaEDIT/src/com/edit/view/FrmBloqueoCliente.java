@@ -14,12 +14,15 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+
 public class FrmBloqueoCliente extends JFrame {
 	JLabel lblTipoDOC,lblNroDOC,lblNombre,lblApellido,lblEstado;
 	JPanel jpDatosCliente,jpEstado;
 	JTextField txtTipoDOC,txtNroDOC,txtNombre,txtApellido;
 	JComboBox jcEstado;
 	JButton btnGuardar,btnSalir;
+	FrmServicioCliente servicioCliente=FrmServicioCliente.Iniciar();
+	
 	public FrmBloqueoCliente() {
 		
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
@@ -112,6 +115,19 @@ public class FrmBloqueoCliente extends JFrame {
 		btnSalir.setBounds(215, 246, 80, 40);
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		getContentPane().add(btnSalir);
+		actualizar();
+	}
+	
+	public void actualizar() {
+//		txtNombre.setText(servicioCliente.getCliente().getPerNom());
+//		txtTipoDOC.setText(servicioCliente.getCliente().getTipDocCod().getDescripcion());
+//		txtNroDOC.setText(servicioCliente.getCliente().getPerNro());
+//		actualizarJCEstado();
+//		jcEstado.setSelectedIndex(servicioCliente.getCliente().getEstCod().getCodigo());
+		
+	}
+	public void actualizarJCEstado() {
+//		logica.añadirEstadoRegistro(jcEstado);
 	}
 
 }

@@ -1,39 +1,34 @@
 package com.edit.model;
 
-public class Acceso {
-
-	private int AccCod;
-	private String AccDes;
-	private Estado AccEst;
+public class Acceso extends Referencial{
 	
+	public Acceso(int codigo, String descripcion, Estado estCod) {
+		
+		super(codigo, descripcion, estCod);
+		
+	}
 	public Acceso() {
-		// TODO Auto-generated constructor stub
+		
 	}
-
+	
 	public int getCodigo() {
-		return AccCod;
+		return super.getCodigo();
 	}
-
-	public void setCodigo(int accCod) {
-		AccCod = accCod;
-	}
-
 	public String getDescripcion() {
-		return AccDes;
+		return super.getDescripcion();
 	}
-
-	public void setDescripcion(String accDes) {
-		AccDes = accDes;
+	public Estado getEstCod() {
+		return (Estado) super.getEstCod();
 	}
-
-	public Estado getEstado() {
-		return AccEst;
+	public void setCodigo(int co) {
+		super.setCodigo(co);
 	}
-
-	public void setEstado(Estado accEst) {
-		AccEst = accEst;
+	public void setDescripcion(String s) {
+		super.setDescripcion(s);
 	}
-
+	public void setEstCod(Estado es) {
+		super.setEstCod(es);
+	}
 	
-	
+
 }

@@ -6,77 +6,79 @@ public class Persona {
 	private Tipo_Documento PerTipDoc;
 	private String PerNumDoc;
 	private String PerNom;
-	private String PerApe;
+
 	private String PerDir;
 	private String PerTel;
+	private String PerCel;
 	private Estado PerEst;
-	
+
 	public Persona() {
-		
+
 	}
-	
-	public int getCodigo() {
+
+	public int getPerCod() {
 		return PerCod;
 	}
 
-	public void setCodigo(int perCod) {
-		this.PerCod = perCod;
+	public void setPerCod(int perCod) {
+		PerCod = perCod;
 	}
 
-	public Tipo_Documento getTipoDocumento() {
+	public Tipo_Documento getPerTipDoc() {
 		return PerTipDoc;
 	}
 
-	public void setTipoDocumento(Tipo_Documento perTipDoc) {
-		this.PerTipDoc = perTipDoc;
+	public void setPerTipDoc(Tipo_Documento perTipDoc) {
+		PerTipDoc = perTipDoc;
 	}
 
-	public String getNumeroDocumento() {
+	public String getPerNumDoc() {
 		return PerNumDoc;
 	}
 
-	public void setNumeroDocumento(String perNumDoc) {
-		this.PerNumDoc = perNumDoc;
+	public void setPerNumDoc(String perNumDoc) {
+		PerNumDoc = perNumDoc;
 	}
 
-	public String getNombre() {
+	public String getPerNom() {
 		return PerNom;
 	}
 
-	public void setNombre(String perNom) {
-		this.PerNom = perNom;
+	public void setPerNom(String perNom) {
+		PerNom = perNom;
 	}
 
-	public String getApellido() {
-		return PerApe;
-	}
-
-	public void setApellido(String perApe) {
-		this.PerApe = perApe;
-	}
-
-	public String getDireccion() {
+	public String getPerDir() {
 		return PerDir;
 	}
 
-	public void setDireccion(String perDir) {
-		this.PerDir = perDir;
+	public void setPerDir(String perDir) {
+		PerDir = perDir;
 	}
 
-	public String getTelefono() {
+	public String getPerTel() {
 		return PerTel;
 	}
 
-	public void setTelefono(String perTel) {
-		this.PerTel = perTel;
+	public void setPerTel(String perTel) {
+		PerTel = perTel;
 	}
 
-	public Estado getEstado() {
+	public String getPerCel() {
+		return PerCel;
+	}
+
+	public void setPerCel(String perCel) {
+		PerCel = perCel;
+	}
+
+	public Estado getPerEst() {
 		return PerEst;
 	}
 
-	public void setEstado(Estado perEst) {
-		this.PerEst = perEst;
+	public void setPerEst(Estado perEst) {
+		PerEst = perEst;
 	}
 	
+
 }

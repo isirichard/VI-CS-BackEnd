@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,19 +13,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-public class FrmTipoPago extends JFrame{
+import com.edit.controller.LogicaReferencial;
+import com.edit.model.Estado;
+import com.edit.model.Tipo_Cliente;
+import com.edit.model.Tipo_Pago;
+
+public class FrmRefTipoPago extends JFrame{
 	private JPanel JPTipoPago,JPtabla;
 	private JLabel lblTipoPago;
 	private JTextField txtTipoPago;
 	private JScrollPane JSTabla;
-	private JTabbedPane JTable;
+	private JTable JTable;
 	private JButton btnGuardar,btnSalir,btnBuscar;
+	private LogicaReferencial logica;
+	private Tipo_Pago tipoPago;
+	private Estado estado;
 	
-	public FrmTipoPago() {
+	public FrmRefTipoPago() {
+		logica=new LogicaReferencial();
+		estado=new Estado();
+		tipoPago=new Tipo_Pago();
+		JTable=new JTable();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Tipo Pago");
 		setResizable(false);
@@ -79,9 +94,21 @@ public class FrmTipoPago extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(216, 359, 80, 42);
 		getContentPane().add(btnSalir);
-			
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tipoPago.setDescripcion(txtTipoPago.getText().toUpperCase());
+				estado.setCodigo(1);
+				tipoPago.setEstCod(estado);
+				logica.btnGuardar(tipoPago);
+				mostrarTabla();
+				txtTipoPago.setText("");
+			}
+		});	
+		mostrarTabla();
 		
 	}
-	
+	public void mostrarTabla() {
+		JTable.setModel(logica.mostrarTodoReferencial("Tipo_Pago","TipPag"));
+	}
 	
 }

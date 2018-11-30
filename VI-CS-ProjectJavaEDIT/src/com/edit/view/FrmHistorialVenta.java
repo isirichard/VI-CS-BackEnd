@@ -30,10 +30,11 @@ public class FrmHistorialVenta extends JFrame{
 	private JTable JTabla;
 	private JTextField txtNro,txtCliente,txtDireccionCli;
 	private JButton btnBuscar,btnSalir;
+	FrmServicioCliente servicioCliente;
 	public FrmHistorialVenta() {
 		setTitle("Historial de Ventas");
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
-		
+		servicioCliente=FrmServicioCliente.Iniciar();
 		setIconImage(logo);
 		setSize(835,585);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -181,4 +182,10 @@ public class FrmHistorialVenta extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/salida(1).png")));
 
 	}
+	
+//	public void actualizar() {
+//		txtCliente.setText(servicioCliente.getCliente().getPerNom());
+//		txtDireccionCli.setText(servicioCliente.getCliente().getPerDir());
+//		txtNro.setText(servicioCliente.getCliente().getPerNro());
+//	}
 }

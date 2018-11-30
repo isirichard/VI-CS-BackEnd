@@ -1,29 +1,23 @@
 package com.edit.model;
 
-public class Tipo_Producto {
-	private int TipProCod;
-	private String TipProDes;
-	private Estado TipProEst;
-	
-	public Tipo_Producto() {}
-	
+public class Tipo_Producto extends Referencial{
 	public int getCodigo() {
-		return TipProCod;
+		return super.getCodigo();
 	}
 	public String getDescripcion() {
-		return TipProDes;
+		return super.getDescripcion();
 	}
-	public Estado getEstado() {
-		return TipProEst;
+	public Estado getEstCod() {
+		return  super.getEstCod();
 	}
-	public void setCodigo(int TipProCod ) {
-		this.TipProCod=TipProCod;
+	public void setCodigo(int co) {
+		super.setCodigo(co);
 	}
-	public void setDescripcion(String TipProDes) {
-		this.TipProDes=TipProDes;
+	public void setDescripcion(String s) {
+		super.setDescripcion(s);
 	}
-	public void setEstado(Estado TipProEst) {
-		this.TipProEst=TipProEst;
+	public void setEstCod(Estado es) {
+		super.setEstCod(es);
 	}
 	
 

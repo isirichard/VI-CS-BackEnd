@@ -1,27 +1,30 @@
 package com.edit.model;
 
-public class Estado {
-	private int EstCod;
-	private String EstDes;
+public class Estado extends Referencial{
+	
 	
 	public Estado() {
 		
 	}
 
 	public int getCodigo() {
-		return EstCod;
+		return super.getCodigo();
 	}
-
-	public void setCodigo(int estCod) {
-		this.EstCod = estCod;
-	}
-
 	public String getDescripcion() {
-		return EstDes;
+		return super.getDescripcion();
 	}
+	public Estado getKFEstCod() {
+		return (Estado) super.getEstCod();
+	}
+	public void setCodigo(int co) {
+		super.setCodigo(co);
+	}
+	public void setDescripcion(String s) {
+		super.setDescripcion(s);
+	}
+	public void setEstCod(Estado es) {
+		super.setEstCod(es);
 
-	public void setDescripcion(String estDes) {
-		this.EstDes = estDes;
 	}
 	
 
