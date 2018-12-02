@@ -19,6 +19,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.edit.controller.LogicaPersona;
+import javax.swing.DefaultComboBoxModel;
 
 
 
@@ -28,17 +32,17 @@ public class FrmBusquedaCliente extends JFrame {
 	JLabel lblTipoDoc,lblNro,lblCliente;
 	JComboBox jcTipoDoc;
 	JTextField txtNro,txtCliente;
-	JScrollPane jsTabla;
+	JScrollPane jtable1;
 	JTable jTabla;
 	JButton btnBuscar;
 	int codigo;
-//	private LogicaButtons logica;
+	private LogicaPersona logica=new LogicaPersona();
 //	private Cliente cliente=new Cliente();
 	
 
 	private FrmBusquedaCliente() {
 		
-//		logica=new LogicaButtons();
+		//logica=new LogicaButtons();
 		
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Buscar Cliente");
@@ -62,6 +66,7 @@ public class FrmBusquedaCliente extends JFrame {
 		jpFiltro.add(lblTipoDoc);
 
 		jcTipoDoc = new JComboBox();
+		jcTipoDoc.setModel(new DefaultComboBoxModel(new String[] {"DNI", "RUC"}));
 		jcTipoDoc.setBounds(66, 18, 56, 25);
 //		logica.añadirTipoDoc(jcTipoDoc);
 		jpFiltro.add(jcTipoDoc);
@@ -89,11 +94,12 @@ public class FrmBusquedaCliente extends JFrame {
 		});
 
 		lblCliente = new JLabel("Cliente:");
+		lblCliente.setEnabled(false);
 		lblCliente.setBounds(10, 56, 46, 14);
 		jpFiltro.add(lblCliente);
 
 		txtCliente = new JTextField();
-		txtCliente.setEnabled(true);
+		txtCliente.setEnabled(false);
 		txtCliente.setEditable(true);
 		txtCliente.setText("");
 		txtCliente.setBounds(66, 53, 296, 25);
@@ -110,56 +116,22 @@ public class FrmBusquedaCliente extends JFrame {
 		btnBuscar.setBounds(372, 17, 89, 23);
 		jpFiltro.add(btnBuscar);
 
-		jsTabla = new JScrollPane();
-		jsTabla.setBounds(10, 113, 487, 200);
-		getContentPane().add(jsTabla);
+		jtable1 = new JScrollPane();
+		jtable1.setBounds(10, 113, 487, 200);
+		getContentPane().add(jtable1);
 		
-//		jTabla = new JTable(logica.mostrarTablaBuscarCliente(txtNro.getText(),txtCliente.getText(),0));
-		jsTabla.setViewportView(jTabla);
+	
 		
 		
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-//				jTabla.setModel(logica.mostrarTablaBuscarCliente(txtNro.getText(),txtCliente.getText(),jcTipoDoc.getSelectedIndex()));
-				
+			
+				jTabla= new JTable(logica.busquedaCliente(txtNro.getText()));
+			
+				jtable1.setViewportView(jTabla);
 			}
 		});
-		
-//		jTabla.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mousePressed(MouseEvent e) {
-//				JTable jt=(JTable) e.getSource();
-//				Point point=e.getPoint();
-//				int row=jt.rowAtPoint(point);
-//				if(e.getClickCount()==1) {
-//					codigo=(Integer.parseInt(jTabla.getValueAt(jTabla.getSelectedRow(), 0).toString()));
-//					
-//					
-//					
-//					
-//					
-//					
-////					System.out.println("tabla:"+cliente.getCliCod());
-//					
-////					System.out.println(cliente.getPerDir());
-////					dispose();
-//					
-//				}
-//				if(e.getClickCount()==2) {
-//					dispose();
-//				}
-//			}
-//		});
-		
-		
-
 	}
-//	public Cliente getCliente() {
-		
-//		return cliente;
-//	}
 	public JTable getTabla() {
 		return jTabla;
 	}

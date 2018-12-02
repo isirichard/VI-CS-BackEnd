@@ -1,11 +1,16 @@
 package com.edit.controller;
 
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import com.edit.dao.Conexion;
 import com.edit.model.Acceso;
@@ -231,5 +236,42 @@ public class LogicaPersona {
 		}
 		return false;
 
+	}
+	
+	
+	
+	//Buscar persona por CliCod
+	public DefaultTableModel busquedaCliente(String clicod) {
+		
+	
+		
+		String []titulos = {"Codigo","Nombre","Direccion","Tipo Cliente"};
+		String []registro=new String[4];
+		String datos[][]= {};
+		DefaultTableModel modelo=new DefaultTableModel(datos,titulos);
+		
+			
+		try {
+			String query = "SELECT cliente.CliCod as c1, persona.PerNom as c2 , persona.PerDir as c3, tipo_cliente.TipCliDes as c4  FROM ((cliente INNER JOIN persona ON cliente.PerCod=persona.PerCod) INNER JOIN tipo_cliente ON cliente.TipCliCod=tipo_cliente.TipCliCod) where CliCod="+clicod;
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				registro[0]=rs.getString("c1");				
+				registro[1]=rs.getString("c2");
+				registro[2]=rs.getString("c3");
+				registro[3]=rs.getString("c4");
+				
+				modelo.addRow(registro);
+				
+			}
+			
+		
+		}catch (SQLException e) {
+			System.out.println("Nose pudo conectar ala base de datos por:"+e.getErrorCode());
+		}
+		
+		
+		
+		return modelo;
 	}
 }
