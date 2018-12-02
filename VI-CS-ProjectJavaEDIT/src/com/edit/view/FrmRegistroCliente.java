@@ -19,7 +19,9 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import com.edit.controller.LogicaPersona;
+import com.edit.controller.LogicaReferencial;
 import com.edit.model.Cliente;
+import com.edit.model.Tipo_Cliente;
 
 public class FrmRegistroCliente extends JFrame{
 	private JPanel JPDatoCliente,JPDireccion,JPTipoCliente;
@@ -31,10 +33,13 @@ public class FrmRegistroCliente extends JFrame{
 	private JTextArea JTDireccion;
 	private Cliente cliente;
 	private LogicaPersona logica;
+	private int Condicion=0;
+	private LogicaReferencial logica2;
 	
 	public FrmRegistroCliente() {
 		cliente=new Cliente();
 		logica = new LogicaPersona();
+		logica2=new LogicaReferencial();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setSize(426, 478);
 		setLocationRelativeTo(null);
@@ -163,6 +168,7 @@ public class FrmRegistroCliente extends JFrame{
 		JCTipoCliente = new JComboBox();
 		JCTipoCliente.setBounds(99, 16, 118, 25);
 		JPTipoCliente.add(JCTipoCliente);
+		logica2.mostrarJCombo("Tipo_Cliente", "TipCli", JCTipoCliente);
 		
 		lblLineaCredito = new JLabel("Linea de Credito");
 		lblLineaCredito.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -187,32 +193,80 @@ public class FrmRegistroCliente extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				autogenerar();
+				Condicion=autogenerar();
 				// TODO Auto-generated method stub
+				
+			}
+		});
+		btnGuardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(Condicion==1) {
+					
+					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
+					cliente.setPerNom(txtNombre.getText());
+					cliente.setPerTel(txtTelefono.getText());
+					cliente.setPerCel(txtCelular.getText());
+					cliente.setPerDir(JTDireccion.getText());
+					Tipo_Cliente tipo=new Tipo_Cliente();
+					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
+					tipo.setDescripcion(JCTipoCliente.getSelectedItem().toString());
+					
+					cliente.setTipCliCod(tipo);
+					
+					logica.ModificarCliente(cliente);
+					System.out.println(tipo.getCodigo());
+					
+				}
+				if(Condicion==2) {
+					
+					Tipo_Cliente tipo=new Tipo_Cliente();
+					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
+					cliente.setTipCliCod(tipo);
+					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
+					logica.asignarPerCod_PerCli(cliente);
+					JCTipoCliente.setSelectedIndex(0);
+					
+					
+				}
+				if(Condicion==3) {
+					logica.InsertarCliente(cliente);
+					JCTipoCliente.setSelectedIndex(0);
+				}
 				
 			}
 		});
 		
 
 	}
-	public void autogenerar() {
+	public int autogenerar() {
 		cliente.setPerNumDoc(txtNroDOC.getText());
-		logica.validarCliente(cliente);
+		
 		
 		if(logica.validarCliente(cliente)==true) {
 			System.out.println("clientee");
 			llenarCliente();
+			JCTipoCliente.setSelectedIndex(cliente.getTipCliCod().getCodigo());
+			return 1;
 		}
 		else {
 			if(logica.ValidarPersona(cliente)==true) {
 				System.out.println("personaa");
 				llenarCliente();
+				return 2;
+				
+			}
+			else {
+				System.out.println("cliente no existe ni persona");
+				return 3;
 			}
 		}
 		//		JCTipoDOC.setSelectedIndex(cliente.getPerTipDoc().getCodigo());
 		
 	}
 	public void llenarCliente() {
+		
 		txtNombre.setText(cliente.getPerNom());
 		txtCelular.setText(cliente.getPerCel());
 		txtTelefono.setText(cliente.getPerTel());
@@ -220,6 +274,15 @@ public class FrmRegistroCliente extends JFrame{
 		txtLineaCredito.setText(""+cliente.getLinea());
 		
 		
+		
+	}
+	public void limpiar() {
+		txtNombre.setText("");
+		txtCelular.setText("");
+		txtTelefono.setText("");
+		txtNroDOC.setText("");
+		txtLineaCredito.setText("");
+		JCTipoCliente.setSelectedIndex(0);
 	}
 	
 }

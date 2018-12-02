@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import com.edit.dao.Conexion;
@@ -25,7 +27,7 @@ public class LogicaPersona {
 	public LogicaPersona() {
 
 	}
-	public void InsertarCliente(Cliente c) {
+	public boolean InsertarCliente(Cliente c) {
 
 		Sql="INSERT INTO PERSONA(PerNro,PerNom,PerDir,PerTel,PerCel,TipDocCod,EstCod"
 				+ " values (?,?,?,?,?,?,?)";
@@ -46,9 +48,50 @@ public class LogicaPersona {
 
 			pst2.setInt(1, c.getTipCliCod().getCodigo());
 			pst2.setInt(2, c.getEstCodCli().getCodigo());
+			int n=pst.executeUpdate();
+			if(n!=0) {
+				int n2=pst2.executeUpdate();
+				if(n2!=0) {
+					return true;
+				}
+			}
+			else {
+				return false;
+			}
 
 
 		}catch (Exception e) {
+			return false;
+			// TODO: handle exception
+		}
+		return false;
+	}
+	public void asignarPerCod_PerCli(Cliente cliente) {
+		
+		Sql="select PerCod From Persona where PerNro='"+cliente.getPerNumDoc()+"'";
+		String Sql2="Insert into Cliente(PerCod,TipCliCod,EstCod) values(?,?,?)";
+		try {
+			Statement st=con.createStatement();
+			ResultSet rs1=st.executeQuery(Sql);
+			PreparedStatement pst2=con.prepareStatement(Sql2);
+			System.out.println("entra al try");
+			if(rs1.next()) {
+				
+				cliente.setPerCod(rs1.getInt("PerCod"));
+				
+				pst2.setInt(1,cliente.getPerCod());
+				
+				
+				pst2.setInt(2, cliente.getTipCliCod().getCodigo());
+				pst2.setInt(3, 1);
+				pst2.executeUpdate();
+				
+				JOptionPane.showMessageDialog(null,"Cliente Creado");
+			}
+			
+			
+		}catch (Exception e) {
+			System.out.println(e);
 			// TODO: handle exception
 		}
 	}
@@ -91,7 +134,7 @@ public class LogicaPersona {
 
 	public boolean validarCliente(Cliente c) {
 		int resultado=0;
-		String sql1="select Persona.perCod,Persona.TipDocCod,Persona.PerNro,Persona.PerNom,Persona.PerDir,Persona.PerTel,Persona.PerCel,Cliente.PerCod,Cliente.cliCod,Cliente.CliDip,Tipo_Cliente.TipCliDes,Cliente.TipCliCod  "
+		String sql1="select Persona.perCod,Persona.TipDocCod,Persona.PerNro,Persona.PerNom,Persona.PerDir,Persona.PerTel,Persona.PerCel,Cliente.PerCod,Cliente.cliCod,Cliente.CliCup,Tipo_Cliente.TipCliDes,Cliente.TipCliCod  "
 				+ "From Persona, Cliente,Tipo_Cliente "
 				+ " where (Persona.TipDocCod='"+1+"' and Persona.PerNro='"+c.getPerNumDoc()+"') and Persona.perCod=Cliente.PerCod and Cliente.TipCliCod=Tipo_Cliente.TipCliCod" ;
 		
@@ -116,7 +159,7 @@ public class LogicaPersona {
 					c.setPerTel(rs1.getString("Persona.PerTel"));
 					c.setPerCel(rs1.getString("Persona.PerCel"));
 					c.setCliCod(rs1.getInt("Cliente.CliCod"));
-					c.setLinea(rs1.getDouble("Cliente.CliDip"));
+					c.setLinea(rs1.getDouble("Cliente.CliCup"));
 					c.setTipCliCod(tipoCliente);
 					
 					JOptionPane.showMessageDialog(null,"Cliente ya existe");
@@ -232,4 +275,41 @@ public class LogicaPersona {
 		return false;
 
 	}
+	public void ModificarCliente(Cliente cliente) {
+		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerCel=?,PerTel=? where PerCod=?";
+		String sql2="UPDATE Cliente set TipCliCod=?,CliCup=? where CliCod=?";
+		try {
+			PreparedStatement pst=con.prepareStatement(sql);
+			PreparedStatement pst2=con.prepareStatement(sql2);
+			pst.setString(1,cliente.getPerNom());
+			pst.setString(2,cliente.getPerTel() );
+			pst.setString(3, cliente.getPerCel());
+			pst.setString(4, cliente.getPerDir());
+			pst.setInt(5, cliente.getPercod());
+//			System.out.println("no entra");
+			pst2.setInt(1, cliente.getTipCliCod().getCodigo());
+			pst2.setDouble(2, cliente.getLinea());
+			pst2.setInt(3, cliente.getCliCod());
+			System.out.println(cliente.getPerCod());
+			System.out.println(cliente.getCliCod());
+			int n=pst.executeUpdate();
+			System.out.println("entaa");
+			if(n!=0) {
+				System.out.println("entra 1 if");
+				int n2=pst2.executeUpdate();
+				if(n2!=0) {
+					
+					JOptionPane.showMessageDialog(null,"Datos Actualizados");
+				}
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e);
+			// TODO: handle exception
+		}
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }

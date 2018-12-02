@@ -6,8 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -192,6 +194,34 @@ public class LogicaReferencial extends JFrame{
 			}
 		}
 
+	}
+	
+	private ArrayList<String> MostrarJCombo(String Tabla,String Iniciales) {
+		ArrayList<String> arr=new ArrayList<String>();
+		arr.add(" ");
+		String sql="Select "+Iniciales+"Des From "+ Tabla;
+		try {
+			Statement st=con.createStatement();
+			ResultSet res=st.executeQuery(sql);
+			while(res.next()) {
+				arr.add(res.getString(Iniciales+"Des"));
+			}
+			return arr;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		// TODO Auto-generated method stub
+		return arr;
+	}
+	public void mostrarJCombo(String tabla,String ini,JComboBox jc) {
+		ArrayList<String> arr=MostrarJCombo(tabla, ini);
+		
+		
+		for(int i=0;i<arr.size();i++) {
+			jc.addItem(arr.get(i));
+		}
+		
 	}
 
 }
