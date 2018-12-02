@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.edit.controller.LogicaReferencial;
 import com.toedter.calendar.JDateChooser;
 
 public class FrmRegistroVenta extends JFrame{
@@ -33,6 +34,7 @@ public class FrmRegistroVenta extends JFrame{
 	private JButton btnBuscar, btnGuardar,btnSalir;
 	private JTable JTabla;
 	private JScrollPane JSTabla;
+	
 	
 	public FrmRegistroVenta() {
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
@@ -351,4 +353,6 @@ public class FrmRegistroVenta extends JFrame{
 		getContentPane().add(btnSalir);
 		
 	}
+	
+	
 }

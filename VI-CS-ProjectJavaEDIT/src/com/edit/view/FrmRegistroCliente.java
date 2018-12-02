@@ -225,12 +225,22 @@ public class FrmRegistroCliente extends JFrame{
 					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
 					cliente.setTipCliCod(tipo);
 					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
+					cliente.setPerNom(txtNombre.getText());
+					cliente.setPerCel(txtCelular.getText());
+					cliente.setPerTel(txtTelefono.getText());
+					cliente.setPerDir(JTDireccion.getText());
+					
+					
 					logica.asignarPerCod_PerCli(cliente);
+					logica.ModificarPersona(cliente);
 					JCTipoCliente.setSelectedIndex(0);
+					
+					
 					
 					
 				}
 				if(Condicion==3) {
+					llenarCliente();
 					logica.InsertarCliente(cliente);
 					JCTipoCliente.setSelectedIndex(0);
 				}

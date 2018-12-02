@@ -223,7 +223,8 @@ public class LogicaPersona {
 		return false;
 
 	}
-
+	
+	
 	
 	public boolean validarColaborador(Colaborador c) {
 		int resultado=0;
@@ -274,6 +275,28 @@ public class LogicaPersona {
 		}
 		return false;
 
+	}
+	
+	public boolean ModificarPersona(Persona p) {
+//		String sql2="select PerCod from Persona where PerCod='"+p.getPerCod()+"'";
+		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerCel=?,PerTel=? where PerCod="+p.getPerCod();
+		try {
+			PreparedStatement pst=con.prepareStatement(sql);
+			pst.setString(1,p.getPerNom());
+			pst.setString(2,p.getPerTel() );
+			pst.setString(3, p.getPerCel());
+			pst.setString(4, p.getPerDir());
+			
+			int n=pst.executeUpdate();
+			if(n!=0) {
+				System.out.println("se Modifico una Persona "+p.getPerCod());
+				return true;
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+			// TODO: handle exception
+		}
+		return false;
 	}
 	public void ModificarCliente(Cliente cliente) {
 		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerCel=?,PerTel=? where PerCod=?";
