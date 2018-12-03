@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,19 +13,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-public class FrmTipoDOC extends JFrame{
+import com.edit.controller.LogicaReferencial;
+import com.edit.model.Estado;
+import com.edit.model.Tipo_Cliente;
+import com.edit.model.Tipo_Documento;
+
+public class FrmRefTipoDOC extends JFrame{
 	private JPanel JPTipoDOC,JPtabla;
 	private JLabel lblTipoDOC;
 	private JTextField txtTipoDOC;
 	private JScrollPane JSTabla;
-	private JTabbedPane JTable;
+	private javax.swing.JTable JTable;
+	private LogicaReferencial logica;
+	private Estado estado;
+	private Tipo_Documento tipoDocumento;
+	
 	private JButton btnGuardar,btnSalir,btnBuscar;
 	
-	public FrmTipoDOC() {
+	public FrmRefTipoDOC() {
+		logica=new LogicaReferencial();
+		estado=new Estado();
+		tipoDocumento=new Tipo_Documento();
+		JTable=new JTable();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Tipo DOC");
 		setResizable(false);
@@ -80,7 +96,20 @@ public class FrmTipoDOC extends JFrame{
 		btnSalir.setBounds(216, 359, 80, 42);
 		getContentPane().add(btnSalir);
 			
-		
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tipoDocumento.setDescripcion(txtTipoDOC.getText().toUpperCase());
+				estado.setCodigo(1);
+				tipoDocumento.setEstCod(estado);
+				logica.btnGuardar(tipoDocumento);
+				mostrarTabla();
+				txtTipoDOC.setText("");
+			}
+		});
+		mostrarTabla();
+	}
+	public void mostrarTabla() {
+		JTable.setModel(logica.mostrarTodoReferencial("Tipo_Documento","TipDOC"));
 	}
 	
 	

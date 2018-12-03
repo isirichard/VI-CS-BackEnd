@@ -1,62 +1,30 @@
 package com.edit.model;
 
-public class Tipo_Cliente {
-	private int TipCliCod;
-	private String TipCliDes;
-	private Estado TipCliEst;
+public class Tipo_Cliente extends Referencial{
+	
 	
 	public Tipo_Cliente() {
 
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getTipCliCod() {
-		return TipCliCod;
-	}
-
-	public void setTipCliCod(int tipCliCod) {
-		TipCliCod = tipCliCod;
-	}
-
-	public String getTipCliDes() {
-		return TipCliDes;
-	}
-
-	public void setTipCliDes(String tipCliDes) {
-		TipCliDes = tipCliDes;
-	}
-
-	public Estado getTipCliEst() {
-		return TipCliEst;
-	}
-
-	public void setTipCliEst(Estado tipCliEst) {
-		TipCliEst = tipCliEst;
-	}
-
-
 	public int getCodigo() {
-		return TipCliCod;
+		return super.getCodigo();
 	}
-
-	public void setCodigo(int tipCliCod) {
-		this.TipCliCod = tipCliCod;
-	}
-
 	public String getDescripcion() {
-		return TipCliDes;
+		return super.getDescripcion();
 	}
-
-	public void setDescripcion(String tipCliDes) {
-		this.TipCliDes = tipCliDes;
+	public Estado getEstCod() {
+		return  super.getEstCod();
 	}
-
-	public Estado getEstado() {
-		return TipCliEst;
+	public void setCodigo(int co) {
+		super.setCodigo(co);
 	}
-
-	public void setEstado(Estado tipCliEst) {
-		this.TipCliEst = tipCliEst;
+	public void setDescripcion(String s) {
+		super.setDescripcion(s);
+	}
+	public void setEstCod(Estado es) {
+		super.setEstCod(es);
 	}
 	
 

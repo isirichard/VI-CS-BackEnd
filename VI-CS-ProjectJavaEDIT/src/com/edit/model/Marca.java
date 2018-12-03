@@ -1,14 +1,23 @@
 package com.edit.model;
 
-public class Tipo_Documento extends Referencial{
+public class Marca extends Referencial{
+	public Marca(int codigo, String descripcion, Estado estCod) {
+
+		super(codigo, descripcion, estCod);
+
+	}
+	public Marca() {
+
+	}
+
 	public int getCodigo() {
 		return super.getCodigo();
 	}
 	public String getDescripcion() {
 		return super.getDescripcion();
 	}
-	public Estado getEstCod() {
-		return  super.getEstCod();
+	public Estado getKFEstCod() {
+		return (Estado) super.getEstCod();
 	}
 	public void setCodigo(int co) {
 		super.setCodigo(co);
@@ -18,6 +27,7 @@ public class Tipo_Documento extends Referencial{
 	}
 	public void setEstCod(Estado es) {
 		super.setEstCod(es);
-	}
 
+	}
 }
+

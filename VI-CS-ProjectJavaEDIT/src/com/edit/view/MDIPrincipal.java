@@ -26,11 +26,12 @@ import javax.swing.border.TitledBorder;
 public class MDIPrincipal extends JFrame {
 	private JScrollPane scroll;
 	private JPanel JPModulos,
-	JPMaestro,  JPCategoria_Producto,JPTipoDoc,JPEmpresa,JPTipoCliente,JPTipoPago,JPRol,
+	JPMaestro,  JPCategoria_Producto,JPTipoDoc,JPEmpresa,JPTipoCliente,JPTipoPago,JPRol,JPMarca,
 	JPRegistrar, JPCliente,JPProveedor,JPProducto,JPColaborador,
 	JPVenta_Pedido,JPVenta,JPPedido,
 	JPCliente_Proveedor,JPServicioCliente,JPServicioProveedor;
 	private JButton btnMaestro,btnRegistrar,btnVenta_Pedido,btnCliente_Proveedor,btnCategoriaProducto,btnTipoDoc,btnRol,btnEmpresa,btnTipoCliente,btnTipoPago,
+	btnMarca,
 	btnCliente,btnProveedor,btnProducto,btnColaborador,
 	btnNotaVenta,btnNotaPedido,btnRegVenta,btnAnularVenta,btnHistorialVenta,btnRegPedido,btnAnularPedido,btnHistorialPedido,
 	btnSCliente,btnSProveedor,btnServicioCliente,btnAumentoLinea,btnServicioProveedor,
@@ -110,6 +111,7 @@ public class MDIPrincipal extends JFrame {
 		JPCategoria_Producto=new JPanel();
 		JPTipoDoc=new JPanel();
 		JPRol=new JPanel();
+		JPMarca=new JPanel();
 		JPEmpresa=new JPanel();
 		JPTipoCliente=new JPanel();
 		JPTipoPago=new JPanel();
@@ -171,6 +173,14 @@ public class MDIPrincipal extends JFrame {
 		btnRol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionRol(e);
+			}
+		});
+		btnMarca.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				accionMarca(e);
+				
 			}
 		});
 		btnEmpresa.addActionListener(new ActionListener() {
@@ -281,6 +291,10 @@ public class MDIPrincipal extends JFrame {
 		btnTipoPago.setBounds(456, 153, 130, 50);
 		JPMaestro.add(btnTipoPago);
 
+		btnMarca=new JButton("Marca");
+		btnMarca.setFont(new Font("Tahoma",Font.PLAIN,11));
+		btnMarca.setBounds(40,278,130,50);
+		JPMaestro.add(btnMarca);
 
 		lblFondo.setBounds(456, 153, 130, 50);
 
@@ -488,12 +502,6 @@ public class MDIPrincipal extends JFrame {
 			}
 		});
 
-		btnAtras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				accionCliente_Proveedor(e);
-			}
-		});
-
 	}
 
 	private void mostrarJPTipoDOC(boolean v) {
@@ -562,6 +570,22 @@ public class MDIPrincipal extends JFrame {
 
 			}
 		});
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionMaestro(e);
+			}
+		});
+	}
+	
+	private void mostrarJPMarca(boolean v) {
+		mostrarCRUD("MARCA",JPMarca,v);
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				accionBTNINGRESARMarca(e);
+
+			}
+		});
+		
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				accionMaestro(e);
@@ -770,6 +794,11 @@ public class MDIPrincipal extends JFrame {
 		mostrarJPRol(true);
 
 	}
+	private void accionMarca(ActionEvent e) {
+		ocultarTodo();
+		
+		mostrarJPMarca(true);
+	}
 	private void accionEmpresa(ActionEvent e) {
 		ocultarTodo();
 
@@ -849,7 +878,8 @@ public class MDIPrincipal extends JFrame {
 		mostrarJPEmpresa(false);
 		mostrarJPTipoCliente(false);
 		mostrarJPTipoPago(false);
-
+		mostrarJPMarca(false);
+		
 		//modulo Registrar
 		mostrarCliente(false);
 		mostrarProveedor(false);
@@ -869,20 +899,20 @@ public class MDIPrincipal extends JFrame {
 	}
 
 	private void accionBTNINGRESARCATEGORIAPRODUCTO(ActionEvent e) {
-		FrmCategoriaProductos categoriaProductos=new FrmCategoriaProductos();
+		FrmRefCategoriaProductos categoriaProductos=new FrmRefCategoriaProductos();
 		categoriaProductos.setVisible(true);
 	}
 	private void accionBTNINGRESARTIPODOC(ActionEvent e) {
-		FrmTipoDOC tipodoc=new FrmTipoDOC();
+		FrmRefTipoDOC tipodoc=new FrmRefTipoDOC();
 		tipodoc.setVisible(true);
 	}
 
 	private void accionBTNINGRESARTIPOCLIENTE(ActionEvent e) {
-		FrmTipoCliente tipocli=new FrmTipoCliente();
+		FrmRefTipoCliente tipocli=new FrmRefTipoCliente();
 		tipocli.setVisible(true);
 	}
 	private void accionBTNINGRESARROL(ActionEvent e) {
-		FrmRol rol=new FrmRol();
+		FrmRefRol rol=new FrmRefRol();
 		rol.setVisible(true);
 	}
 	private void accionBTNINGRESAREMPRESA(ActionEvent e) {
@@ -891,8 +921,12 @@ public class MDIPrincipal extends JFrame {
 	}
 
 	private void accionBTNINGRESARTIPOPAGO(ActionEvent e) {
-		FrmTipoPago tipopag=new FrmTipoPago();
+		FrmRefTipoPago tipopag=new FrmRefTipoPago();
 		tipopag.setVisible(true);
+	}
+	private void accionBTNINGRESARMarca(ActionEvent e) {
+		FrmRefMarca marca=new FrmRefMarca();
+		marca.setVisible(true);
 	}
 	private void accionBTNINGRESARCLIENTE(ActionEvent e) {
 		FrmRegistroCliente Rcliente=new FrmRegistroCliente();
@@ -919,7 +953,7 @@ public class MDIPrincipal extends JFrame {
 		pedido.setVisible(true);
 	}
 	private void accionBtnServicioCliente(ActionEvent e) {
-		FrmServicioCliente cliente=new FrmServicioCliente();
+		FrmServicioCliente cliente=FrmServicioCliente.Iniciar();
 		cliente.setVisible(true);
 	}
 	private void accionBtnAumentoLinea(ActionEvent e) {

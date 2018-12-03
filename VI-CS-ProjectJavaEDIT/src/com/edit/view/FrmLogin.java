@@ -4,24 +4,33 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import com.edit.controller.Coordinador;
 
 public class FrmLogin extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField txtcontraseña;
 	private JLabel lblUsuario,lblContraseña,lblimagen;
 	private JButton btnIngresar,btnCancelar;
-	private Coordinador miCoordinador;
-	public FrmLogin() {
+	
+	
+	private static FrmLogin login;
+	private FrmLogin() {
+		
+		
 		setTitle("LOGIN");
 		setSize(300, 420);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,6 +58,12 @@ public class FrmLogin extends JFrame {
 		txtUsuario.setBounds(85, 219, 163, 21);
 		getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
+		txtUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				btnEnter(e);
+			}
+		});
 		
 		lblContraseña = new JLabel("Contrase\u00F1a: ");
 		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -62,6 +77,7 @@ public class FrmLogin extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnIngresarAccion(e);
+//				validarAcceso(e);
 			}
 		});
 		
@@ -78,22 +94,77 @@ public class FrmLogin extends JFrame {
 		
 		txtcontraseña = new JPasswordField();
 		txtcontraseña.setBounds(85, 261, 163, 21);
+		txtcontraseña.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				btnEnter(e);
+			}
+		});
 		getContentPane().add(txtcontraseña);
 		
 	}
 	private void btnIngresarAccion(ActionEvent e) {
-		if(miCoordinador.validar(txtUsuario.getText())) {
-			MDIPrincipal principal = new MDIPrincipal();
-			principal.setVisible(true);
-			setLocationRelativeTo(null);
-			this.dispose();
-		}
+		MDIPrincipal principal = new MDIPrincipal();
+		principal.setVisible(true);
+		setLocationRelativeTo(null);
+		this.dispose();
 	}
+	
+	public static FrmLogin iniciar() {
+		if(login==null) {
+			login= new FrmLogin();
+		}
+		return login;
+	}
+	
 	private void btnCancelarAccion(ActionEvent e) {
 		System.exit(0);
 	}
-	public void setCoordinador(Coordinador miCoordinador) {
-		this.miCoordinador = miCoordinador;
+	
+//	private void validarAcceso(ActionEvent e) {
+//		int resultado=0;
+//		try {
+//			String usuario=txtUsuario.getText();
+//			String pass=String.valueOf(txtcontraseña.getPassword());
+//			String sql="select * from Colaborador where UPPER(ColUsu) = UPPER('"+usuario+"') and ColPas='"+pass+"'";
+//			Statement st=con.createStatement();
+//			ResultSet rs=st.executeQuery(sql);
+//			
+//			
+////			if(rs.next()) {
+////				resultado=1;
+////				if(resultado==1) {
+////					colaborador.setColCod(rs.getInt("ColCod"));
+////					colaborador.setColUsu(rs.getString("ColUsu"));
+////					System.out.println(colaborador.getColUsu());
+////					btnIngresarAccion(e);
+////				}else {
+////					JOptionPane.showMessageDialog(null,"ERROR EN EL ACCESO");
+////				}
+//				
+//				 
+//			}
+//			else {
+//				JOptionPane.showMessageDialog(null,"ERROR EN EL ACCESO");
+//			}
+//		}catch (Exception ex) {
+//			System.out.println(ex);
+//			// TODO: handle exception
+//		}
+//		
+//	}
+	
+	private void btnEnter(KeyEvent e) {
+		char tecla=e.getKeyChar();
 		
+		if(tecla==KeyEvent.VK_ENTER) {
+			btnIngresar.doClick();
+		}
 	}
+	
+	
+//	public Colaborador getColaborador() {
+//		return colaborador;
+//	}
+
 }

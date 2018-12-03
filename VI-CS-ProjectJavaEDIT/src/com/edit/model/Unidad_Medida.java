@@ -1,6 +1,10 @@
 package com.edit.model;
 
-public class Tipo_Documento extends Referencial{
+public class Unidad_Medida extends Referencial{
+	
+	public Unidad_Medida() {
+		
+	}
 	public int getCodigo() {
 		return super.getCodigo();
 	}
@@ -19,5 +23,6 @@ public class Tipo_Documento extends Referencial{
 	public void setEstCod(Estado es) {
 		super.setEstCod(es);
 	}
+	
 
 }
