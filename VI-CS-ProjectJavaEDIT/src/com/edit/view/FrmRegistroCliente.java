@@ -22,6 +22,7 @@ import com.edit.controller.LogicaPersona;
 import com.edit.controller.LogicaReferencial;
 import com.edit.model.Cliente;
 import com.edit.model.Tipo_Cliente;
+import com.edit.model.Tipo_Documento;
 
 public class FrmRegistroCliente extends JFrame{
 	private JPanel JPDatoCliente,JPDireccion,JPTipoCliente;
@@ -189,6 +190,7 @@ public class FrmRegistroCliente extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(196, 382, 80, 42);
 		getContentPane().add(btnSalir);
+		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
 		btnBuscar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -240,9 +242,21 @@ public class FrmRegistroCliente extends JFrame{
 					
 				}
 				if(Condicion==3) {
-					llenarCliente();
+					cliente.setPerNumDoc(txtNroDOC.getText());
+					Tipo_Documento tipo1=new Tipo_Documento();
+					tipo1.setCodigo(JCTipoDOC.getSelectedIndex());
+					cliente.setTipDocCod(tipo1);
+					cliente.setPerNom(txtNombre.getText());
+					cliente.setPerCel(txtCelular.getText());
+					cliente.setPerTel(txtTelefono.getText());
+					cliente.setPerDir(JTDireccion.getText());
+					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
+					Tipo_Cliente tipo=new Tipo_Cliente();
+					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
+					cliente.setTipCliCod(tipo);
 					logica.InsertarCliente(cliente);
 					JCTipoCliente.setSelectedIndex(0);
+					limpiar();
 				}
 				
 			}

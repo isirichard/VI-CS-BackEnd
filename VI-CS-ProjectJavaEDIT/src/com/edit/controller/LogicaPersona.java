@@ -28,28 +28,33 @@ public class LogicaPersona {
 
 	}
 	public boolean InsertarCliente(Cliente c) {
-
-		Sql="INSERT INTO PERSONA(PerNro,PerNom,PerDir,PerTel,PerCel,TipDocCod,EstCod"
-				+ " values (?,?,?,?,?,?,?)";
-		String sql2="INSERT INTO CLIENTE(PerCod,TipCliCod,EstCod) "
+		
+		Sql="INSERT INTO PERSONA(PerNro,PerNom,PerDir,PerTel,PerCel,TipDocCod,EstCod,PerTipDoc "
+				+ " values (?,?,?,?,?,?,?,?)";
+		String sql2="INSERT INTO CLIENTE(PerCod,TipCliCod,CliCup) "
 				+ "values ((select PerCod from Persona order by PerCod desc limit 1),?,?)";
 		try {
 			PreparedStatement pst= con.prepareStatement(Sql);
 			PreparedStatement pst2=con.prepareStatement(sql2);
 
-
+			
 			pst.setString(1, c.getPerNumDoc());
 			pst.setString(2, c.getPerNom());
 			pst.setString(3, c.getPerDir());
 			pst.setString(4, c.getPerTel());
 			pst.setString(5, c.getPerCel());
 			pst.setInt(6, c.getPerTipDoc().getCodigo());
-			pst.setInt(7, c.getPerEst().getCodigo());
-
+			
+			pst.setInt(7, 1);
+			pst.setInt(8, c.getTipCliCod().getCodigo());
+//			System.out.println("registra persona");
 			pst2.setInt(1, c.getTipCliCod().getCodigo());
-			pst2.setInt(2, c.getEstCodCli().getCodigo());
+			pst2.setDouble(2, c.getLinea());
+			
 			int n=pst.executeUpdate();
+			System.out.println("registra cliente");
 			if(n!=0) {
+				System.out.println("entra al if");
 				int n2=pst2.executeUpdate();
 				if(n2!=0) {
 					return true;
@@ -61,6 +66,7 @@ public class LogicaPersona {
 
 
 		}catch (Exception e) {
+			System.out.println(e);
 			return false;
 			// TODO: handle exception
 		}
