@@ -46,13 +46,13 @@ public class Logica_TextField extends JFrame{
 			}
 		});
 	}
-	public void tamaño_10(JTextField jt) {
+	public void tamaño_10(JTextField jt,int max) {
 		
-		int maximo=10;
+		
 		jt.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(jt.getText().length()>=maximo) {
+				if(jt.getText().length()>=max) {
 					getToolkit().beep();
 					e.consume();
 					
@@ -79,11 +79,11 @@ public class Logica_TextField extends JFrame{
 		jc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(jc.getSelectedIndex()==1) {
-					tamaño_8(jt);
+					tamaño_10(jt,8);
 					System.out.println(jc.getSelectedItem());
 				}
 				else{
-					tamaño_10(jt);
+					tamaño_10(jt,10);
 					System.out.println(jc.getSelectedItem());
 				}
 			}

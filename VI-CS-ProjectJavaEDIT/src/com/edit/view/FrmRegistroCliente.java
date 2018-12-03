@@ -201,7 +201,7 @@ public class FrmRegistroCliente extends JFrame{
 		btnSalir.setBounds(196, 382, 80, 42);
 		getContentPane().add(btnSalir);
 		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
-		logica3.AccionJcombo(JCTipoDOC, txtNroDOC);
+		
 		
 		btnBuscar.addActionListener(new ActionListener() {
 		
@@ -286,7 +286,7 @@ public class FrmRegistroCliente extends JFrame{
 		cliente.setPerNumDoc(txtNroDOC.getText());
 		Tipo_Documento doc=new Tipo_Documento();
 		doc.setCodigo(JCTipoDOC.getSelectedIndex());
-		
+		cliente.setPerTipDoc(doc);
 		
 		if(logica.validarCliente(cliente)==true) {
 			System.out.println("clientee");
