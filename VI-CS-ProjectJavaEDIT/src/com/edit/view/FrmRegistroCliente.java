@@ -109,11 +109,13 @@ public class FrmRegistroCliente extends JFrame{
 		lblTelefono.setBounds(29, 135, 46, 14);
 		JPDatoCliente.add(lblTelefono);
 		
+		
 		txtTelefono = new JTextField();
 		txtTelefono.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtTelefono.setBounds(83, 130, 89, 25);
 		JPDatoCliente.add(txtTelefono);
 		txtTelefono.setColumns(10);
+		logica3.acepta_Numeros(txtTelefono);
 		
 		lblCelular = new JLabel("Celular:");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -125,6 +127,7 @@ public class FrmRegistroCliente extends JFrame{
 		txtCelular.setBounds(226, 131, 116, 25);
 		JPDatoCliente.add(txtCelular);
 		txtCelular.setColumns(10);
+		logica3.acepta_Numeros(txtCelular);
 		
 		btnBuscar = new JButton("");
 		btnBuscar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/buscar.png")));
@@ -186,6 +189,7 @@ public class FrmRegistroCliente extends JFrame{
 		txtLineaCredito.setBounds(99, 59, 118, 25);
 		JPTipoCliente.add(txtLineaCredito);
 		txtLineaCredito.setColumns(10);
+		logica3.acepta_Numeros(txtLineaCredito);
 		
 		btnGuardar = new JButton("");
 		btnGuardar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/guardar.png")));
@@ -197,6 +201,8 @@ public class FrmRegistroCliente extends JFrame{
 		btnSalir.setBounds(196, 382, 80, 42);
 		getContentPane().add(btnSalir);
 		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
+		logica3.AccionJcombo(JCTipoDOC, txtNroDOC);
+		
 		btnBuscar.addActionListener(new ActionListener() {
 		
 			@Override
@@ -280,7 +286,7 @@ public class FrmRegistroCliente extends JFrame{
 		cliente.setPerNumDoc(txtNroDOC.getText());
 		Tipo_Documento doc=new Tipo_Documento();
 		doc.setCodigo(JCTipoDOC.getSelectedIndex());
-		cliente.setTipDocCod(doc);
+		
 		
 		if(logica.validarCliente(cliente)==true) {
 			System.out.println("clientee");

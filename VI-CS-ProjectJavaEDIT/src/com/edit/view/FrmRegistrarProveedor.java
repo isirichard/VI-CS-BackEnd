@@ -20,6 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import com.edit.controller.LogicaPersona;
 import com.edit.controller.LogicaReferencial;
+import com.edit.controller.Logica_TextField;
 import com.edit.model.Acceso;
 import com.edit.model.Proveedor;
 import com.edit.model.Tipo_Documento;
@@ -36,8 +37,10 @@ public class FrmRegistrarProveedor extends JFrame{
 	private LogicaPersona logica;
 	private LogicaReferencial logica2;
 	private int Condicion=0;
+	private Logica_TextField logica3;
 
 	public FrmRegistrarProveedor() {
+		logica3=new Logica_TextField();
 		proveedor=new Proveedor();
 		logica=new LogicaPersona();
 		logica2=new LogicaReferencial();
@@ -157,7 +160,9 @@ public class FrmRegistrarProveedor extends JFrame{
 		btnSalir.setBounds(240, 375, 80, 42);
 		getContentPane().add(btnSalir);
 		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
-
+		logica3.acepta_Numeros(txtNroDOC);
+		logica3.acepta_Numeros(txtCelular);
+		logica3.acepta_Numeros(txtTelefono);
 		btnBuscar.addActionListener(new ActionListener() {
 
 			@Override

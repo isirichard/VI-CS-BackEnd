@@ -21,6 +21,7 @@ import javax.swing.border.TitledBorder;
 
 import com.edit.controller.LogicaPersona;
 import com.edit.controller.LogicaReferencial;
+import com.edit.controller.Logica_TextField;
 import com.edit.model.Acceso;
 import com.edit.model.Colaborador;
 import com.edit.model.Tipo_Cliente;
@@ -39,8 +40,10 @@ public class FrmRegistrarColaborador extends JFrame{
 	private LogicaPersona logica;
 	private LogicaReferencial logica2;
 	private int Condicion;
+	private Logica_TextField logica3;
 
 	public FrmRegistrarColaborador() {
+		logica3=new Logica_TextField();
 		colaborador=new Colaborador();
 		logica2=new LogicaReferencial();
 		logica=new LogicaPersona();
@@ -78,7 +81,7 @@ public class FrmRegistrarColaborador extends JFrame{
 		txtNroDOC.setBounds(217, 23, 125, 25);
 		JPDatoCliente.add(txtNroDOC);
 		txtNroDOC.setColumns(10);
-
+		
 		lblNombre = new JLabel("Nombre: ");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNombre.setBounds(29, 61, 46, 14);
@@ -202,7 +205,9 @@ public class FrmRegistrarColaborador extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(220, 382, 80, 42);
 		getContentPane().add(btnSalir);
-		
+		logica3.acepta_Numeros(txtNroDOC);
+		logica3.acepta_Numeros(txtCelular);
+		logica3.acepta_Numeros(txtTelefono);
 		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
 		logica2.mostrarJCombo("Acceso", "Acc", JCTipoAcceso);
 		btnBuscar.addActionListener(new ActionListener() {
