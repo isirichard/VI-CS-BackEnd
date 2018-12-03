@@ -340,5 +340,82 @@ public class LogicaPersona {
 		
 	}
 	
-	
+	public void ModificarColaborador(Colaborador c) {
+		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerCel=?,PerTel=? where PerCod=?";
+		String sql2="UPDATE Colaborador set TipCliCod=?,CliCup=? where CliCod=?";
+		try {
+			PreparedStatement pst=con.prepareStatement(sql);
+			PreparedStatement pst2=con.prepareStatement(sql2);
+			pst.setString(1,c.getPerNom());
+			pst.setString(2,c.getPerTel() );
+			pst.setString(3, c.getPerCel());
+			pst.setString(4, c.getPerDir());
+			pst.setInt(5, c.getPercod());
+//			System.out.println("no entra");
+			pst2.setInt(1, c.getTipCliCod().getCodigo());
+			pst2.setDouble(2, c.getLinea());
+			pst2.setInt(3, c.getCliCod());
+			System.out.println(c.getPerCod());
+			System.out.println(c.getCliCod());
+			int n=pst.executeUpdate();
+			System.out.println("entaa");
+			if(n!=0) {
+				System.out.println("entra 1 if");
+				int n2=pst2.executeUpdate();
+				if(n2!=0) {
+					
+					JOptionPane.showMessageDialog(null,"Datos Actualizados");
+				}
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e);
+			// TODO: handle exception
+		}
+		// TODO Auto-generated method stub
+	}
+	public boolean InsertarColaborador(Colaborador c) {
+		Sql="INSERT INTO PERSONA(PerNro,PerNom,PerDir,PerTel,PerCel,TipDocCod,EstCod,PerTipDoc "
+				+ " values (?,?,?,?,?,?,?,?)";
+		String sql2="INSERT INTO Colaborador(PerCod,ColUsu,ColPas,AccCod) "
+				+ "values ((select PerCod from Persona order by PerCod desc limit 1),?,?,?)";
+		try {
+			PreparedStatement pst= con.prepareStatement(Sql);
+			PreparedStatement pst2=con.prepareStatement(sql2);
+
+			
+			pst.setString(1, c.getPerNumDoc());
+			pst.setString(2, c.getPerNom());
+			pst.setString(3, c.getPerDir());
+			pst.setString(4, c.getPerTel());
+			pst.setString(5, c.getPerCel());
+			pst.setInt(6, c.getPerTipDoc().getCodigo());
+			pst.setInt(7, 1);
+			pst.setInt(8, c.getPerTipDoc().getCodigo());
+//			System.out.println("registra persona");
+			pst2.setString(1, c.getColUsu());
+			pst2.setString(2, c.getColPas());
+			pst2.setInt(3, c.getAccCod().getCodigo());
+			
+			int n=pst.executeUpdate();
+			System.out.println("registra Colaborador");
+			if(n!=0) {
+				System.out.println("entra al if");
+				int n2=pst2.executeUpdate();
+				if(n2!=0) {
+					return true;
+				}
+			}
+			else {
+				return false;
+			}
+
+
+		}catch (Exception e) {
+			System.out.println(e);
+			return false;
+			// TODO: handle exception
+		}
+		return false;
+	}
 }

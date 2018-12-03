@@ -78,25 +78,27 @@ public class FrmRegistroCliente extends JFrame{
 		
 		lblNombre = new JLabel("Nombre: ");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNombre.setBounds(29, 61, 46, 14);
+//		lblNombre.setBounds(29, 61, 46, 14);
+		lblNombre.setBounds(29, 81, 46, 14);
 		JPDatoCliente.add(lblNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtNombre.setBounds(83, 56, 259, 25);
+//		txtNombre.setBounds(83, 56, 259, 25);
+		txtNombre.setBounds(83, 80, 259, 25);
 		JPDatoCliente.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		txtApellido = new JTextField();
-		txtApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtApellido.setBounds(83, 95, 259, 25);
-		JPDatoCliente.add(txtApellido);
-		txtApellido.setColumns(10);
+//		txtApellido = new JTextField();
+//		txtApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
+//		txtApellido.setBounds(83, 95, 259, 25);
+//		JPDatoCliente.add(txtApellido);
+//		txtApellido.setColumns(10);
 		
-		lblApellido = new JLabel("Apellidos:");
-		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblApellido.setBounds(29, 100, 46, 14);
-		JPDatoCliente.add(lblApellido);
+//		lblApellido = new JLabel("Apellidos:");
+//		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
+//		lblApellido.setBounds(29, 100, 46, 14);
+//		JPDatoCliente.add(lblApellido);
 		
 		lblTelefono = new JLabel("Telefono:");
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -192,7 +194,7 @@ public class FrmRegistroCliente extends JFrame{
 		getContentPane().add(btnSalir);
 		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
 		btnBuscar.addActionListener(new ActionListener() {
-			
+		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Condicion=autogenerar();
