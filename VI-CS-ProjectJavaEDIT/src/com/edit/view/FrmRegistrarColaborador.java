@@ -20,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import com.edit.controller.LogicaPersona;
+import com.edit.controller.LogicaReferencial;
 import com.edit.model.Acceso;
 import com.edit.model.Colaborador;
 import com.edit.model.Tipo_Cliente;
@@ -36,10 +37,12 @@ public class FrmRegistrarColaborador extends JFrame{
 	private JTextArea JTDireccion;
 	private Colaborador colaborador;
 	private LogicaPersona logica;
+	private LogicaReferencial logica2;
 	private int Condicion;
 
 	public FrmRegistrarColaborador() {
 		colaborador=new Colaborador();
+		logica2=new LogicaReferencial();
 		logica=new LogicaPersona();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setSize(426, 478);
@@ -199,13 +202,16 @@ public class FrmRegistrarColaborador extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(220, 382, 80, 42);
 		getContentPane().add(btnSalir);
-		llenarColaborador();
+		
+		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
+		logica2.mostrarJCombo("Acceso", "Acc", JCTipoAcceso);
 		btnBuscar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				validar();
+				limpiar();
+				Condicion=autogenerar();
 
 			}
 		});
@@ -214,9 +220,7 @@ public class FrmRegistrarColaborador extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Tipo_Documento doc=new Tipo_Documento();
-				doc.setCodigo(JCTipoDOC.getSelectedIndex());
-				colaborador.setTipDocCod(doc);
+				
 				colaborador.setPerNumDoc(txtNroDOC.getText());
 				colaborador.setPerNom(txtNombre.getText());
 				colaborador.setPerCel(txtCelular.getText());
@@ -240,9 +244,9 @@ public class FrmRegistrarColaborador extends JFrame{
 
 
 
-					logica.asignarPerCod_PerCol(colaborador);
+					logica.asignarPerCod_ColCod(colaborador);
 					logica.ModificarPersona(colaborador);
-					JCTipoAcceso.setSelectedIndex(0);
+					
 
 
 
@@ -251,69 +255,73 @@ public class FrmRegistrarColaborador extends JFrame{
 				if(Condicion==3) {
 
 
-					logica.InsertarCliente(cliente);
-					JCTipoAcceso.setSelectedIndex(0);
-					limpiar();
+					logica.InsertarColaborador(colaborador);
+					
+
 				}
 
 			}
 
-		}
-	});
-}
 
-public void validar() {
-	colaborador.setPerNumDoc(txtNroDOC.getText());
-	if(logica.validarColaborador(colaborador)) {
-
-	}
-	else {
-		if(logica.ValidarPersona(colaborador)) {
-
-		}
+		});
 	}
 
-}
-public int autogenerar() {
-	colaborador.setPerNumDoc(txtNroDOC.getText());
+	
 
+	
+	public int autogenerar() {
+		colaborador.setPerNumDoc(txtNroDOC.getText());
+		Tipo_Documento doc=new Tipo_Documento();
+		doc.setCodigo(JCTipoDOC.getSelectedIndex());
+		colaborador.setTipDocCod(doc);
 
-	if(logica.validarColaborador(colaborador)) {
-		System.out.println("clientee");
-		llenarColaborador();
-		//			JCTipoDOC.setSelectedIndex(col.getTipCliCod().getCodigo());
-		return 1;
-	}
-	else {
-		if(logica.ValidarPersona(colaborador)==true) {
-			System.out.println("personaa");
+		if(logica.validarColaborador(colaborador)==true) {
+			System.out.println("clientee");
 			llenarColaborador();
-			return 2;
-
+			
+			return 1;
 		}
 		else {
-			System.out.println("cliente no existe ni persona");
-			return 3;
+			if(logica.ValidarPersona(colaborador)==true) {
+				System.out.println("personaa");
+				llenarPersona();
+				return 2;
+
+			}
+			else {
+				System.out.println("cliente no existe ni persona");
+				return 3;
+			}
 		}
+		
 	}
-	//		JCTipoDOC.setSelectedIndex(cliente.getPerTipDoc().getCodigo());
+	public void llenarPersona() {
+		logica.asignarDatosPersona(colaborador);
+		
+		txtNombre.setText(colaborador.getPerNom());
+		txtCelular.setText(colaborador.getPerCel());
+		txtTelefono.setText(colaborador.getPerTel());
+		JTDireccion.setText(colaborador.getPerDir());
+		
 
-}
-public void llenarColaborador() {
-
-	txtNombre.setText(colaborador.getPerNom());
-
-	txtCelular.setText(colaborador.getPerCel());
-	txtTelefono.setText(colaborador.getPerTel());
-	txtNroDOC.setText(colaborador.getPerNumDoc());
-	JTDireccion.setText(colaborador.getPerDir());
-	txtUsuario.setText(colaborador.getColUsu());
-	colaborador.setColPas("aaaa");
-	colaborador.setColPas(String.valueOf(txtContraseña.getPassword()));
-	Acceso acceso=new Acceso();
-	acceso.setCodigo(JCTipoAcceso.getSelectedIndex());
-	colaborador.setAccCod(acceso);
-
-
-}
+	}
+	public void llenarColaborador() {
+		logica.asignarDatosColaborador(colaborador);
+		txtNombre.setText(colaborador.getPerNom());
+		txtCelular.setText(colaborador.getPerCel());
+		txtTelefono.setText(colaborador.getPerTel());
+		JTDireccion.setText(colaborador.getPerDir());
+		txtUsuario.setText(colaborador.getColUsu());
+		txtContraseña.setText(String.valueOf(colaborador.getColPas()));
+		
+		JCTipoAcceso.setSelectedIndex(colaborador.getAccCod().getCodigo());
+	}
+	public void limpiar() {
+		txtNombre.setText("");
+		txtCelular.setText("");
+		JTDireccion.setText("");
+		txtUsuario.setText("");;
+		txtContraseña.setText(String.valueOf(""));
+		JCTipoAcceso.setSelectedIndex(0);
+	}
 }
