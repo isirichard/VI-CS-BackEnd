@@ -1,99 +1,133 @@
 package com.edit.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-public class Documento {
-
-	private int DocNum;
-	private Empresa DocEmp;
-	private Colaborador DocCol;
-	private Date FecEmi;
-	private Pedido DocPed;
-	private Estado DocEst;
-	private Tipo_Pago DocTipPag;
-	private Date DocFecVenCre;
-	private int DocConDia;
+public abstract class Documento {
+	//cabecera
+	private int DocCod;
+	private Cliente CliCod;
+	private Colaborador ColCod;
+	private Date DocFecEmi;
+	private Tipo_Pago PagCod;
+	private Referencial_booleano EntRecCod;//entregado/recibidocodigo
+	private Estado estCod;
 	
-	public int getNumeroDocumento() {
-		return DocNum;
-	}
-
-	public void setNumeroDocumento(int docNum) {
-		DocNum = docNum;
-	}
-
-
+	//detalle
+//	private ArrayList<Producto> productos;
+	private final double IGV=0.18;
+	private ArrayList<Inventario> inventario;
+//	private double montoUnitario;
+	private double montoParcial;
+	private double montoTotal;
+	private double cantidad;
 	
-
-	public Colaborador getColaborador() {
-		return DocCol;
+	public double getCantidad() {
+		return cantidad;
 	}
 
-	public void setColaborador(Colaborador docCol) {
-		DocCol = docCol;
+
+	public void setCantidad(double cantidad) {
+		this.cantidad = cantidad;
 	}
 
-	public Date getFechaEmision() {
-		return FecEmi;
-	}
-
-	public void setFechaEmision(Date fecEmi) {
-		FecEmi = fecEmi;
-	}
-
-	public Pedido getPedido() {
-		return DocPed;
-	}
-
-	public void setPedido(Pedido docPed) {
-		DocPed = docPed;
-	}
-
-	public Estado getEstado() {
-		return DocEst;
-	}
-
-	public void setEstado(Estado docEst) {
-		DocEst = docEst;
-	}
-
-	public Tipo_Pago getTipoPago() {
-		return DocTipPag;
-	}
-
-	public void setTipoPago(Tipo_Pago docTipPag) {
-		DocTipPag = docTipPag;
-	}
-
-	public Date getFechaVencimientoCredito() {
-		return DocFecVenCre;
-	}
-
-	public void setFechaVencimientoCredito(Date docFecVenCre) {
-		DocFecVenCre = docFecVenCre;
-	}
-
-	public int getDocConDia() {
-		return DocConDia;
-	}
-
-	public void setDocConDia(int docConDia) {
-		DocConDia = docConDia;
-	}
 
 	public Documento() {
-		// TODO Auto-generated constructor stub
-	}
-
-public void Aprobacion() {
 		
 	}
 	
-public void ContadorDias() {
 	
-}
-
-
+	public Documento(int docCod, Cliente cliCod, Colaborador colCod, Date docFecEmi, Tipo_Pago pagCod,
+			Referencial_booleano entRecCod, Estado estCod, ArrayList<Inventario> inventario,
+			double montoUnitario, double montoParcial, double montoTotal) {
+		super();
+		DocCod = docCod;
+		CliCod = cliCod;
+		ColCod = colCod;
+		DocFecEmi = docFecEmi;
+		PagCod = pagCod;
+		EntRecCod = entRecCod;
+		this.estCod = estCod;
+		this.inventario = inventario;
+		
+		this.montoParcial = montoParcial;
+		this.montoTotal = montoTotal;
+	}
+	public int getDocCod() {
+		return DocCod;
+	}
+	public void setDocCod(int docCod) {
+		DocCod = docCod;
+	}
+	public Cliente getCliCod() {
+		return CliCod;
+	}
+	public void setCliCod(Cliente cliCod) {
+		CliCod = cliCod;
+	}
+	public Colaborador getColCod() {
+		return ColCod;
+	}
+	public void setColCod(Colaborador colCod) {
+		ColCod = colCod;
+	}
+	public Date getDocFecEmi() {
+		return DocFecEmi;
+	}
+	public void setDocFecEmi(Date docFecEmi) {
+		DocFecEmi = docFecEmi;
+	}
+	public Tipo_Pago getPagCod() {
+		return PagCod;
+	}
+	public void setPagCod(Tipo_Pago pagCod) {
+		PagCod = pagCod;
+	}
+	public Referencial_booleano getEntRecCod() {
+		return EntRecCod;
+	}
+	public void setEntRecCod(Referencial_booleano entRecCod) {
+		EntRecCod = entRecCod;
+	}
+	public Estado getEstCod() {
+		return estCod;
+	}
+	public void setEstCod(Estado estCod) {
+		this.estCod = estCod;
+	}
+	public ArrayList<Inventario> getInventario() {
+		return inventario;
+	}
+	public void setInventario(ArrayList<Inventario> inventario) {
+		this.inventario = inventario;
+	}
+	public double getMontoUnitario(int contadorTabla) {
+		return inventario.get(contadorTabla).getProPreVen();
+	}
+	public void setMontoUnitario(double montoUnitario) {
+		
+	}
+	public double getMontoParcial(int contadorTabla) {
+		return getMontoUnitario(contadorTabla)*getCantidad();
+	}
+	public void setMontoParcial(double montoParcial) {
+		this.montoParcial = montoParcial;
+	}
+	public double getMontoTotal() {
+		double suma=0.0;
+		for(int i=0;i<inventario.size();i++) {
+			suma+=getMontoParcial(i);
+		}
+		return suma;
+		
+	}
+	public void setMontoTotal(double montoTotal) {
+		this.montoTotal = montoTotal;
+	}
+	public double getIGV() {
+		return IGV;
+	}
+	
 	
 	
 }

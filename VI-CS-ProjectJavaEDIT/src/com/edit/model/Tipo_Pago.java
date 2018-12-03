@@ -1,6 +1,8 @@
 package com.edit.model;
 
-public class Tipo_Pago {
+
+
+public class Tipo_Pago extends Referencial{
 
 	private int TipPagCod;
 	private String TipPagDes;
@@ -12,24 +14,24 @@ public class Tipo_Pago {
 		// TODO Auto-generated constructor stub
 	}
 	public int getCodigo() {
-		return TipPagCod;
-	}
-	public void setCodigo(int tipPagCod) {
-		TipPagCod = tipPagCod;
+		return super.getCodigo();
 	}
 	public String getDescripcion() {
-		return TipPagDes;
+		return super.getDescripcion();
 	}
-	public void setDescripcion(String tipPagDes) {
-		TipPagDes = tipPagDes;
+	public Estado getKFEstCod() {
+		return (Estado) super.getEstCod();
 	}
-	public Estado getEstado() {
-		return TipPagEst;
+	public void setCodigo(int co) {
+		super.setCodigo(co);
 	}
-	public void setEEstado(Estado tipPagEst) {
-		TipPagEst = tipPagEst;
+	public void setDescripcion(String s) {
+		super.setDescripcion(s);
 	}
-	
+	public void setEstCod(Estado es) {
+		super.setEstCod(es);
+
+	}
 	
 	
 }

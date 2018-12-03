@@ -3,6 +3,8 @@ package com.edit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import com.edit.controller.LogicaPersona;
+import com.edit.model.Proveedor;
+
 public class FrmRegistrarProveedor extends JFrame{
 	private JPanel JPDatoCliente,JPDireccion;
 	private JLabel lblTipoDOC,lblNroDOC,lblEmpresa,lblTelefono,lblCelular,lblDireccion;
@@ -24,8 +29,12 @@ public class FrmRegistrarProveedor extends JFrame{
 	private JButton btnBuscar,btnGuardar,btnSalir;
 	private JTabbedPane JTableta;
 	private JTextArea JTDireccion;
+	private Proveedor proveedor;
+	private LogicaPersona logica;
 	
 	public FrmRegistrarProveedor() {
+		proveedor=new Proveedor();
+		logica=new LogicaPersona();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setSize(426, 478);
 		setLocationRelativeTo(null);
@@ -141,8 +150,28 @@ public class FrmRegistrarProveedor extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(240, 375, 80, 42);
 		getContentPane().add(btnSalir);
+		btnBuscar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				validar();
+			}
+		});
 		
 
+	}
+	public void validar() {
+		proveedor.setPerNumDoc(txtNroDOC.getText());
+		if(logica.validarProveedor(proveedor)) {
+			
+		}else {
+			if(logica.ValidarPersona(proveedor)) {
+				
+			}
+		}
+		
+		
 	}
 	
 }

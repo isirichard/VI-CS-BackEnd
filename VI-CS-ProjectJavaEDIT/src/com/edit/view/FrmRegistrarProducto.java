@@ -16,7 +16,7 @@ public class FrmRegistrarProducto extends JFrame{
 	private JPanel JPProducto;
 	private JLabel lblNombreP,lblSKU,lblCategoria;
 	private JTextField txtNombreP,txtSKU,txtPrecioVenta,txtPrecioCosto;
-	private JComboBox JCCategoria,JCUnidadMedida;
+	private JComboBox JCCategoria,JCUnidadMedida,JCMarca;
 	private JButton btnSalir,btnGuardar;
 	
 	public FrmRegistrarProducto() {
@@ -31,7 +31,7 @@ public class FrmRegistrarProducto extends JFrame{
 		
 		JPProducto = new JPanel();
 		JPProducto.setBorder(new TitledBorder(null, "Datos Producto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPProducto.setBounds(10, 11, 393, 312);
+		JPProducto.setBounds(10, 11, 393, 350);
 		getContentPane().add(JPProducto);
 		JPProducto.setLayout(null);
 		
@@ -65,6 +65,11 @@ public class FrmRegistrarProducto extends JFrame{
 		lblPrecioVenta.setBounds(28, 245, 88, 14);
 		JPProducto.add(lblPrecioVenta);
 		
+		JLabel lblMarca=new JLabel("Marca");
+		lblMarca.setFont(new Font("Tahoma",Font.PLAIN,11));
+		lblMarca.setBounds(28,302,88,14);
+		JPProducto.add(lblMarca);
+		
 		txtNombreP = new JTextField();
 		txtNombreP.setBounds(126, 17, 256, 25);
 		JPProducto.add(txtNombreP);
@@ -93,14 +98,18 @@ public class FrmRegistrarProducto extends JFrame{
 		txtPrecioVenta.setBounds(126, 242, 139, 25);
 		JPProducto.add(txtPrecioVenta);
 		
+		JCMarca=new JComboBox();
+		JCMarca.setBounds(126,299,143,25);
+		JPProducto.add(JCMarca);
+		
 		btnGuardar = new JButton("");
 		btnGuardar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/guardar.png")));
-		btnGuardar.setBounds(104, 334, 80, 42);
+		btnGuardar.setBounds(104, 380, 80, 42);
 		getContentPane().add(btnGuardar);
 		
 		btnSalir = new JButton("");
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
-		btnSalir.setBounds(220, 334, 80, 42);
+		btnSalir.setBounds(220, 380, 80, 42);
 		getContentPane().add(btnSalir);
 		
 	}

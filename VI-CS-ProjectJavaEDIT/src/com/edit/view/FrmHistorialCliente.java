@@ -38,9 +38,12 @@ public class FrmHistorialCliente extends JFrame{
 	JTable JTMovimientos,JTPendientes;
 	JButton btnCobrar,btnEntregar,btnImprimir;
 	RenderTable render;
+	FrmServicioCliente servicioCliente;
 
 	public FrmHistorialCliente() {
+		
 		render=new RenderTable();
+		servicioCliente=FrmServicioCliente.Iniciar();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Historial Cliente");
 		setResizable(false);
@@ -352,8 +355,14 @@ public class FrmHistorialCliente extends JFrame{
 		btnImprimir.setBounds(510, 603, 89, 23);
 		getContentPane().add(btnImprimir);
 		JTPendientes.setDefaultRenderer(Object.class, render);
+//		actualizar();
 	}
 	
-	
+//	public void actualizar() {
+//		txtCliente.setText(servicioCliente.getCliente().getPerNom());
+//		txtNro.setText(servicioCliente.getCliente().getTipDocCod().getDescripcion());
+//		txtDireccion.setText(servicioCliente.getCliente().getPerDir());
+//		txtEstado.setText(servicioCliente.getCliente().getEstCod().getDescripcion());
+//	}
 }
 
