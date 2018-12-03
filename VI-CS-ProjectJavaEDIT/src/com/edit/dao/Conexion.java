@@ -17,11 +17,11 @@ public class Conexion {
 		try{
 			
 			properties.load(inputStream);
-			String driver = properties.getProperty("driver");
-			String url = properties.getProperty("url");
-			String user = properties.getProperty("user");
-			String password = properties.getProperty("password");
-			//Class.forName(driver);
+			String driver = properties.getProperty("com.mysql.jdbc.Driver");
+			String url = properties.getProperty("jdbc:mysql://localhost:3360/prueba");
+			String user = properties.getProperty("root");
+			String password = properties.getProperty("");
+			Class.forName(driver);
 			cx = DriverManager.getConnection(url, user, password);
 			System.out.println("Me concte");
 		}catch(Exception e){
