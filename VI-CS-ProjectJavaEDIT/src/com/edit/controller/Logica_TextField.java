@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -86,6 +87,30 @@ public class Logica_TextField extends JFrame{
 					tamaño_10(jt,10);
 					System.out.println(jc.getSelectedItem());
 				}
+			}
+		});
+	}
+	
+	private void btnEnter(JButton btn,KeyEvent e) {
+		char tecla=e.getKeyChar();
+		
+		if(tecla==KeyEvent.VK_ENTER) {
+			btn.doClick();
+		}
+	}
+	public void btnEnter(JTextField jt,JButton btn) {
+		jt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				btnEnter(btn,e);
+			}
+		});
+	}
+	public void btnEnter(JTextField jt) {
+		jt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
 			}
 		});
 	}

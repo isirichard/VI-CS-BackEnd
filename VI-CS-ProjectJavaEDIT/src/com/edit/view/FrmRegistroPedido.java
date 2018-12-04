@@ -2,6 +2,8 @@ package com.edit.view;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +19,11 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.edit.controller.LogicaReferencial;
+import com.edit.controller.Logica_Pedido;
+import com.edit.model.Cliente;
+import com.edit.model.Proveedor;
+import com.edit.model.Tipo_Documento;
 import com.toedter.calendar.JDateChooser;
 
 public class FrmRegistroPedido extends JFrame{
@@ -33,8 +40,14 @@ public class FrmRegistroPedido extends JFrame{
 	private JButton btnBuscar, btnGuardar,btnSalir;
 	private JTable JTabla;
 	private JScrollPane JSTabla;
+	private LogicaReferencial logica1;
+	private Logica_Pedido logicaPedido;
+	private Proveedor proveedor;
 	
 	public FrmRegistroPedido() {
+		logicaPedido=new Logica_Pedido();
+		proveedor=new Proveedor();
+		logica1=new LogicaReferencial();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Registro de Pedido");
 //		setClosable(true);
@@ -349,6 +362,41 @@ public class FrmRegistroPedido extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(405, 578, 80, 42);
 		getContentPane().add(btnSalir);
+		logica1.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
+		logica1.mostrarJCombo("Tipo_Pago", "TipPag", JCPago);
+		txtNro.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(txtNro.getText().length()<=8) {
+				
+				}
+				btnEnter(e);
+				
+			}
+		});
+	}
+	
+	public void BuscarProveedor() {
+		proveedor.setPerNumDoc(txtNro.getText());
+		Tipo_Documento doc=new Tipo_Documento();
+		doc.setCodigo(JCTipoDOC.getSelectedIndex());
+		proveedor.setPerTipDoc(doc);
+		logicaPedido.BuscarProveedor(proveedor);
 		
 	}
+	private void btnEnter(KeyEvent e) {
+		char tecla=e.getKeyChar();
+		
+		if(tecla==KeyEvent.VK_ENTER) {
+			BuscarProveedor();
+			generar();
+			
+		}
+	}
+	private void generar() {
+		
+		txtProveedor.setText(proveedor.getPerNom());
+		txtDireccion.setText(proveedor.getPerDir());
+	}
+	
 }

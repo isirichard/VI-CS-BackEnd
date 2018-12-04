@@ -21,6 +21,7 @@ import javax.swing.border.TitledBorder;
 import com.edit.controller.LogicaPersona;
 import com.edit.controller.LogicaReferencial;
 import com.edit.controller.Logica_TextField;
+import com.edit.model.Acceso;
 import com.edit.model.Cliente;
 import com.edit.model.Tipo_Cliente;
 import com.edit.model.Tipo_Documento;
@@ -219,61 +220,39 @@ public class FrmRegistroCliente extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("CONDICION : "+Condicion);
+				cliente.setPerNom(txtNombre.getText());
+				
+				cliente.setPerCel(txtCelular.getText());
+				cliente.setPerTel(txtTelefono.getText());
+				
+				cliente.setPerDir(JTDireccion.getText());
+				
+				cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
+				Tipo_Cliente acc=new Tipo_Cliente();
+				acc.setCodigo(JCTipoCliente.getSelectedIndex());
+				cliente.setTipCliCod(acc);
 				if(Condicion==1) {
 					
-					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
-					cliente.setPerNom(txtNombre.getText());
-					cliente.setPerTel("Prueba");
-					cliente.setPerCel(txtCelular.getText());
-					cliente.setPerDir(JTDireccion.getText());
-					Tipo_Cliente tipo=new Tipo_Cliente();
-					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
-					tipo.setDescripcion(JCTipoCliente.getSelectedItem().toString());
-					
-					cliente.setTipCliCod(tipo);
-					
 					logica.ModificarCliente(cliente);
-					System.out.println(cliente.getPerTel());
+					
 					
 					
 				}
 				if(Condicion==2) {
 					
-					Tipo_Cliente tipo=new Tipo_Cliente();
-					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
-					cliente.setTipCliCod(tipo);
-					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
-					cliente.setPerNom(txtNombre.getText());
-					cliente.setPerCel(txtCelular.getText());
-					cliente.setPerTel(txtTelefono.getText());
-					cliente.setPerDir(JTDireccion.getText());
-					
 					
 					logica.asignarPerCod_PerCli(cliente);
 					logica.ModificarPersona(cliente);
-					JCTipoCliente.setSelectedIndex(0);
+					
 					
 					
 					
 					
 				}
 				if(Condicion==3) {
-					cliente.setPerNumDoc(txtNroDOC.getText());
-					Tipo_Documento tipo1=new Tipo_Documento();
-					tipo1.setCodigo(JCTipoDOC.getSelectedIndex());
-					cliente.setTipDocCod(tipo1);
-					cliente.setPerNom(txtNombre.getText());
-					cliente.setPerCel(txtCelular.getText());
-					cliente.setPerTel(txtTelefono.getText());
-					cliente.setPerDir(JTDireccion.getText());
-					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
-					Tipo_Cliente tipo=new Tipo_Cliente();
-					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
-					cliente.setTipCliCod(tipo);
 					logica.InsertarCliente(cliente);
-//					logica.insertarPersona(cliente);
-					JCTipoCliente.setSelectedIndex(0);
-					limpiar();
+					
+					
 					
 				}
 				
@@ -289,20 +268,20 @@ public class FrmRegistroCliente extends JFrame{
 		cliente.setPerTipDoc(doc);
 		
 		if(logica.validarCliente(cliente)==true) {
-			System.out.println("clientee");
+			
 			llenarCliente();
 
 			return 1;
 		}
 		else {
 			if(logica.ValidarPersona(cliente)==true) {
-				System.out.println("personaa");
+				
 				llenarPersona();
 				return 2;
 				
 			}
 			else {
-				System.out.println("cliente no existe ni persona");
+				
 				return 3;
 			}
 		}

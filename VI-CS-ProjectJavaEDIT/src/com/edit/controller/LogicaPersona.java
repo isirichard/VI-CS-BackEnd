@@ -250,7 +250,7 @@ public class LogicaPersona {
 			if(rs1.next()) {
 
 
-
+				
 				pst2.setInt(1,cliente.getPerCod());
 
 
@@ -482,32 +482,32 @@ public class LogicaPersona {
 		return false;
 	}
 	public void ModificarCliente(Cliente cliente) {
-		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerCel=?,PerTel=? where PerCod=?";
+		ModificarPersona(cliente);
+//		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerTel=?,PerCel=? where PerCod=?";
 		String sql2="UPDATE Cliente set TipCliCod=?,CliCup=? where CliCod=?";
 		try {
-			PreparedStatement pst=con.prepareStatement(sql);
+//			PreparedStatement pst=con.prepareStatement(sql);
 			PreparedStatement pst2=con.prepareStatement(sql2);
-			pst.setString(1,cliente.getPerNom());
-			pst.setString(2,cliente.getPerDir() );
-			pst.setString(3, cliente.getPerCel());
-			pst.setString(4, cliente.getPerTel());
-			pst.setInt(5, cliente.getPercod());
+//			pst.setString(1,cliente.getPerNom());
+//			pst.setString(2,cliente.getPerDir() );
+//			pst.setString(3, cliente.getPerCel());
+//			pst.setString(4, cliente.getPerTel());
+//			pst.setInt(5, cliente.getPercod());
 			
 			
 			pst2.setInt(1, cliente.getTipCliCod().getCodigo());
 			pst2.setDouble(2, cliente.getLinea());
 			pst2.setInt(3, cliente.getCliCod());
 			
-			int n=pst.executeUpdate();
+//			int n=pst.executeUpdate();
+			int n=pst2.executeUpdate();
 			
-			if(n!=0) {
-				
 				int n2=pst2.executeUpdate();
 				if(n2!=0) {
 
 					JOptionPane.showMessageDialog(null,"Datos Actualizados");
 				}
-			}
+			
 
 		}catch (Exception e) {
 			System.out.println(e);
