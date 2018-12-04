@@ -5,6 +5,7 @@ public class Inventario {
 	private Producto ProdCod;
 	private int ProPreCom;
 	private int ProPreVen;
+	private int ProStk;
 	
 	
 	public Inventario() {
@@ -12,10 +13,10 @@ public class Inventario {
 		ProdCod=new Producto();
 	}
 	
-	public Proveedor getProvCod() {
+	public Proveedor getProv() {
 		return ProvCod;
 	}
-	public void setProvCod(Proveedor provCod) {
+	public void setProv(Proveedor provCod) {
 		ProvCod = provCod;
 	}
 	public Producto getProdCod() {
@@ -35,6 +36,14 @@ public class Inventario {
 	}
 	public void setProPreVen(int proPreVen) {
 		ProPreVen = proPreVen;
+	}
+
+	public int getProStk() {
+		return ProStk;
+	}
+
+	public void setProStk(int proStk) {
+		ProStk = proStk;
 	}
 	
 

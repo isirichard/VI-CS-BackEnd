@@ -352,11 +352,9 @@ public class LogicaPersona {
 			pst.setString(4, c.getPerDir());
 			pst.setInt(5, c.getPercod());
 //			System.out.println("no entra");
-			pst2.setInt(1, c.getTipCliCod().getCodigo());
-			pst2.setDouble(2, c.getLinea());
-			pst2.setInt(3, c.getCliCod());
-			System.out.println(c.getPerCod());
-			System.out.println(c.getCliCod());
+			pst2.setString(1, c.getColUsu());
+			pst2.setString(2, c.getColPas());
+			pst2.setInt(3, c.getAccCod().getCodigo());
 			int n=pst.executeUpdate();
 			System.out.println("entaa");
 			if(n!=0) {

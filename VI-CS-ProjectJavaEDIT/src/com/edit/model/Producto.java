@@ -3,9 +3,9 @@ package com.edit.model;
 public class Producto {
 	private int ProdCod;
 	private String ProdDes;
-	
+	private int ProSKU;
 	private Tipo_Producto TipProCod;
-	private int ProStk;//stock 
+	private int ProStk;//stock
 	private Marca MarCod;
 	private Unidad_Medida UniMedCod;
 	private Estado EstCod;
@@ -26,6 +26,14 @@ public class Producto {
 
 	public void setProdDes(String prodDes) {
 		ProdDes = prodDes;
+	}
+	
+	public int getProSKU() {
+		return ProSKU;
+	}
+
+	public void setProSKU(int proSKU) {
+		ProSKU = proSKU;
 	}
 
 	public Tipo_Producto getTipProCod() {
