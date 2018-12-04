@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,8 +45,10 @@ public class FrmRegistroPedido extends JFrame{
 	private LogicaReferencial logica1;
 	private Logica_Pedido logicaPedido;
 	private Proveedor proveedor;
+	private FrmBuscarProveedor buscarProveedor;
 	
 	public FrmRegistroPedido() {
+		buscarProveedor=new FrmBuscarProveedor();
 		logicaPedido=new Logica_Pedido();
 		proveedor=new Proveedor();
 		logica1=new LogicaReferencial();
@@ -171,8 +175,14 @@ public class FrmRegistroPedido extends JFrame{
 		JPFecha.add(lblFechaPago);
 		
 		JDEmision = new JDateChooser();
+		Calendar c2=new GregorianCalendar();
 		JDEmision.setBounds(85, 20, 139, 20);
 		JPFecha.add(JDEmision);
+		JDEmision.setCalendar(c2);
+		JDEmision.setEnabled(false);
+		System.out.println(JDEmision.getCalendar().get(Calendar.DAY_OF_MONTH));
+		System.out.println(JDEmision.getCalendar().get(Calendar.YEAR));
+		System.out.println(JDEmision.getCalendar().get(Calendar.MONTH)+1);
 		
 		JDPago = new JDateChooser();
 		JDPago.setBounds(85, 50, 139, 20);
@@ -366,14 +376,20 @@ public class FrmRegistroPedido extends JFrame{
 		logica1.mostrarJCombo("Tipo_Pago", "TipPag", JCPago);
 		txtNro.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {
-				if(txtNro.getText().length()<=8) {
-				
-				}
+			public void keyPressed(KeyEvent e) {
 				btnEnter(e);
-				
 			}
 		});
+//		txtNro.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyTyped(KeyEvent e) {
+//				if(txtNro.getText().length()<=8) {
+//					buscarProveedor.setVisible(true);
+//				}
+//				btnEnter(e);
+//				
+//			}
+//		});
 	}
 	
 	public void BuscarProveedor() {
@@ -388,6 +404,9 @@ public class FrmRegistroPedido extends JFrame{
 		char tecla=e.getKeyChar();
 		
 		if(tecla==KeyEvent.VK_ENTER) {
+			if(txtNro.getText().length()==0) {
+				buscarProveedor.setVisible(true);
+			}
 			BuscarProveedor();
 			generar();
 			
