@@ -406,7 +406,19 @@ public class FrmRegistroPedido extends JFrame{
 		if(tecla==KeyEvent.VK_ENTER) {
 			if(txtNro.getText().length()==0) {
 				buscarProveedor.setVisible(true);
+				Tipo_Documento doc=new Tipo_Documento();
+				doc.setCodigo(buscarProveedor.getTipoDOC());
+				proveedor.setPerTipDoc(doc);
+				proveedor.setPerNumDoc(buscarProveedor.getRuc());
+				JCTipoDOC.setSelectedIndex(proveedor.getPerTipDoc().getCodigo());
+				txtNro.setText(proveedor.getPerNumDoc());
+				System.out.println(proveedor.getPerNumDoc());
+				
+				
+				
+				
 			}
+			
 			BuscarProveedor();
 			generar();
 			

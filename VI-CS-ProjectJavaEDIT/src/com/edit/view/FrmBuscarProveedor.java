@@ -2,8 +2,11 @@ package com.edit.view;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,7 +27,8 @@ public class FrmBuscarProveedor extends JFrame{
 	private JTable tabla;
 	private JScrollPane JSCTabla;
 	private Logica_Pedido logica;
-
+	private String RUC="";
+	private int TipoDOC=0;
 	public FrmBuscarProveedor() {
 		logica= new Logica_Pedido();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
@@ -69,12 +73,45 @@ public class FrmBuscarProveedor extends JFrame{
 			public void keyTyped(KeyEvent e) {
 
 				muestraTodaTabla(txtProveedor.getText());
+				
 
 			}
 		});
+		tabla.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JTable jt=(JTable) e.getSource();
+				Point point=e.getPoint();
+				int row=jt.rowAtPoint(point);
+				if(e.getClickCount()==2) {
+					RUC=tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
+					dispose();
+					if(RUC.length()==11) {
+						TipoDOC=2;
+					}
+					if(RUC.length()==8) {
+						TipoDOC=1;
+					}
+					System.out.println(RUC.length()+" "+TipoDOC);
+					
+					//					
+
+				}
+			}
+		});
+	
+
 	}
 	public void muestraTodaTabla(String s) {
 		tabla.setModel(logica.buscar(s));
 	}
+	public String getRuc() {
+		return RUC;
+	}
+	public int getTipoDOC() {
+		return TipoDOC;
+	}
+
+
 
 }
