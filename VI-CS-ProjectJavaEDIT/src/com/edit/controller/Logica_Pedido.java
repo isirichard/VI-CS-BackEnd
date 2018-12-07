@@ -1,13 +1,20 @@
 package com.edit.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import com.edit.dao.Conexion;
 import com.edit.model.Cliente;
+import com.edit.model.Inventario;
+import com.edit.model.Nota_Pedido;
 import com.edit.model.Proveedor;
 
 public class Logica_Pedido {
@@ -88,6 +95,73 @@ public class Logica_Pedido {
 			// TODO: handle exception
 		}
 		return modelo;
+	}
+	
+	public void buscarSKU(Inventario i) {
+		String sql="select Inventario.ProdCod,Producto.ProdDes,Inventario.ProPreVen From Producto,Inventario "
+				+ "where Producto.prodCod=Inventario.ProdCod and Producto.ProSKU='"+i.getProdCod().getProSKU()+"'";
+		try {
+			Statement st=con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			while(rs.next()) {
+				i.getProdCod().setProdCod(rs.getInt("ProdCod"));
+				
+				i.getProdCod().setProdDes(rs.getString("ProdDes"));
+				i.setProPreVen(rs.getDouble("ProPreVen"));
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+			// TODO: handle exception
+		}
+	}
+	public void RegistrarNotaPedido(Nota_Pedido nota) {
+		String sql="Insert Into Nota_Pedido_Cab(NotPedFecEmiDia,NotPedFecEmiMes,NotPedFecEmiAno,NotPedFecPagDia,NotPedFecPagMes,NotPedFecPagAño,"
+				+ "NotPedFecRecDia,NotPedFecRecMes,ColCod,TipPagCod,PagCod,RecCod,EstCod) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql2="Insert Into Nota_Pedido_Det(NotPedNro,NotPedCan,ProvCod,ProdCod)"
+				+ " values ((select NotPedNro from Nota_Pedido_Cab order by PerCod desc limit 1),?,?,?)";
+		try {
+			PreparedStatement pst= con.prepareStatement(sql);
+			PreparedStatement pst2=con.prepareStatement(sql2);
+
+
+			pst.setInt(1, nota.getDocFecEmiDia());
+			pst.setInt(2, nota.getDocFecEmiMes());
+			pst.setInt(3, nota.getDocFecEmiAño());
+			pst.setInt(4, nota.getFecPagoDia());
+			pst.setInt(5, nota.getFecPagoMes());
+			pst.setInt(6, nota.getFecPagoAño());
+			pst.setInt(7, nota.getFecRecepcionDia());
+			pst.setInt(8, nota.getFecRecepcionMes());
+			pst.setInt(8, nota.getFecRecepcionAño());
+			pst.setInt(9, nota.getColCod().getColCod());
+			pst.setInt(10, nota.getPagCod().getCodigo());
+			pst.setInt(11, nota.getEntRecCod().getPagCod());
+			pst.setInt(12, 1);
+
+			
+			//nota detalle
+			for(int i=0;i<nota.getInventario().size();i++) {
+				pst2.setInt(1, nota.getCantidad());
+				pst2.setInt(2, nota.getInventario().get(i).getProvCod().getProvCod());
+				pst2.setInt(3,nota.getInventario().get(i).getProdCod().getProdCod() );
+			}
+			
+
+			int n=pst.executeUpdate();
+
+			if(n!=0) {
+
+				int n2=pst2.executeUpdate();
+				if(n2!=0) {
+					JOptionPane.showMessageDialog(null,"Nota Registrado");
+					
+				}
+			}
+			}catch (Exception e) {
+			System.out.println(e);
+						// TODO: handle exception
+		}
+		
 	}
 	
 }
