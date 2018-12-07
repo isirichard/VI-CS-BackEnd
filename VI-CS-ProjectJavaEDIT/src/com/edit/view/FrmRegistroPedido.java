@@ -543,13 +543,19 @@ public class FrmRegistroPedido extends JFrame{
 		det[2]=txtProducto.getText();
 		det[3]=txtPrecioUnitario.getText();
 		det[4]=txtPrecioxCant.getText();
-		inventarios.add(inventario);
+		
+		System.out.println(inventario);
+		
+		
 		modelo.addRow(det);
+		inventarios.add(inventario);
 		limpiar();
+		System.out.println(inventarios);
 		return modelo;
 
 	}
 	public void limpiar() {
+		inventario=new Inventario();
 		txtSKU.setText("");
 		txtProducto.setText("");
 		txtCantidad.setText("");
@@ -808,7 +814,7 @@ public class FrmRegistroPedido extends JFrame{
 				if(validarCabecera() && validarDetalle()) {
 					llenarDatosCabecera();
 					llenarDatosDetalle();
-					System.out.println(nota_Pedido);
+					System.out.println(nota_Pedido.getInventario());
 					logicaPedido.RegistrarNotaPedido(nota_Pedido);
 				}
 				else {

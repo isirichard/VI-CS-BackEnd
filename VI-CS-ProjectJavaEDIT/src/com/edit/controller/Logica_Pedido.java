@@ -128,14 +128,18 @@ public class Logica_Pedido {
 	}
 	public void RegistrarNotaPedido(Nota_Pedido nota) {
 		String sql="Insert Into Nota_Pedido_Cab(NotPedFecEmiDia,NotPedFecEmiMes,NotPedFecEmiAno,NotPedFecPagDia,NotPedFecPagMes,NotPedFecPagAño,"
-				+ "NotPedFecRecDia,NotPedFecRecMes,ColCod,TipPagCod,PagCoc,RecCod,EstCod) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "NotPedFecRecDia,NotPedFecRecMes,ColCod,TipPagCod,PagCoD,RecCod,EstCod) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql3="select NotPedNro from Nota_Pedido_Cab order by NotPedNro desc limit 1";
 		String sql2="Insert Into Nota_Pedido_Det(NotPedNro,NotPedCan,ProvCod,ProdCod)"
-				+ " values ((select NotPedNro from Nota_Pedido_Cab order by NotPedNro desc limit 1),?,?,?)";
+				+ " values (?,?,?,?)";
 		try {
+			
 			PreparedStatement pst= con.prepareStatement(sql);
 			PreparedStatement pst2=con.prepareStatement(sql2);
-
-
+//			PreparedStatement pst2;
+			Statement st=con.createStatement();
+			ResultSet rs=st.executeQuery(sql3);
+			
 			pst.setInt(1, nota.getDocFecEmiDia());
 			pst.setInt(2, nota.getDocFecEmiMes());
 			pst.setInt(3, nota.getDocFecEmiAño());
@@ -150,16 +154,19 @@ public class Logica_Pedido {
 			pst.setInt(11, nota.getRecibido().getPagCod());
 			pst.setInt(12, nota.getEstadoPago().getPagCod());
 			pst.setInt(13, 1);
-
+			while(rs.next()) {
+				nota.setCodNotPed(rs.getInt("NotPedNro"));
+			}
 			
 			//nota detalle
 			for(int i=0;i<nota.getInventario().size();i++) {
-				
-				pst2.setInt(1, nota.getCantidad());
+				System.out.println(nota.getCodNotPed());
+				pst2.setInt(1,nota.getCodNotPed());
+				pst2.setInt(2, nota.getCantidad());
 //				pst2.setInt(2, nota.getInventario().get(i).getProvCod().getProvCod());
-				pst2.setInt(2, 1);
+				pst2.setInt(3, 1);
 				
-				pst2.setInt(3,nota.getInventario().get(i).getProdCod().getProdCod() );
+				pst2.setInt(4,nota.getInventario().get(i).getProdCod().getProdCod() );
 			}
 			
 
