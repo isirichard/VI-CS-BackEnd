@@ -6,9 +6,10 @@ import java.util.Date;
 public abstract class Documento {
 	//cabecera
 	private int DocCod;
-	private Cliente CliCod;
+	private Persona CliCod;
 	private Colaborador ColCod;
-	private Date DocFecEmi;
+	private int DocFecEmiDia,DocFecEmiMes,DocFecEmiAño;
+	
 	private Tipo_Pago PagCod;
 	private Referencial_booleano EntRecCod;//entregado/recibidocodigo
 	private Estado estCod;
@@ -20,14 +21,14 @@ public abstract class Documento {
 //	private double montoUnitario;
 	private double montoParcial;
 	private double montoTotal;
-	private double cantidad;
+	private int cantidad;
 	
-	public double getCantidad() {
+	public int getCantidad() {
 		return cantidad;
 	}
 
 
-	public void setCantidad(double cantidad) {
+	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
 
@@ -37,32 +38,17 @@ public abstract class Documento {
 	}
 	
 	
-	public Documento(int docCod, Cliente cliCod, Colaborador colCod, Date docFecEmi, Tipo_Pago pagCod,
-			Referencial_booleano entRecCod, Estado estCod, ArrayList<Inventario> inventario,
-			double montoUnitario, double montoParcial, double montoTotal) {
-		super();
-		DocCod = docCod;
-		CliCod = cliCod;
-		ColCod = colCod;
-		DocFecEmi = docFecEmi;
-		PagCod = pagCod;
-		EntRecCod = entRecCod;
-		this.estCod = estCod;
-		this.inventario = inventario;
-		
-		this.montoParcial = montoParcial;
-		this.montoTotal = montoTotal;
-	}
+	
 	public int getDocCod() {
 		return DocCod;
 	}
 	public void setDocCod(int docCod) {
 		DocCod = docCod;
 	}
-	public Cliente getCliCod() {
+	public Persona getCliCod() {
 		return CliCod;
 	}
-	public void setCliCod(Cliente cliCod) {
+	public void setCliCod(Persona cliCod) {
 		CliCod = cliCod;
 	}
 	public Colaborador getColCod() {
@@ -71,12 +57,42 @@ public abstract class Documento {
 	public void setColCod(Colaborador colCod) {
 		ColCod = colCod;
 	}
-	public Date getDocFecEmi() {
-		return DocFecEmi;
+	
+	public int getDocFecEmiDia() {
+		return DocFecEmiDia;
 	}
-	public void setDocFecEmi(Date docFecEmi) {
-		DocFecEmi = docFecEmi;
+
+
+	public void setDocFecEmiDia(int docFecEmiDia) {
+		DocFecEmiDia = docFecEmiDia;
 	}
+
+
+	public int getDocFecEmiMes() {
+		return DocFecEmiMes;
+	}
+
+
+	public void setDocFecEmiMes(int docFecEmiMes) {
+		DocFecEmiMes = docFecEmiMes;
+	}
+
+
+	public int getDocFecEmiAño() {
+		return DocFecEmiAño;
+	}
+
+
+	public void setDocFecEmiAño(int docFecEmiAño) {
+		DocFecEmiAño = docFecEmiAño;
+	}
+
+
+	public double getMontoParcial() {
+		return montoParcial;
+	}
+
+
 	public Tipo_Pago getPagCod() {
 		return PagCod;
 	}

@@ -61,7 +61,7 @@ public class Persona {
 	}
 
 	public void setPerTel(String perTel) {
-		PerTel = perTel;
+		this.PerTel = perTel;
 	}
 
 	public String getPerCel() {

@@ -38,7 +38,7 @@ public class Nota_Venta extends Documento {
 		super.setDocCod(docCod);
 	}
 	public Cliente getCliCod() {
-		return super.getCliCod();
+		return (Cliente) super.getCliCod();
 	}
 	public void setCliCod(Cliente cliCod) {
 		super.setCliCod(cliCod);
@@ -49,11 +49,24 @@ public class Nota_Venta extends Documento {
 	public void setColCod(Colaborador colCod) {
 		super.setColCod(colCod);
 	}
-	public Date getDocFecEmi() {
-		return super.getDocFecEmi();
+	public int getDocFecEmiDia() {
+		return super.getDocFecEmiDia();
 	}
-	public void setDocFecEmi(Date docFecEmi) {
-		super.setDocFecEmi(docFecEmi);
+	public int getDocFecEmiMes() {
+		return super.getDocFecEmiMes();
+	}
+	public int getDocFecEmiAño() {
+		return super.getDocFecEmiAño();
+	}
+	public void setDocFecEmiDia(int docFecEmiDia) {
+		super.setDocFecEmiDia(docFecEmiDia);
+	}
+	
+	public void setDocFecEmiMes(int docFecEmiMes) {
+		super.setDocFecEmiMes(docFecEmiMes);
+	}
+	public void setDocFecEmi(int docFecEmiAño) {
+		super.setDocFecEmiAño(docFecEmiAño);
 	}
 	public Tipo_Pago getPagCod() {
 		return super.getPagCod();

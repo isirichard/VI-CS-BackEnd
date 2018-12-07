@@ -3,9 +3,9 @@ package com.edit.model;
 public class Inventario {
 	private Proveedor ProvCod; 
 	private Producto ProdCod;
-	private int ProPreCom;
-	private int ProPreVen;
-	
+	private double ProPreCom;
+	private double ProPreVen;
+	private int stock;
 	
 	public Inventario() {
 		ProvCod=new Proveedor();
@@ -24,18 +24,27 @@ public class Inventario {
 	public void setProdCod(Producto prodCod) {
 		ProdCod = prodCod;
 	}
-	public int getProPreCom() {
+	public double getProPreCom() {
 		return ProPreCom;
 	}
-	public void setProPreCom(int proPreCom) {
+	public void setProPreCom(double proPreCom) {
 		ProPreCom = proPreCom;
 	}
-	public int getProPreVen() {
+	public double getProPreVen() {
 		return ProPreVen;
 	}
-	public void setProPreVen(int proPreVen) {
+	public void setProPreVen(double proPreVen) {
 		ProPreVen = proPreVen;
 	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
 	
 
 	

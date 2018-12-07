@@ -20,6 +20,8 @@ import javax.swing.border.TitledBorder;
 
 import com.edit.controller.LogicaPersona;
 import com.edit.controller.LogicaReferencial;
+import com.edit.controller.Logica_TextField;
+import com.edit.model.Acceso;
 import com.edit.model.Cliente;
 import com.edit.model.Tipo_Cliente;
 import com.edit.model.Tipo_Documento;
@@ -36,11 +38,13 @@ public class FrmRegistroCliente extends JFrame{
 	private LogicaPersona logica;
 	private int Condicion=0;
 	private LogicaReferencial logica2;
+	private Logica_TextField logica3;
 	
 	public FrmRegistroCliente() {
 		cliente=new Cliente();
 		logica = new LogicaPersona();
 		logica2=new LogicaReferencial();
+		logica3=new Logica_TextField();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setSize(426, 478);
 		setLocationRelativeTo(null);
@@ -75,39 +79,44 @@ public class FrmRegistroCliente extends JFrame{
 		txtNroDOC.setBounds(217, 23, 125, 25);
 		JPDatoCliente.add(txtNroDOC);
 		txtNroDOC.setColumns(10);
+		logica3.acepta_Numeros(txtNroDOC);
 		
 		lblNombre = new JLabel("Nombre: ");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNombre.setBounds(29, 61, 46, 14);
+//		lblNombre.setBounds(29, 61, 46, 14);
+		lblNombre.setBounds(29, 81, 46, 14);
 		JPDatoCliente.add(lblNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtNombre.setBounds(83, 56, 259, 25);
+//		txtNombre.setBounds(83, 56, 259, 25);
+		txtNombre.setBounds(83, 80, 259, 25);
 		JPDatoCliente.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		txtApellido = new JTextField();
-		txtApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtApellido.setBounds(83, 95, 259, 25);
-		JPDatoCliente.add(txtApellido);
-		txtApellido.setColumns(10);
+//		txtApellido = new JTextField();
+//		txtApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
+//		txtApellido.setBounds(83, 95, 259, 25);
+//		JPDatoCliente.add(txtApellido);
+//		txtApellido.setColumns(10);
 		
-		lblApellido = new JLabel("Apellidos:");
-		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblApellido.setBounds(29, 100, 46, 14);
-		JPDatoCliente.add(lblApellido);
+//		lblApellido = new JLabel("Apellidos:");
+//		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 11));
+//		lblApellido.setBounds(29, 100, 46, 14);
+//		JPDatoCliente.add(lblApellido);
 		
 		lblTelefono = new JLabel("Telefono:");
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblTelefono.setBounds(29, 135, 46, 14);
 		JPDatoCliente.add(lblTelefono);
 		
+		
 		txtTelefono = new JTextField();
 		txtTelefono.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtTelefono.setBounds(83, 130, 89, 25);
 		JPDatoCliente.add(txtTelefono);
 		txtTelefono.setColumns(10);
+		logica3.acepta_Numeros(txtTelefono);
 		
 		lblCelular = new JLabel("Celular:");
 		lblCelular.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -119,6 +128,7 @@ public class FrmRegistroCliente extends JFrame{
 		txtCelular.setBounds(226, 131, 116, 25);
 		JPDatoCliente.add(txtCelular);
 		txtCelular.setColumns(10);
+		logica3.acepta_Numeros(txtCelular);
 		
 		btnBuscar = new JButton("");
 		btnBuscar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/buscar.png")));
@@ -180,6 +190,7 @@ public class FrmRegistroCliente extends JFrame{
 		txtLineaCredito.setBounds(99, 59, 118, 25);
 		JPTipoCliente.add(txtLineaCredito);
 		txtLineaCredito.setColumns(10);
+		logica3.acepta_Numeros(txtLineaCredito);
 		
 		btnGuardar = new JButton("");
 		btnGuardar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/guardar.png")));
@@ -191,11 +202,15 @@ public class FrmRegistroCliente extends JFrame{
 		btnSalir.setBounds(196, 382, 80, 42);
 		getContentPane().add(btnSalir);
 		logica2.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
+		
+		
 		btnBuscar.addActionListener(new ActionListener() {
-			
+		
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				limpiar();
 				Condicion=autogenerar();
+				
 				// TODO Auto-generated method stub
 				
 			}
@@ -204,59 +219,41 @@ public class FrmRegistroCliente extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("CONDICION : "+Condicion);
+				cliente.setPerNom(txtNombre.getText());
+				
+				cliente.setPerCel(txtCelular.getText());
+				cliente.setPerTel(txtTelefono.getText());
+				
+				cliente.setPerDir(JTDireccion.getText());
+				
+				cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
+				Tipo_Cliente acc=new Tipo_Cliente();
+				acc.setCodigo(JCTipoCliente.getSelectedIndex());
+				cliente.setTipCliCod(acc);
 				if(Condicion==1) {
 					
-					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
-					cliente.setPerNom(txtNombre.getText());
-					cliente.setPerTel(txtTelefono.getText());
-					cliente.setPerCel(txtCelular.getText());
-					cliente.setPerDir(JTDireccion.getText());
-					Tipo_Cliente tipo=new Tipo_Cliente();
-					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
-					tipo.setDescripcion(JCTipoCliente.getSelectedItem().toString());
-					
-					cliente.setTipCliCod(tipo);
-					
 					logica.ModificarCliente(cliente);
-					System.out.println(tipo.getCodigo());
+					
+					
 					
 				}
 				if(Condicion==2) {
 					
-					Tipo_Cliente tipo=new Tipo_Cliente();
-					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
-					cliente.setTipCliCod(tipo);
-					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
-					cliente.setPerNom(txtNombre.getText());
-					cliente.setPerCel(txtCelular.getText());
-					cliente.setPerTel(txtTelefono.getText());
-					cliente.setPerDir(JTDireccion.getText());
-					
 					
 					logica.asignarPerCod_PerCli(cliente);
 					logica.ModificarPersona(cliente);
-					JCTipoCliente.setSelectedIndex(0);
+					
 					
 					
 					
 					
 				}
 				if(Condicion==3) {
-					cliente.setPerNumDoc(txtNroDOC.getText());
-					Tipo_Documento tipo1=new Tipo_Documento();
-					tipo1.setCodigo(JCTipoDOC.getSelectedIndex());
-					cliente.setTipDocCod(tipo1);
-					cliente.setPerNom(txtNombre.getText());
-					cliente.setPerCel(txtCelular.getText());
-					cliente.setPerTel(txtTelefono.getText());
-					cliente.setPerDir(JTDireccion.getText());
-					cliente.setLinea(Double.parseDouble(txtLineaCredito.getText()));
-					Tipo_Cliente tipo=new Tipo_Cliente();
-					tipo.setCodigo(JCTipoCliente.getSelectedIndex());
-					cliente.setTipCliCod(tipo);
 					logica.InsertarCliente(cliente);
-					JCTipoCliente.setSelectedIndex(0);
-					limpiar();
+					
+					
+					
 				}
 				
 			}
@@ -266,45 +263,58 @@ public class FrmRegistroCliente extends JFrame{
 	}
 	public int autogenerar() {
 		cliente.setPerNumDoc(txtNroDOC.getText());
-		
+		Tipo_Documento doc=new Tipo_Documento();
+		doc.setCodigo(JCTipoDOC.getSelectedIndex());
+		cliente.setPerTipDoc(doc);
 		
 		if(logica.validarCliente(cliente)==true) {
-			System.out.println("clientee");
+			
 			llenarCliente();
-			JCTipoCliente.setSelectedIndex(cliente.getTipCliCod().getCodigo());
+
 			return 1;
 		}
 		else {
 			if(logica.ValidarPersona(cliente)==true) {
-				System.out.println("personaa");
-				llenarCliente();
+				
+				llenarPersona();
 				return 2;
 				
 			}
 			else {
-				System.out.println("cliente no existe ni persona");
+				
 				return 3;
 			}
 		}
-		//		JCTipoDOC.setSelectedIndex(cliente.getPerTipDoc().getCodigo());
+		
+		
+	}
+	public void llenarPersona() {
+		logica.asignarDatosPersona(cliente);
+		txtNombre.setText(cliente.getPerNom());
+		txtCelular.setText(cliente.getPerCel());
+		txtTelefono.setText(cliente.getPerTel());
+		txtNroDOC.setText(cliente.getPerNumDoc());
+		
+		JTDireccion.setText(cliente.getPerDir());
+		
+		
 		
 	}
 	public void llenarCliente() {
-		
+		logica.asignarDatosCliente(cliente);
 		txtNombre.setText(cliente.getPerNom());
 		txtCelular.setText(cliente.getPerCel());
 		txtTelefono.setText(cliente.getPerTel());
 		txtNroDOC.setText(cliente.getPerNumDoc());
 		txtLineaCredito.setText(""+cliente.getLinea());
-		
-		
-		
+		JTDireccion.setText(cliente.getPerDir());
+		JCTipoCliente.setSelectedIndex(cliente.getTipCliCod().getCodigo());
 	}
 	public void limpiar() {
 		txtNombre.setText("");
 		txtCelular.setText("");
 		txtTelefono.setText("");
-		txtNroDOC.setText("");
+		
 		txtLineaCredito.setText("");
 		JCTipoCliente.setSelectedIndex(0);
 	}

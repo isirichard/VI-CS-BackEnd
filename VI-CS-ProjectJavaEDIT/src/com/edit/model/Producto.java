@@ -5,10 +5,11 @@ public class Producto {
 	private String ProdDes;
 	
 	private Tipo_Producto TipProCod;
-	private int ProStk;//stock 
+	
 	private Marca MarCod;
 	private Unidad_Medida UniMedCod;
 	private Estado EstCod;
+	private String proSKU;
 	
 	public Producto() {}
 
@@ -36,13 +37,7 @@ public class Producto {
 		TipProCod = tipProCod;
 	}
 
-	public int getProStk() {
-		return ProStk;
-	}
-
-	public void setProStk(int proStk) {
-		ProStk = proStk;
-	}
+	
 
 	public Marca getMarCod() {
 		return MarCod;
@@ -67,6 +62,15 @@ public class Producto {
 	public void setEstCod(Estado estCod) {
 		EstCod = estCod;
 	}
+
+	public String getProSKU() {
+		return proSKU;
+	}
+
+	public void setProSKU(String proSKU) {
+		this.proSKU = proSKU;
+	}
+	
 	
 	
 	

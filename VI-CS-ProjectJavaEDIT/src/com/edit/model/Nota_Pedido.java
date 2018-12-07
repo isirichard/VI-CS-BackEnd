@@ -5,23 +5,60 @@ import java.util.Date;
 
 public class Nota_Pedido extends Documento{
 	private int CodNotPed;
-	private Date FecRecepcion;
-	private Date FecPago;
+	private int FecRecepcionDia,FecRecepcionMes,FecRecepcionAño;
+	private int FecPagoDia,FecPagoMes,FecPagoAño;
 	
-	public Date getFecRecepcion() {
-		return FecRecepcion;
+	
+	
+
+	
+
+	public int getFecRecepcionDia() {
+		return FecRecepcionDia;
 	}
 
-	public void setFecRecepcion(Date fecRecepcion) {
-		FecRecepcion = fecRecepcion;
+	public void setFecRecepcionDia(int fecRecepcionDia) {
+		FecRecepcionDia = fecRecepcionDia;
 	}
 
-	public Date getFecPago() {
-		return FecPago;
+	public int getFecRecepcionMes() {
+		return FecRecepcionMes;
 	}
 
-	public void setFecPago(Date fecPago) {
-		FecPago = fecPago;
+	public void setFecRecepcionMes(int fecRecepcionMes) {
+		FecRecepcionMes = fecRecepcionMes;
+	}
+
+	public int getFecRecepcionAño() {
+		return FecRecepcionAño;
+	}
+
+	public void setFecRecepcionAño(int fecRecepcionAño) {
+		FecRecepcionAño = fecRecepcionAño;
+	}
+
+	public int getFecPagoDia() {
+		return FecPagoDia;
+	}
+
+	public void setFecPagoDia(int fecPagoDia) {
+		FecPagoDia = fecPagoDia;
+	}
+
+	public int getFecPagoMes() {
+		return FecPagoMes;
+	}
+
+	public void setFecPagoMes(int fecPagoMes) {
+		FecPagoMes = fecPagoMes;
+	}
+
+	public int getFecPagoAño() {
+		return FecPagoAño;
+	}
+
+	public void setFecPagoAño(int fecPagoAño) {
+		FecPagoAño = fecPagoAño;
 	}
 
 	public Nota_Pedido() {
@@ -41,10 +78,10 @@ public class Nota_Pedido extends Documento{
 	public void setDocCod(int docCod) {
 		super.setDocCod(docCod);
 	}
-	public Cliente getCliCod() {
-		return super.getCliCod();
+	public Proveedor getCliCod() {
+		return (Proveedor) super.getCliCod();
 	}
-	public void setCliCod(Cliente cliCod) {
+	public void setCliCod(Proveedor cliCod) {
 		super.setCliCod(cliCod);
 	}
 	public Colaborador getColCod() {
@@ -53,11 +90,23 @@ public class Nota_Pedido extends Documento{
 	public void setColCod(Colaborador colCod) {
 		super.setColCod(colCod);
 	}
-	public Date getDocFecEmi() {
-		return super.getDocFecEmi();
+	public int getDocFecEmiDia() {
+		return super.getDocFecEmiDia();
 	}
-	public void setDocFecEmi(Date docFecEmi) {
-		super.setDocFecEmi(docFecEmi);
+	public int getDocFecEmiMes() {
+		return super.getDocFecEmiMes();
+	}
+	public int getDocFecEmiAño() {
+		return super.getDocFecEmiAño();
+	}
+	public void setDocFecEmiDia(int docFecEmiDia) {
+		super.setDocFecEmiDia(docFecEmiDia);
+	}
+	public void setDocFecEmiMes(int docFecEmiDia) {
+		super.setDocFecEmiMes(docFecEmiDia);
+	}
+	public void setDocFecEmiAño(int docFecEmiDia) {
+		super.setDocFecEmiAño(docFecEmiDia);
 	}
 	public Tipo_Pago getPagCod() {
 		return super.getPagCod();
