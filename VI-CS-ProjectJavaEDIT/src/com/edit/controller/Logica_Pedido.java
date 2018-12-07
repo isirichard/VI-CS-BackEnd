@@ -133,7 +133,7 @@ public class Logica_Pedido {
 		String sql2="Insert Into Nota_Pedido_Det(NotPedNro,NotPedCan,ProvCod,ProdCod)"
 				+ " values (?,?,?,?)";
 		try {
-			
+			int n2=-1;
 			PreparedStatement pst= con.prepareStatement(sql);
 			PreparedStatement pst2=con.prepareStatement(sql2);
 //			PreparedStatement pst2;
@@ -164,9 +164,10 @@ public class Logica_Pedido {
 				pst2.setInt(1,nota.getCodNotPed());
 				pst2.setInt(2, nota.getCantidad());
 //				pst2.setInt(2, nota.getInventario().get(i).getProvCod().getProvCod());
-				pst2.setInt(3, 1);
+				pst2.setInt(3, nota.getProvCod().getProvCod());
 				
 				pst2.setInt(4,nota.getInventario().get(i).getProdCod().getProdCod() );
+				n2=pst2.executeUpdate();
 			}
 			
 
@@ -175,7 +176,7 @@ public class Logica_Pedido {
 			if(n!=0) {
 				JOptionPane.showMessageDialog(null,"Registro Exitoso");
 
-				int n2=pst2.executeUpdate();
+				
 				if(n2!=0) {
 					JOptionPane.showMessageDialog(null,"Nota Registrado");
 					
