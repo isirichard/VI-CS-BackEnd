@@ -19,11 +19,20 @@ import com.edit.model.Proveedor;
 
 public class Logica_Pedido {
 	private Connection con=Conexion.conectar();
-	public void BuscarProveedor(Proveedor p) {
-		AsignarDatosCompletos(p);
+	public boolean BuscarProveedor(Proveedor p) {
+		if(AsignarDatosCompletos(p)) {
+			
+			return true;
+		}
+		else {
+			
+			return false;
+		}
+		
 		
 	}
-	private void AsignarDatosCompletos(Proveedor p) {
+	private boolean AsignarDatosCompletos(Proveedor p) {
+		boolean encontrado=false;
 		String sql="SELECT Persona.PerCod,Persona.PerNom,Persona.PerDir,PerTel,PerCel,"
 				+ "Proveedor.ProvCod "
 				+ "FROM Proveedor, persona where (Persona.TipDocCod='"+p.getPerTipDoc().getCodigo()+"' and Persona.PerNro='"+p.getPerNumDoc()+"') "
@@ -39,13 +48,16 @@ public class Logica_Pedido {
 				p.setPerDir(rs.getString("PerDir"));
 				p.setPerTel(rs.getString("PerTel"));
 				p.setPerCel(rs.getString("PerCel"));
+				encontrado=true;
 				
 			}
 			
 		}catch (Exception e) {
 			System.out.println(e);
+			encontrado=false;
 			// TODO: handle exception
 		}
+		return encontrado;
 
 	}
 	private void AsignarCodigos(Proveedor p) {
@@ -116,9 +128,9 @@ public class Logica_Pedido {
 	}
 	public void RegistrarNotaPedido(Nota_Pedido nota) {
 		String sql="Insert Into Nota_Pedido_Cab(NotPedFecEmiDia,NotPedFecEmiMes,NotPedFecEmiAno,NotPedFecPagDia,NotPedFecPagMes,NotPedFecPagAño,"
-				+ "NotPedFecRecDia,NotPedFecRecMes,ColCod,TipPagCod,PagCod,RecCod,EstCod) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "NotPedFecRecDia,NotPedFecRecMes,ColCod,TipPagCod,PagCoc,RecCod,EstCod) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		String sql2="Insert Into Nota_Pedido_Det(NotPedNro,NotPedCan,ProvCod,ProdCod)"
-				+ " values ((select NotPedNro from Nota_Pedido_Cab order by PerCod desc limit 1),?,?,?)";
+				+ " values ((select NotPedNro from Nota_Pedido_Cab order by NotPedNro desc limit 1),?,?,?)";
 		try {
 			PreparedStatement pst= con.prepareStatement(sql);
 			PreparedStatement pst2=con.prepareStatement(sql2);
@@ -135,14 +147,18 @@ public class Logica_Pedido {
 			pst.setInt(8, nota.getFecRecepcionAño());
 			pst.setInt(9, nota.getColCod().getColCod());
 			pst.setInt(10, nota.getPagCod().getCodigo());
-			pst.setInt(11, nota.getEntRecCod().getPagCod());
-			pst.setInt(12, 1);
+			pst.setInt(11, nota.getRecibido().getPagCod());
+			pst.setInt(12, nota.getEstadoPago().getPagCod());
+			pst.setInt(13, 1);
 
 			
 			//nota detalle
 			for(int i=0;i<nota.getInventario().size();i++) {
+				
 				pst2.setInt(1, nota.getCantidad());
-				pst2.setInt(2, nota.getInventario().get(i).getProvCod().getProvCod());
+//				pst2.setInt(2, nota.getInventario().get(i).getProvCod().getProvCod());
+				pst2.setInt(2, 1);
+				
 				pst2.setInt(3,nota.getInventario().get(i).getProdCod().getProdCod() );
 			}
 			
@@ -150,6 +166,7 @@ public class Logica_Pedido {
 			int n=pst.executeUpdate();
 
 			if(n!=0) {
+				JOptionPane.showMessageDialog(null,"Registro Exitoso");
 
 				int n2=pst2.executeUpdate();
 				if(n2!=0) {
