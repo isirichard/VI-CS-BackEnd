@@ -274,4 +274,58 @@ public class LogicaPersona {
 		
 		return modelo;
 	}
+	
+public String[] busquedaCliente2(String clicod) {
+		
+	
+		
+	String []registro=new String[2];
+	
+			
+		try {
+			String query = "SELECT cliente.CliCod as c1, persona.PerNom as c2 , persona.PerDir as c3, tipo_cliente.TipCliDes as c4  FROM ((cliente INNER JOIN persona ON cliente.PerCod=persona.PerCod) INNER JOIN tipo_cliente ON cliente.TipCliCod=tipo_cliente.TipCliCod) where CliCod="+clicod;
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				registro[0]=rs.getString("c2");				
+				registro[1]=rs.getString("c3");		
+				
+			}
+			
+		
+		}catch (SQLException e) {
+			System.out.println("Nose pudo conectar ala base de datos por:"+e.getErrorCode());
+		}
+		
+		
+		
+		return registro;
+	}
+
+public String[] busquedaProducto(String clicod) {
+	
+	
+	
+	String []registro=new String[2];
+	
+			
+		try {
+			String query = "SELECT producto.ProdDes as c1 FROM producto where ProdCod="+clicod;
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				registro[0]=rs.getString("c1");				
+					
+				
+			}
+			
+		
+		}catch (SQLException e) {
+			System.out.println("Nose pudo conectar ala base de datos por:"+e.getErrorCode());
+		}
+		
+		
+		
+		return registro;
+	}
 }

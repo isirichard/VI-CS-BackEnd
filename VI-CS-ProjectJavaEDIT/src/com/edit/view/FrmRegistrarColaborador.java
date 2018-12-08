@@ -23,6 +23,7 @@ import com.edit.controller.LogicaPersona;
 import com.edit.model.Colaborador;
 
 public class FrmRegistrarColaborador extends JFrame{
+	private static FrmRegistrarColaborador instancia;
 	private JPanel JPDatoCliente,JPDireccion,JPTipoCliente;
 	private JLabel lblTipoDOC,lblNroDOC,lblNombre,lblApellido,lblTelefono,lblCelular,lblDireccion,lblUsuario,lblContraseña,lblTipoAcceso;
 	private JTextField txtNroDOC,txtNombre,txtApellido,txtTelefono,txtCelular,txtLineaCredito,txtUsuario;
@@ -218,6 +219,13 @@ public class FrmRegistrarColaborador extends JFrame{
 			}
 		}
 		
+	}
+	
+	public static FrmRegistrarColaborador Iniciar() {
+		if(instancia==null) {
+			instancia=new FrmRegistrarColaborador();
+		}
+		return instancia;
 	}
 	
 }

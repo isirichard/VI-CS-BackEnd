@@ -17,7 +17,11 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.edit.controller.LogicaPersona;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmRegistroVenta extends JFrame{
 	
@@ -33,6 +37,7 @@ public class FrmRegistroVenta extends JFrame{
 	private JButton btnBuscar, btnGuardar,btnSalir;
 	private JTable JTabla;
 	private JScrollPane JSTabla;
+	private LogicaPersona logica=new LogicaPersona();
 	
 	public FrmRegistroVenta() {
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
@@ -47,7 +52,7 @@ public class FrmRegistroVenta extends JFrame{
 		
 		JPDatosCliente = new JPanel();
 		JPDatosCliente.setBorder(new TitledBorder(null, "Datos Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPDatosCliente.setBounds(10, 11, 366, 120);
+		JPDatosCliente.setBounds(10, 11, 377, 120);
 		getContentPane().add(JPDatosCliente);
 		JPDatosCliente.setLayout(null);
 		
@@ -92,8 +97,21 @@ public class FrmRegistroVenta extends JFrame{
 		JPDatosCliente.add(lblNro);
 		
 		JCTipoDOC = new JComboBox();
+		JCTipoDOC.setModel(new DefaultComboBoxModel(new String[] {"DNI", "RUC"}));
 		JCTipoDOC.setBounds(66, 20, 66, 20);
 		JPDatosCliente.add(JCTipoDOC);
+		
+		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String response[]=logica.busquedaCliente2(txtNro.getText());
+				txtCliente.setText(response[0]);
+				txtDireccion.setText(response[1]);
+				
+			}
+		});
+		button.setBounds(341, 86, 30, 25);
+		JPDatosCliente.add(button);
 		
 		JPEmpresa = new JPanel();
 		JPEmpresa.setBorder(new TitledBorder(null, "Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -233,6 +251,14 @@ public class FrmRegistroVenta extends JFrame{
 		JPProducto.add(lblProducto);
 		
 		btnBuscar= new JButton("");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String response[]=logica.busquedaProducto(txtSKU.getText());
+				txtProducto.setText(response[0]);
+				
+			}
+		});
 		btnBuscar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/buscar.png")));
 		btnBuscar.setBounds(239, 38, 30, 25);
 		JPProducto.add(btnBuscar);
@@ -262,7 +288,6 @@ public class FrmRegistroVenta extends JFrame{
 		
 		txtPrecioUnitario = new JTextField();
 		txtPrecioUnitario.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtPrecioUnitario.setEditable(false);
 		txtPrecioUnitario.setBounds(279, 75, 80, 25);
 		JPProducto.add(txtPrecioUnitario);
 		txtPrecioUnitario.setColumns(10);
@@ -274,7 +299,6 @@ public class FrmRegistroVenta extends JFrame{
 		JPProducto.add(lblPrecioxCant);
 		
 		txtPrecioxCant = new JTextField();
-		txtPrecioxCant.setEditable(false);
 		txtPrecioxCant.setBounds(463, 77, 78, 25);
 		JPProducto.add(txtPrecioxCant);
 		txtPrecioxCant.setColumns(10);
@@ -341,6 +365,10 @@ public class FrmRegistroVenta extends JFrame{
 		JPPrecio.add(txtPrecioTotal);
 		
 		btnGuardar = new JButton("");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnGuardar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/guardar.png")));
 		btnGuardar.setBounds(262, 578, 80, 42);
 		getContentPane().add(btnGuardar);
@@ -350,5 +378,13 @@ public class FrmRegistroVenta extends JFrame{
 		btnSalir.setBounds(405, 578, 80, 42);
 		getContentPane().add(btnSalir);
 		
+	}
+	
+	private static FrmRegistroVenta instancia;
+	public static FrmRegistroVenta Iniciar() {
+		if(instancia==null) {
+			instancia=new FrmRegistroVenta();
+		}
+		return instancia;
 	}
 }
