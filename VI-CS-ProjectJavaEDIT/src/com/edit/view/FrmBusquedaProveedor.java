@@ -1,5 +1,8 @@
 package com.edit.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -10,6 +13,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import com.edit.controller.Busqueda_proveedor;
+
 public class FrmBusquedaProveedor extends JFrame{
 	JPanel jpFiltro,jpTabla;
 	JLabel lblTipoDoc,lblNro,lblProveedor7;
@@ -18,11 +23,13 @@ public class FrmBusquedaProveedor extends JFrame{
 	JScrollPane jsTabla;
 	JTable jTabla;
 	JButton btnBuscar;
+	Busqueda_proveedor busqueda;
 	
 	public FrmBusquedaProveedor() {
 	setSize(524,409);
 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	getContentPane().setLayout(null);
+	busqueda = new Busqueda_proveedor();
 	
 	jpFiltro = new JPanel();
 	jpFiltro.setBorder(new TitledBorder(null, "Filtro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -63,6 +70,7 @@ public class FrmBusquedaProveedor extends JFrame{
 	btnBuscar.setBounds(372, 17, 89, 23);
 	jpFiltro.add(btnBuscar);
 	
+	
 	jsTabla = new JScrollPane();
 	jsTabla.setBounds(10, 113, 487, 200);
 	getContentPane().add(jsTabla);
@@ -71,5 +79,5 @@ public class FrmBusquedaProveedor extends JFrame{
 	jsTabla.setViewportView(jTabla);
 
 	}
-
+	
 }

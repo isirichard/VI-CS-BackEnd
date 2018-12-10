@@ -85,6 +85,7 @@ public class FrmBuscarProveedor extends JFrame{
 				int row=jt.rowAtPoint(point);
 				if(e.getClickCount()==2) {
 					RUC=tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
+					//System.out.println(RUC);
 					dispose();
 					if(RUC.length()==11) {
 						TipoDOC=2;

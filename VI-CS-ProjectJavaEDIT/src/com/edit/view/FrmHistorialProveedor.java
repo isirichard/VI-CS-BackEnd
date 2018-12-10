@@ -17,6 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import javax.swing.table.DefaultTableModel;
 
+import com.edit.model.Proveedor;
 import com.toedter.calendar.JDateChooser;
 
 
@@ -38,8 +39,10 @@ public class FrmHistorialProveedor extends JFrame{
 	JTable JTMovimientos,JTPendientes;
 	JButton btnPagado,btnRecibir,btnImprimir;
 	RenderTable render;
+	Proveedor proveedor;
 
 	public FrmHistorialProveedor() {
+		proveedor = new Proveedor();
 		render=new RenderTable();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Historial Proveedor");
@@ -353,7 +356,20 @@ public class FrmHistorialProveedor extends JFrame{
 		getContentPane().add(btnImprimir);
 		JTPendientes.setDefaultRenderer(Object.class, render);
 	}
+	public void llenarText(Proveedor proveedor) {
+	    //System.out.println(proveedor.getPerNom());
+		//this.txtTipoDoc.setText(proveedor.getPerTipDoc().getDescripcion());
+		this.proveedor=proveedor;
+		this.txtNro.setText(proveedor.getPerNumDoc());
 	
+	
+		this.txtDireccion.setText(proveedor.getPerDir());
+		this.txtMontoTotal.setText(""+proveedor.getProDeuAtr());
+	    this.txtDisponible.setText(""+proveedor.getProDeuAct());
+		this.txtDeudaTotal.setText(""+proveedor.getProDeuTot());
+		
+	
+	}
 	
 }
 
