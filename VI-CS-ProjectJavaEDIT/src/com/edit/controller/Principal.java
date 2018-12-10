@@ -3,6 +3,7 @@ package com.edit.controller;
 import com.edit.dao.UsuarioDAOImpl;
 import com.edit.view.FrmCategoriaProductos;
 import com.edit.view.FrmEmpresa;
+import com.edit.view.FrmHistorialProveedor;
 import com.edit.view.FrmHistorialVenta;
 import com.edit.view.FrmLogin;
 import com.edit.view.FrmRegistrarColaborador;
@@ -16,13 +17,15 @@ import com.edit.view.FrmServicioCliente;
 public class Principal {
 	public static void main(String args[]) {
 		//::::::::::.......LOGIN.........::::::::
+		
 		Coordinador miCoordinador;
 		UsuarioDAOImpl miUsuario;
-		FrmLogin miLogin;
+		FrmHistorialProveedor miLogin;
 		
 		//instanciando
-		miLogin = new FrmLogin();
+		miLogin = new FrmHistorialProveedor();
 		miLogin.setVisible(true);
+		/*
 		miUsuario = new UsuarioDAOImpl();
 		miCoordinador = new Coordinador();		
 		//establecemos las relaciones entre clases
@@ -31,6 +34,10 @@ public class Principal {
 		//enviarle una instancia de cada clase al coordinador
 		miCoordinador.setFrmLogin(miLogin);
 		miCoordinador.setUsuarioDAOImpl(miUsuario);
+		
+		*/
+		
+		
 		
 	}
 }

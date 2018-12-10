@@ -10,9 +10,20 @@ public class Producto {
 	
 	public Producto() {}
 	
-	public String getDescripcion() {
+	
+	
+	public String getProdDes() {
 		return ProdDes;
 	}
+
+
+
+	public void setProdDes(String prodDes) {
+		ProdDes = prodDes;
+	}
+
+
+
 	public Proveedor getProveedor() {
 		return ProdTipPro;
 	}

@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,14 +17,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import com.edit.controller.Coordinador;
 import com.toedter.calendar.JDateChooser;
 
 
-
+import com.edit.model.NotaPedidoCab;
+import com.edit.model.NotaPedidoDet;
 
 
 
@@ -36,16 +43,16 @@ public class FrmHistorialProveedor extends JFrame{
 	JTextField txtTipoDoc,txtNro,txtCliente,txtDireccion,txtDireccion1,txtEstado,txtDeudaTotal,txtDisponible,txtTotalDeuda,txtDeudaVencida,txtNoVencida,txtMontoTotal;
 	JScrollPane JSMovimientos,JSPendientes;
 	JTable JTMovimientos,JTPendientes;
-	JButton btnPagado,btnRecibir,btnImprimir;
+	JButton btnPagado,btnRecibir,btnImprimir,btnBuscar,btnVerTodosMovAnt;
 	RenderTable render;
-
+	Coordinador coordi;
 	public FrmHistorialProveedor() {
 		render=new RenderTable();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Historial Proveedor");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+		coordi = new Coordinador();
 		setIconImage(logo);
 		setSize(785,691);
 		setLocationRelativeTo(null);
@@ -212,7 +219,8 @@ public class FrmHistorialProveedor extends JFrame{
 		lblDesde.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDesde.setBounds(110, 21, 46, 14);
 		JPFecha.add(lblDesde);
-
+		
+		// PRIMER CHOOSER
 		JDDesde = new JDateChooser();
 		JDDesde.setBounds(155, 17, 120, 20);
 		JPFecha.add(JDDesde);
@@ -222,80 +230,68 @@ public class FrmHistorialProveedor extends JFrame{
 		lblHasta.setBounds(413, 21, 46, 14);
 		JPFecha.add(lblHasta);
 
+		// SEGUNDO CHOOSER
 		JDHasta = new JDateChooser();
 		JDHasta.setBounds(469, 17, 120, 20);
 		JPFecha.add(JDHasta);
 
+		btnBuscar=new JButton("");
+		btnBuscar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/buscar.png")));
+		btnBuscar.setBounds(700,15,37,25);
+		JPFecha.add(btnBuscar);
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnBuscarAccion(e);
+			}
+		});
+		
+		
+		
+		
+		
 		JPMovimientos = new JPanel();
 		JPMovimientos.setBorder(new TitledBorder(null, "Moviemientos Anteriores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPMovimientos.setBounds(10, 267, 750, 123);
+		JPMovimientos.setBounds(10, 267, 750, 135);
 		getContentPane().add(JPMovimientos);
 		JPMovimientos.setLayout(null);
 
 		JSMovimientos = new JScrollPane();
-		JSMovimientos.setBounds(10, 27, 716, 85);
+		JSMovimientos.setBounds(10, 20, 716, 85);
 		JPMovimientos.add(JSMovimientos);
 
-		JTMovimientos = new JTable();
+		JTMovimientos = new JTable(){
+			public boolean isCellEditable(int rowIndex,int colIndex) {
+				return false;
+			}
+			
+		};
+		
+		
+		
+		
 		JTMovimientos.setModel(new DefaultTableModel(
 				new Object[][] {
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
-					{null, null, null, null, null, null, null, null},
+					{		"15/01/2018", "16/01/2018", "PAGADO", "RECIBIDO", "CERA SAPOLIO", "48787456", "250.00", "250.00"},
+					{		"EMISION", "VENCIMIENTO", "ESTADO", "RECIBIDO", "PRODUCTO", "DOCUMENTO", "TOTAL", "MONTO"
+					},
 				},
 				new String[] {
-						"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
+						"EMISION", "VENCIMIENTO", "ESTADO", "RECIBIDO", "PRODUCTO", "DOCUMENTO", "TOTAL", "MONTO"
 				}
 				));
 		JSMovimientos.setViewportView(JTMovimientos);
-
+		mostrarTabla(datosDefault());
+		
+		btnVerTodosMovAnt = new JButton("Ver Todos Movimientos");
+		btnVerTodosMovAnt.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnVerTodosMovAnt.setBounds(300, 108, 170, 23);
+		JPMovimientos.add(btnVerTodosMovAnt);
+		btnVerTodosMovAnt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnVerTodosMovAntAccion(e);
+			}
+		});
+		
 		JPPendientes = new JPanel();
 		JPPendientes.setBorder(new TitledBorder(null, "Pendientes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		JPPendientes.setBounds(10, 401, 750, 172);
@@ -353,6 +349,104 @@ public class FrmHistorialProveedor extends JFrame{
 		getContentPane().add(btnImprimir);
 		JTPendientes.setDefaultRenderer(Object.class, render);
 	}
+	
+	private void btnVerTodosMovAntAccion(ActionEvent e) {
+		mostrarTabla(datosDefault());
+	}
+	
+	private void btnBuscarAccion(ActionEvent e) {
+		mostrarTabla(datosEntre());
+	}
+	
+	private void mostrarTabla(String [][] datos) {
+		JTMovimientos.setModel(new DefaultTableModel(
+				datos,
+				new String[] {
+						"F. EMISION", "F. RECIBIDO", "ESTADO", "RECIBIDO", "PRODUCTO", "DOCUMENTO", "TOTAL", "MONTO"
+				}
+				));
+		JSMovimientos.setViewportView(JTMovimientos);
+		
+	}
+	
+	
+	private String [][] datosDefault(){
+		ArrayList <NotaPedidoCab> movAnterioresCol = (ArrayList<NotaPedidoCab>) coordi.mostrarTodosMovAnterioresColCod(1);
+		ArrayList <NotaPedidoDet> detallesProv = (ArrayList<NotaPedidoDet>) coordi.mostrarTodosMovAnterioresPorProv(1);
+		String datos [][] = new String [movAnterioresCol.size()+3][8];
+		for (int i = 0; i < movAnterioresCol.size(); i++) {
+			datos[i][0]= movAnterioresCol.get(i).getFechaEmision();
+			datos[i][1]= movAnterioresCol.get(i).getFechaRecibido();
+			//datos[i][2]= movAnterioresCol.get(i).getFechaPagado();
+			datos[i][2] = ""+coordi.getEstadoPagoDescripcionPorId(movAnterioresCol.get(i).getPagCoc());
+			datos[i][3] = ""+coordi.getEstadoRecibidoDescripcionPorId(movAnterioresCol.get(i).getRecCod());
+			datos[i][4] = coordi.getDescripcionProductoPorId(detallesProv.get(i).getProdCod());
+			datos[i][5] = "DOCUMENTO";
+			datos[i][6] = ""+detallesProv.get(i).getNotPedTot();
+			datos[i][7] = ""+detallesProv.get(i).getNotPedTot();
+			
+		}
+		return datos;
+	}
+
+	private String [][] datosEntre(){
+		int k=0;
+		ArrayList <NotaPedidoCab> movAnterioresCol = (ArrayList<NotaPedidoCab>) coordi.mostrarTodosMovAnterioresColCod(1);
+		ArrayList <NotaPedidoDet> detallesProv = (ArrayList<NotaPedidoDet>) coordi.mostrarTodosMovAnterioresPorProv(1);
+		String datos [][] = new String [movAnterioresCol.size()+3][8];
+		for (int i = 0; i < movAnterioresCol.size(); i++) {
+			System.out.println(movAnterioresCol.get(i).getNotPedFecRecDia()+"DIAAAA");
+			System.out.println(movAnterioresCol.get(i).getNotPedFecRecMes()+"MESSSS");
+			System.out.println(movAnterioresCol.get(i).getNotPedFecRecAño()+"AÑOOOO");
+			
+			System.out.println(entre(movAnterioresCol.get(i).getNotPedFecRecDia(),movAnterioresCol.get(i).getNotPedFecRecMes(),movAnterioresCol.get(i).getNotPedFecRecAño()));
+			if(entre(movAnterioresCol.get(i).getNotPedFecRecDia(),movAnterioresCol.get(i).getNotPedFecRecMes(),movAnterioresCol.get(i).getNotPedFecRecAño())) {
+			datos[k][0]= movAnterioresCol.get(i).getFechaEmision();
+			datos[k][1]= movAnterioresCol.get(i).getFechaRecibido();
+			//datos[i][2]= movAnterioresCol.get(i).getFechaPagado();
+			datos[k][2] = ""+coordi.getEstadoPagoDescripcionPorId(movAnterioresCol.get(i).getPagCoc());
+			datos[k][3] = ""+coordi.getEstadoRecibidoDescripcionPorId(movAnterioresCol.get(i).getRecCod());
+			datos[k][4] = coordi.getDescripcionProductoPorId(detallesProv.get(i).getProdCod());
+			datos[k][5] = "DOCUMENTO";
+			datos[k][6] = ""+detallesProv.get(i).getNotPedTot();
+			datos[k][7] = ""+detallesProv.get(i).getNotPedTot();
+			k++;
+			}
+		}
+		System.out.println("HECHO");
+		return datos;
+	}
+
+	
+	private boolean entre(int dia,int mes,int ano) {
+		
+		int diaI = JDDesde.getDate().getDate();
+		int mesI = JDDesde.getDate().getMonth()+1;
+		int anoI = JDDesde.getDate().getYear()+1900;
+		
+		int diaF = JDHasta.getDate().getDate();
+		int mesF = JDHasta.getDate().getMonth()+1;
+		int anoF = JDHasta.getDate().getYear()+1900;
+		
+	//	System.out.println(diaI +"\t"+mesI+"\t"+anoI);
+	//	System.out.println(diaF +"\t"+mesF+"\t"+anoF);
+		
+		if(ano>=anoI && ano<=anoF)
+			if(mes==mesI && mes==mesF) {
+				if(dia>=diaI && dia<=diaF)
+					return true;
+			}else {
+				if(mesI<=mes && mesF>=mes) {
+					return true;
+				}
+			}
+				
+		
+		
+		return false;
+	}
+	
+	
 	
 	
 }
