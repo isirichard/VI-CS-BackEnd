@@ -19,6 +19,7 @@ import javax.swing.border.TitledBorder;
 import com.edit.controller.LogicaPersona;
 import com.edit.controller.LogicaProducto;
 import com.edit.controller.LogicaReferencial;
+import com.edit.model.Cliente;
 import com.edit.model.Inventario;
 import com.edit.model.Marca;
 import com.edit.model.Producto;
@@ -33,7 +34,7 @@ public class FrmRegistrarProducto extends JFrame{
 	private JLabel lblNombreP,lblSKU,lblCategoria, lblUnidadMedida, lblPrecioCosto, lblPrecioVenta, lblMarca, lblProveedor;
 	private JTextField txtNombreP,txtSKU,txtPrecioVenta,txtPrecioCosto;
 	private JComboBox JCCategoria,JCUnidadMedida,JCMarca, JCProveedor;
-	private JButton btnSalir,btnGuardar;
+	private JButton btnBuscar1, btnSalir,btnGuardar;
 	private JTabbedPane JTableta;
 	private JTextArea JTDireccion;
 	private Producto producto;
@@ -42,6 +43,9 @@ public class FrmRegistrarProducto extends JFrame{
 	private LogicaReferencial logica2;
 	
 	public FrmRegistrarProducto() {
+		producto = new Producto();
+		logica = new LogicaProducto();
+		logica2 = new LogicaReferencial();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setSize(426, 478);
 		setLocationRelativeTo(null);
@@ -57,15 +61,15 @@ public class FrmRegistrarProducto extends JFrame{
 		getContentPane().add(JPProducto);
 		JPProducto.setLayout(null);
 		
-		lblNombreP = new JLabel("Nombre Producto:");
-		lblNombreP.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNombreP.setBounds(32, 20, 88, 25);
-		JPProducto.add(lblNombreP);
-		
 		lblSKU = new JLabel("SKU:");
 		lblSKU.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblSKU.setBounds(96, 60, 44, 25);
+		lblSKU.setBounds(96, 20, 44, 25);
 		JPProducto.add(lblSKU);
+		
+		lblNombreP = new JLabel("Nombre Producto:");
+		lblNombreP.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNombreP.setBounds(32, 60, 88, 25);
+		JPProducto.add(lblNombreP);
 		
 		lblCategoria = new JLabel("Categoria:");
 		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -97,19 +101,20 @@ public class FrmRegistrarProducto extends JFrame{
 		lblProveedor.setBounds(66, 300, 60, 25);
 		JPProducto.add(lblProveedor);
 		
-		txtNombreP = new JTextField();
-		txtNombreP.setBounds(126, 20, 256, 25);
-		JPProducto.add(txtNombreP);
-		txtNombreP.setColumns(10);
-		
 		txtSKU = new JTextField();
 		txtSKU.setColumns(10);
-		txtSKU.setBounds(126, 60, 256, 25);
+		txtSKU.setBounds(126, 20, 200, 25);
 		JPProducto.add(txtSKU);
+		
+		txtNombreP = new JTextField();
+		txtNombreP.setBounds(126, 60, 200, 25);
+		JPProducto.add(txtNombreP);
+		txtNombreP.setColumns(10);
 		
 		JCCategoria = new JComboBox();
 		JCCategoria.setBounds(126, 100, 143, 25);
 		JPProducto.add(JCCategoria);
+		logica2.mostrarJCombo("Tipo_Producto", "TipPro", JCCategoria);
 		
 		JCUnidadMedida = new JComboBox();
 		JCUnidadMedida.setBounds(126, 140, 143, 25);
@@ -119,6 +124,7 @@ public class FrmRegistrarProducto extends JFrame{
 		txtPrecioCosto.setColumns(10);
 		txtPrecioCosto.setBounds(126, 180, 139, 25);
 		JPProducto.add(txtPrecioCosto);
+		logica2.mostrarJCombo("Unidad_Medida", "UniMed", JCCategoria);
 		
 		txtPrecioVenta = new JTextField();
 		txtPrecioVenta.setColumns(10);
@@ -128,10 +134,17 @@ public class FrmRegistrarProducto extends JFrame{
 		JCMarca = new JComboBox();
 		JCMarca.setBounds(126,260,143,25);
 		JPProducto.add(JCMarca);
+		logica2.mostrarJCombo("Marca", "Mar", JCCategoria);
 		
 		JCProveedor = new JComboBox();
 		JCProveedor.setBounds(126,300,143,25);
 		JPProducto.add(JCProveedor);
+		logica2.mostrarPCombo("Proveedor", "Mar", JCProveedor);
+		
+		btnBuscar1 = new JButton("");
+		btnBuscar1.setIcon(new ImageIcon(getClass().getResource("/Imagenes/buscar.png")));
+		btnBuscar1.setBounds(343, 20, 37, 25);
+		JPProducto.add(btnBuscar1);
 		
 		btnGuardar = new JButton("");
 		btnGuardar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/guardar.png")));
@@ -142,6 +155,15 @@ public class FrmRegistrarProducto extends JFrame{
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(220, 380, 80, 42);
 		getContentPane().add(btnSalir);
+		
+		btnBuscar1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Condicion = autogenerar();
+				
+			}
+		});
 		
 		btnGuardar.addActionListener(new ActionListener() {
 			
@@ -238,6 +260,39 @@ public class FrmRegistrarProducto extends JFrame{
 		
 		
 		
+	}
+	
+	public int autogenerar() {
+		producto.setProSKU(Integer.parseInt(txtSKU.getText()));
+		
+		
+		if(logica.validarProducto(producto) == true) {
+			System.out.println("existe producto");
+			llenarProducto();
+			JCCategoria.setSelectedIndex(producto.getTipProCod().getCodigo());
+			JCMarca.setSelectedIndex(producto.getMarCod().getCodigo());
+			JCUnidadMedida.setSelectedIndex(producto.getUniMedCod().getCodigo());
+			return 1;
+		}else {
+			if(logica.validarProducto(producto) == true) {
+				System.out.println("prodcto");
+				llenarProducto();
+				return 2;
+				
+			}
+			else {
+				System.out.println("Producto no existe");
+				return 3;
+			}
+		}
+		//		JCTipoDOC.setSelectedIndex(cliente.getPerTipDoc().getCodigo());
+		
+	}
+	
+	public void llenarProducto() {
+		
+		txtNombreP.setText(producto.getProdDes());
+		txtSKU.setText(producto.getProSKU()+"");
 	}
 	
 	public void limpiar() {

@@ -25,7 +25,7 @@ public class Conexion {
 			String user = properties.getProperty("root");
 			String password = properties.getProperty("");
 			Class.forName(driver);
-			cx = DriverManager.getConnection(url, user, password);
+			cx = DriverManager.getConnection("jdbc:mysql://localhost:3360/prueba", "root", "");
 			System.out.println("Me concte");
 		}catch(Exception e){
 			e.printStackTrace();

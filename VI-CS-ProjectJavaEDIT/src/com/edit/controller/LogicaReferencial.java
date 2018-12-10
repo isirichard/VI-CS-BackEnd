@@ -214,8 +214,37 @@ public class LogicaReferencial extends JFrame{
 		// TODO Auto-generated method stub
 		return arr;
 	}
+	
+	private ArrayList<String> MostrarPerCombo(String Tabla,String Iniciales) {
+		ArrayList<String> arr=new ArrayList<String>();
+		arr.add(" ");
+		String sql="Select " + Iniciales + "Nom From Persona, "+ Tabla +" where Persona.PerCod = Proveedor.PerCod";
+		try {
+			Statement st=con.createStatement();
+			ResultSet res=st.executeQuery(sql);
+			while(res.next()) {
+				arr.add(res.getString(Iniciales+"Non"));
+			}
+			return arr;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		// TODO Auto-generated method stub
+		return arr;
+	}
 	public void mostrarJCombo(String tabla,String ini,JComboBox jc) {
 		ArrayList<String> arr=MostrarJCombo(tabla, ini);
+		
+		
+		for(int i=0;i<arr.size();i++) {
+			jc.addItem(arr.get(i));
+		}
+		
+	}
+	
+	public void mostrarPCombo(String tabla,String ini,JComboBox jc) {
+		ArrayList<String> arr=MostrarPerCombo(tabla, ini);
 		
 		
 		for(int i=0;i<arr.size();i++) {
