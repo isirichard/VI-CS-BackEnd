@@ -5,9 +5,6 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 public class Conexion {
-	private Conexion() {
-		
-	}
 	protected static Connection cx;
 	public static Connection conectar(){
 		if(cx != null){

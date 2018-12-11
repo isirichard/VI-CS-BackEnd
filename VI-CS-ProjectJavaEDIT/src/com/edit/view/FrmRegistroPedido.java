@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -31,6 +34,9 @@ import com.edit.controller.LogicaReferencial;
 import com.edit.controller.Logica_Pedido;
 import com.edit.controller.Logica_TextField;
 import com.edit.model.Cliente;
+import com.edit.model.Colaborador;
+import com.edit.model.Estado;
+import com.edit.model.Estado_Pago;
 import com.edit.model.Inventario;
 import com.edit.model.Nota_Pedido;
 import com.edit.model.Proveedor;
@@ -43,10 +49,10 @@ public class FrmRegistroPedido extends JFrame{
 
 	private JPanel JPDatosCliente,JPEmpresa,JPFecha,JPTipoPago,JPEntrega,JPProducto,JPPrecio;
 	private JLabel lblTipoDOC,lblNro,lblProveedor,lblDireccionPro,lblEmpresa,lblRUC,lblDireccionEmp,lblTelefono,lblEmpresaNom,lblRUCNom,lblDireccionNom,lblTelefonoNom,
-	lblFechaEmision,lblFechaPago,lblPago,lblSKU,lblProducto,lblCodigoVend,lblCantidad,lblPrecioUnitario,lblPrecioxCant,
-	lblPrecioVenta,lblIGV,lblPrecioTotal,lblLogo;
-	private JTextField txtNro,txtProveedor,txtDireccion,txtSKU,txtProducto,txtCodigoVend,txtCantidad,txtPrecioUnitario,txtPrecioxCant,txtPrecioVenta,
-	txtIGV,txtPrecioTotal;
+	lblFechaEmision,lblFechaPago,lblPago,lblSKU,lblProducto,lblCodigoVend,lblCantidad,lblPrecioCompra,lblPrecioxCant,
+	lblCompraParcial,lblIGV,lblPrecioTotal,lblLogo,lblPrecioVenta;
+	private JTextField txtNro,txtProveedor,txtDireccion,txtSKU,txtProducto,txtCodigoVend,txtCantidad,txtPrecioCompra,txtPrecioxCant,txtCompraParcial,
+	txtIGV,txtPrecioTotal,txtPrecioVenta;
 	private JComboBox JCTipoDOC,JCPago;
 	private JDateChooser JDEmision,JDPago;
 	private JRadioButton JRRecibido,JRNoRecibido;
@@ -55,14 +61,24 @@ public class FrmRegistroPedido extends JFrame{
 	private JScrollPane JSTabla;
 	private LogicaReferencial logica1;
 	private Logica_Pedido logicaPedido;
-	private Proveedor proveedor;
+
 	private FrmBuscarProveedor buscarProveedor;
-	private Inventario inventario;
 	private Logica_TextField logicaTEXT;
-	private ArrayList<Inventario> detalle=new ArrayList<Inventario>();
 	private DefaultTableModel modelo;
 	private String [] titulos= {"cantidad","SKU","Descripcion","Precio Unitario","Precio x Cantidad"};
 	private Nota_Pedido nota_Pedido;
+	//datos de la nota pedido
+	private Proveedor proveedor=new Proveedor();
+	private Tipo_Documento tipoDocumento=new Tipo_Documento();
+	private Colaborador colaborador=new Colaborador();
+	private Tipo_Pago tipoPago=new Tipo_Pago();
+	private Estado estado=new Estado();
+	private Recibido recibido=new Recibido();
+	private Estado_Pago estadoPago=new Estado_Pago();
+	private Inventario inventario=new Inventario();
+	private ArrayList<Inventario> inventarios=new ArrayList<Inventario>();
+
+	//fin
 	public FrmRegistroPedido() {
 		nota_Pedido=new Nota_Pedido();
 		modelo=new DefaultTableModel(null, titulos) {
@@ -75,7 +91,6 @@ public class FrmRegistroPedido extends JFrame{
 		inventario=new Inventario();
 		buscarProveedor=new FrmBuscarProveedor();
 		logicaPedido=new Logica_Pedido();
-		proveedor=new Proveedor();
 		logica1=new LogicaReferencial();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Registro de Pedido");
@@ -214,7 +229,7 @@ public class FrmRegistroPedido extends JFrame{
 		Calendar c3=new GregorianCalendar();
 		JDEmision.setCalendar(c3);
 		JPFecha.add(JDPago);
-		
+
 
 		JPTipoPago = new JPanel();
 		JPTipoPago.setBorder(new TitledBorder(null, "Tipo Pago", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -311,24 +326,36 @@ public class FrmRegistroPedido extends JFrame{
 		JPProducto.add(btnAgregar);
 
 
-		lblPrecioUnitario = new JLabel("Precio Unitario:");
-		lblPrecioUnitario.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblPrecioUnitario.setBounds(190, 80, 79, 14);
-		JPProducto.add(lblPrecioUnitario);
+		lblPrecioCompra = new JLabel("Precio Compra:");
+		lblPrecioCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblPrecioCompra.setBounds(190, 80, 79, 14);
+		JPProducto.add(lblPrecioCompra);
 
-		txtPrecioUnitario = new JTextField();
-		txtPrecioUnitario.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtPrecioUnitario.setEditable(false);
-		txtPrecioUnitario.setBounds(279, 75, 80, 25);
-		JPProducto.add(txtPrecioUnitario);
-		txtPrecioUnitario.setColumns(10);
+		txtPrecioCompra = new JTextField();
+		txtPrecioCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtPrecioCompra.setEditable(true);
+		txtPrecioCompra.setBounds(279, 75, 80, 25);
+		JPProducto.add(txtPrecioCompra);
+		txtPrecioCompra.setColumns(10);
 
 
 		lblPrecioxCant = new JLabel("Precio x Cant:");
 		lblPrecioxCant.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPrecioxCant.setBounds(381, 80, 72, 14);
 		JPProducto.add(lblPrecioxCant);
-
+		
+		lblPrecioVenta=new JLabel("Precio Venta:");
+		lblPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblPrecioVenta.setBounds(564, 80, 72, 14);
+		JPProducto.add(lblPrecioVenta);
+		
+		txtPrecioVenta= new JTextField();
+		txtPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtPrecioVenta.setEditable(true);
+		txtPrecioVenta.setBounds(634, 77, 64, 25);
+		JPProducto.add(txtPrecioVenta);
+		txtPrecioVenta.setColumns(10);
+		
 		txtPrecioxCant = new JTextField();
 		txtPrecioxCant.setEditable(false);
 		txtPrecioxCant.setBounds(463, 77, 78, 25);
@@ -349,10 +376,10 @@ public class FrmRegistroPedido extends JFrame{
 		JPProducto.add(JPPrecio);
 		JPPrecio.setLayout(null);
 
-		lblPrecioVenta = new JLabel("Precio Venta:");
-		lblPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblPrecioVenta.setBounds(10, 29, 73, 14);
-		JPPrecio.add(lblPrecioVenta);
+		lblCompraParcial = new JLabel("Compra Parcial:");
+		lblCompraParcial.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCompraParcial.setBounds(10, 29, 88, 14);
+		JPPrecio.add(lblCompraParcial);
 
 		lblIGV = new JLabel("IGV% :");
 		lblIGV.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -364,11 +391,11 @@ public class FrmRegistroPedido extends JFrame{
 		lblPrecioTotal.setBounds(10, 105, 73, 14);
 		JPPrecio.add(lblPrecioTotal);
 
-		txtPrecioVenta = new JTextField();
-		txtPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtPrecioVenta.setBounds(85, 24, 58, 25);
-		JPPrecio.add(txtPrecioVenta);
-		txtPrecioVenta.setColumns(10);
+		txtCompraParcial = new JTextField();
+		txtCompraParcial.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtCompraParcial.setBounds(85, 24, 58, 25);
+		JPPrecio.add(txtCompraParcial);
+		txtCompraParcial.setColumns(10);
 
 		txtIGV = new JTextField();
 		txtIGV.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -392,16 +419,18 @@ public class FrmRegistroPedido extends JFrame{
 		btnSalir.setBounds(405, 578, 80, 42);
 		getContentPane().add(btnSalir);
 
-		logicaTEXT.acepta_Numeros(txtCantidad);
-		logica1.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
-		logica1.mostrarJCombo("Tipo_Pago", "TipPag", JCPago);
+		//cabecera
+		arreglos();
+		InicioJCombo();
+		btnEnterProveedor();
+		radioButtonAccion();
+		buscarSKU();
+		AgregarProducto();
 
-		txtNro.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				btnEnterProveedor(e);
-			}
-		});
+		Guardar();
+		SubirDatosTabla();
+		eliminarDatoTabla();
+
 		//		txtNro.addKeyListener(new KeyAdapter() {
 		//			@Override
 		//			public void keyTyped(KeyEvent e) {
@@ -412,6 +441,157 @@ public class FrmRegistroPedido extends JFrame{
 		//				
 		//			}
 		//		});
+
+
+		txtCantidad.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(txtCantidad.getText().length()<0) {
+					txtCantidad.setText("0");
+				}
+				System.out.println("entra");
+				calcularPrecioxCantidad();
+
+
+			}
+		});
+		//		btnAgregar.addActionListener(new ActionListener() {
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent arg0) {
+		//				// TODO Auto-generated method stub
+		//				System.out.println("agrega");
+		//				
+		//
+		//			}
+		//		});
+
+		//		btnGuardar.addActionListener(new ActionListener() {
+		//			
+		//			@Override
+		//			public void actionPerformed(ActionEvent e) {
+		//				// TODO Auto-generated method stub
+		//				
+		//				nota_Pedido.setCliCod(proveedor);
+		//				nota_Pedido.setFecPagoDia(JDPago.getCalendar().get(Calendar.DAY_OF_MONTH));
+		//				nota_Pedido.setFecPagoMes(JDPago.getCalendar().get(Calendar.MONTH)+1);
+		//				nota_Pedido.setFecPagoAño(JDPago.getCalendar().get(Calendar.YEAR));
+		//				nota_Pedido.setDocFecEmiDia(JDEmision.getCalendar().get(Calendar.DAY_OF_MONTH));
+		//				nota_Pedido.setDocFecEmiDia(JDEmision.getCalendar().get(Calendar.MONTH)+1);
+		//				nota_Pedido.setDocFecEmiDia(JDEmision.getCalendar().get(Calendar.YEAR));
+		//				Tipo_Pago pago=new Tipo_Pago();
+		//				pago.setCodigo(JCPago.getSelectedIndex());
+		//				nota_Pedido.setPagCod(pago);
+		//				Recibido recibido=new Recibido();
+		//				if(JRRecibido.isSelected()) {
+		//					recibido.setPagCod(1);
+		//					nota_Pedido.setFecRecepcionDia(JDEmision.getCalendar().get(Calendar.DAY_OF_MONTH));
+		//					nota_Pedido.setFecRecepcionMes(JDEmision.getCalendar().get(Calendar.MONTH)+1);
+		//					nota_Pedido.setFecRecepcionAño(JDEmision.getCalendar().get(Calendar.YEAR));
+		//				}
+		//				if(JRNoRecibido.isSelected()) {
+		//					recibido.setPagCod(2);
+		//				}
+		//				nota_Pedido.setEntRecCod(recibido);
+		//				
+		//				
+		//				logicaPedido.RegistrarNotaPedido(nota_Pedido);
+		//				
+		//			}
+		//		});
+	}
+
+	public void BuscarProveedor() {
+
+		Inicio();
+
+		if(logicaPedido.BuscarProveedor(proveedor)) {
+			JOptionPane.showMessageDialog(null,"Encontrado");
+		}
+		else {
+			if(JCTipoDOC.getSelectedIndex()==0) {
+				JOptionPane.showMessageDialog(null,"Seleccione Tipo Documento");
+				limpiarDatosProveedor();
+			}else {
+				JOptionPane.showMessageDialog(null,"No Existe");
+				limpiarDatosProveedor();
+
+			}
+		}
+
+	}
+
+
+	private void generarDatosProveedor() {
+
+		txtProveedor.setText(proveedor.getPerNom());
+		txtDireccion.setText(proveedor.getPerDir());
+	}
+
+	public void calcularPrecioxCantidad() {
+		double resultado=0.0;
+		try {
+			int cantidad=0;
+			if(txtCantidad.getText().length()==0) {
+				cantidad=0;
+				txtPrecioxCant.setText("0.0");
+			}
+			cantidad=(Integer.parseInt(txtCantidad.getText()));
+			double precioVenta=(Double.parseDouble(txtPrecioCompra.getText()));
+			resultado=cantidad*precioVenta;
+			txtPrecioxCant.setText(""+resultado);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public DefaultTableModel agregarATabla() {
+
+
+
+		String [] det=new String[5];
+
+
+
+		det[0]=txtCantidad.getText();
+		det[1]=txtSKU.getText();
+		det[2]=txtProducto.getText();
+		det[3]=txtPrecioCompra.getText();
+		det[4]=txtPrecioxCant.getText();
+
+		System.out.println(inventario);
+
+
+		modelo.addRow(det);
+		inventarios.add(inventario);
+		limpiar();
+		System.out.println(inventarios);
+		return modelo;
+
+	}
+	public void limpiar() {
+		inventario=new Inventario();
+		txtSKU.setText("");
+		txtProducto.setText("");
+		txtCantidad.setText("");
+		txtPrecioCompra.setText("");
+		txtPrecioxCant.setText("");
+	}
+
+
+	//metodos
+
+	private void Inicio() {
+
+		//cabecera
+		tipoDocumento.setCodigo(JCTipoDOC.getSelectedIndex());
+		proveedor.setPerNumDoc(txtNro.getText());
+		proveedor.setPerTipDoc(tipoDocumento);
+		nota_Pedido.setProvCod(proveedor);
+
+
+	}
+	private void radioButtonAccion() {
 		JRRecibido.addActionListener(new ActionListener() {
 
 			@Override
@@ -430,78 +610,14 @@ public class FrmRegistroPedido extends JFrame{
 
 			}
 		});
-		txtSKU.addKeyListener(new KeyAdapter() {
+	}
+	private void btnEnterProveedor() {
+		txtNro.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				btnEnterSKU(e);
+				btnEnterProveedor(e);
 			}
 		});
-		txtCantidad.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				if(txtCantidad.getText().length()<0) {
-					txtCantidad.setText("0");
-				}
-				System.out.println("entra");
-				calcularPrecioxCantidad();
-
-
-			}
-		});
-		btnAgregar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("agrega");
-				JTabla.setModel(agregarATabla());
-				llenarPrecioTotal();
-
-			}
-		});
-		
-		btnGuardar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				nota_Pedido.setInventario(detalle);
-				nota_Pedido.setCliCod(proveedor);
-				nota_Pedido.setFecPagoDia(JDPago.getCalendar().get(Calendar.DAY_OF_MONTH));
-				nota_Pedido.setFecPagoMes(JDPago.getCalendar().get(Calendar.MONTH)+1);
-				nota_Pedido.setFecPagoAño(JDPago.getCalendar().get(Calendar.YEAR));
-				nota_Pedido.setDocFecEmiDia(JDEmision.getCalendar().get(Calendar.DAY_OF_MONTH));
-				nota_Pedido.setDocFecEmiDia(JDEmision.getCalendar().get(Calendar.MONTH)+1);
-				nota_Pedido.setDocFecEmiDia(JDEmision.getCalendar().get(Calendar.YEAR));
-				Tipo_Pago pago=new Tipo_Pago();
-				pago.setCodigo(JCPago.getSelectedIndex());
-				nota_Pedido.setPagCod(pago);
-				Recibido recibido=new Recibido();
-				if(JRRecibido.isSelected()) {
-					recibido.setPagCod(1);
-					nota_Pedido.setFecRecepcionDia(JDEmision.getCalendar().get(Calendar.DAY_OF_MONTH));
-					nota_Pedido.setFecRecepcionMes(JDEmision.getCalendar().get(Calendar.MONTH)+1);
-					nota_Pedido.setFecRecepcionAño(JDEmision.getCalendar().get(Calendar.YEAR));
-				}
-				if(JRNoRecibido.isSelected()) {
-					recibido.setPagCod(2);
-				}
-				nota_Pedido.setEntRecCod(recibido);
-				
-				
-				logicaPedido.RegistrarNotaPedido(nota_Pedido);
-				
-			}
-		});
-	}
-
-	public void BuscarProveedor() {
-		proveedor.setPerNumDoc(txtNro.getText());
-		Tipo_Documento doc=new Tipo_Documento();
-		doc.setCodigo(JCTipoDOC.getSelectedIndex());
-		proveedor.setPerTipDoc(doc);
-		logicaPedido.BuscarProveedor(proveedor);
-
 	}
 	private void btnEnterProveedor(KeyEvent e) {
 		char tecla=e.getKeyChar();
@@ -509,9 +625,7 @@ public class FrmRegistroPedido extends JFrame{
 		if(tecla==KeyEvent.VK_ENTER) {
 			if(txtNro.getText().length()==0) {
 				buscarProveedor.setVisible(true);
-				Tipo_Documento doc=new Tipo_Documento();
-				doc.setCodigo(buscarProveedor.getTipoDOC());
-				proveedor.setPerTipDoc(doc);
+				Inicio();
 				proveedor.setPerNumDoc(buscarProveedor.getRuc());
 				JCTipoDOC.setSelectedIndex(proveedor.getPerTipDoc().getCodigo());
 				txtNro.setText(proveedor.getPerNumDoc());
@@ -523,28 +637,148 @@ public class FrmRegistroPedido extends JFrame{
 			}
 
 			BuscarProveedor();
-			generar();
+			generarDatosProveedor();
 
 		}
 
 
 	}
-	private void generar() {
+	private void InicioJCombo() {
+		//inicio de JC
+		logica1.mostrarJCombo("Tipo_Documento", "TipDoc", JCTipoDOC);
+		logica1.mostrarJCombo("Tipo_Pago", "TipPag", JCPago);
+	}
 
-		txtProveedor.setText(proveedor.getPerNom());
-		txtDireccion.setText(proveedor.getPerDir());
+	private void arreglos() {
+		logicaTEXT.acepta_Numeros(txtCantidad);
+		logicaTEXT.acepta_Numeros(txtNro);
+
 	}
-	public void radioButtonAccion() {
-		if(JRRecibido.isSelected()) {
-			JRNoRecibido.setSelected(false);
-			System.out.println("recibido");
-		}
-		if(JRNoRecibido.isSelected()) {
-			JRRecibido.setSelected(false);
-			System.out.println("no recibido");
-		}
+	private void limpiarDatosProveedor() {
+		proveedor=new Proveedor();
+		txtProveedor.setText("");
+		txtDireccion.setText("");
+		//		txtNro.setText("");
+		//		JCTipoDOC.setSelectedIndex(0);
 	}
-	public void btnEnterSKU(KeyEvent e){
+	private boolean validarCabecera() {
+		try {
+			if(JCTipoDOC.getSelectedIndex()==0) {
+				JOptionPane.showMessageDialog(null,"Seleccione Tipo Documento");
+				return false;
+			}
+			if(txtNro.getText().length()==0) {
+				JOptionPane.showMessageDialog(null,"Ingrese datos del proveedor");
+				return false;
+			}
+			if(JDPago.getCalendar()==null) {
+				JOptionPane.showMessageDialog(null,"Ingrese Fecha Pago");
+				return false;
+			}
+			if(JCPago.getSelectedIndex()==0) {
+				JOptionPane.showMessageDialog(null,"Seleccione Tipo Pago");
+				return false;
+			}
+			if(!JRNoRecibido.isSelected() && !JRRecibido.isSelected()) {
+				JOptionPane.showMessageDialog(null,"Seleccione Recibido o No recibido");
+				return false;
+			}
+		}catch (Exception e) {
+
+			// TODO: handle exception
+		}
+		return true;
+
+	}
+	private void llenarDatosCabecera() {
+		try {
+			nota_Pedido.setProvCod(proveedor);
+			nota_Pedido.setDocFecEmiDia(JDEmision.getCalendar().get(Calendar.DAY_OF_MONTH));
+			nota_Pedido.setDocFecEmiMes(JDEmision.getCalendar().get(Calendar.MONTH)+1);
+			nota_Pedido.setDocFecEmiAño(JDEmision.getCalendar().get(Calendar.YEAR));
+			nota_Pedido.setFecPagoDia(JDPago.getCalendar().get(Calendar.DAY_OF_MONTH));
+			nota_Pedido.setFecPagoMes(JDPago.getCalendar().get(Calendar.MONTH)+1);
+			nota_Pedido.setFecPagoAño(JDPago.getCalendar().get(Calendar.YEAR));
+			if(JRRecibido.isSelected()) {
+				recibido.setPagCod(1);
+
+				nota_Pedido.setFecRecepcionDia(JDEmision.getCalendar().get(Calendar.DAY_OF_MONTH));
+				nota_Pedido.setFecRecepcionMes(JDEmision.getCalendar().get(Calendar.MONTH)+1);
+				nota_Pedido.setFecRecepcionAño(JDEmision.getCalendar().get(Calendar.YEAR));
+			}
+			else {
+				recibido.setPagCod(2);
+			}
+			if(JCPago.getSelectedIndex()==1) {
+				estadoPago.setPagCod(2);
+			}
+			else {
+				estadoPago.setPagCod(1);
+
+			}
+			nota_Pedido.setEstadoPago(estadoPago);
+			nota_Pedido.setRecibido(recibido);
+			tipoPago.setCodigo(JCPago.getSelectedIndex());
+			nota_Pedido.setPagCod(tipoPago);
+			colaborador.setColCod(1);
+			nota_Pedido.setColCod(colaborador);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+
+
+
+	}
+	private boolean validarDetalle() {
+		if(JTabla.getRowCount()==0) {
+			JOptionPane.showMessageDialog(null,"Ingrese minimo 1 Producto");
+			return false;
+		}
+		return true;
+	}
+	private boolean validarAgregarProducto() {
+		try {
+			if(txtProducto.getText().length()==0) {
+				JOptionPane.showMessageDialog(null,"Ingrese un producto");
+				return false;
+			}
+			if(txtCantidad.getText().length()==0) {
+				JOptionPane.showMessageDialog(null,"Ingrese Cantidad Permitida");
+				return false;
+			}
+			if(Integer.parseInt(txtCantidad.getText())==0) {
+				JOptionPane.showMessageDialog(null,"Ingrese Cantidad Permitida");
+				return false;
+			}
+
+			if(Double.parseDouble(txtPrecioxCant.getText())==0.0 ) {
+				JOptionPane.showMessageDialog(null,"Precio No Permitido");
+				return false;
+			}
+
+
+
+		}catch (Exception e) {
+			return false;
+			// TODO: handle exception
+		}
+		return true;
+	}
+	private void AgregarProducto() {
+		btnAgregar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(validarAgregarProducto()) {
+					JTabla.setModel(agregarATabla());
+					llenarPrecioTotal();
+
+				}
+			}
+		});
+	}
+
+	private void btnEnterSKU(KeyEvent e){
 		inventario.getProdCod().setProSKU(txtSKU.getText());
 
 		char tecla=e.getKeyChar();
@@ -552,55 +786,20 @@ public class FrmRegistroPedido extends JFrame{
 		if(tecla==KeyEvent.VK_ENTER) {
 			logicaPedido.buscarSKU(inventario);
 			txtProducto.setText(inventario.getProdCod().getProdDes());
-			txtPrecioUnitario.setText(""+inventario.getProPreVen());
+			txtPrecioCompra.setText(""+inventario.getProPreVen());
 
 
 		}
 
 
 	}
-	public void calcularPrecioxCantidad() {
-		double resultado=0.0;
-		try {
-			int cantidad=0;
-			if(txtCantidad.getText().length()==0) {
-				cantidad=0;
-				txtPrecioxCant.setText("0.0");
+	private void buscarSKU() {
+		txtSKU.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				btnEnterSKU(e);
 			}
-			cantidad=(Integer.parseInt(txtCantidad.getText()));
-			double precioVenta=(Double.parseDouble(txtPrecioUnitario.getText()));
-			resultado=cantidad*precioVenta;
-			txtPrecioxCant.setText(""+resultado);
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
-
-	public DefaultTableModel agregarATabla() {
-
-		
-		
-		String [] det=new String[5];
-
-
-
-		det[0]=txtCantidad.getText();
-		det[1]=txtSKU.getText();
-		det[2]=txtProducto.getText();
-		det[3]=txtPrecioUnitario.getText();
-		det[4]=txtPrecioxCant.getText();
-		detalle.add(inventario);
-		modelo.addRow(det);
-		limpiar();
-		return modelo;
-
-	}
-	public void limpiar() {
-		txtSKU.setText("");
-		txtProducto.setText("");
-		txtCantidad.setText("");
-		txtPrecioUnitario.setText("");
-		txtPrecioxCant.setText("");
+		});
 	}
 	public void llenarPrecioTotal() {
 		int fila=JTabla.getRowCount();
@@ -610,7 +809,7 @@ public class FrmRegistroPedido extends JFrame{
 			for(int i=0;i<fila;i++) {
 				precioVenta+=(Double.parseDouble(JTabla.getValueAt(i, 4).toString()));
 			}
-			txtPrecioVenta.setText(""+precioVenta);
+			txtCompraParcial.setText(""+precioVenta);
 			precioTotal=precioVenta+(precioVenta*0.18);
 			txtPrecioTotal.setText(""+precioTotal);
 
@@ -618,8 +817,92 @@ public class FrmRegistroPedido extends JFrame{
 			// TODO: handle exception
 		}
 	}
+	private void llenarDatosDetalle() {
+		nota_Pedido.setInventario(inventarios);
+	}
+	private void Guardar() {
+		btnGuardar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(validarCabecera() && validarDetalle()) {
+					llenarDatosCabecera();
+					llenarDatosDetalle();
+					System.out.println(nota_Pedido.getInventario());
+					logicaPedido.RegistrarNotaPedido(nota_Pedido);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Registro no se completo");
+					Finalizado();
+				}
+
+
+
+
+			}
+		});
+
+	}
+	public void SubirDatosTabla() {
+		JTabla.addMouseListener(new MouseAdapter() {
+			//		@Override
+			public void mousePressed(MouseEvent e) {
+				JTable jt=(JTable) e.getSource();
+				Point point=e.getPoint();
+				int row=jt.rowAtPoint(point);
+				if(e.getClickCount()==2) {
+					txtCantidad.setText(JTabla.getValueAt(JTabla.getSelectedRow(),0).toString());
+					txtSKU.setText(JTabla.getValueAt(JTabla.getSelectedRow(), 2).toString());
+					txtProducto.setText(JTabla.getValueAt(JTabla.getSelectedRow(), 3).toString());
+					txtPrecioCompra.setText(JTabla.getValueAt(JTabla.getSelectedRow(), 4).toString());
+
+					//					
+
+				}
+			}
+		});
+	}
+
+	public void eliminarDatoTabla() {
+		JTabla.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				btnEliminar(e);
+			}
+		});
+		
+	}
+	public void btnEliminar(KeyEvent e) {
+		
+
+		char tecla=e.getKeyChar();
+
+		if(tecla==KeyEvent.VK_DELETE) {
+			JTabla.setModel(quitarTabla());
+
+
+		}
+
+			
+		
+	}
+	public DefaultTableModel quitarTabla() {
+		System.out.println(JTabla.getSelectedRow());
+		inventarios.remove(JTabla.getSelectedRow());
+		modelo.removeRow(JTabla.getSelectedRow());
+		System.out.println(inventario);
+		
+		
+		
+		return modelo;
+
+	}
 	
-
-
-
+	public void Finalizado() {
+		if(JOptionPane.showConfirmDialog(rootPane, "Desea salir del sistema","Salir del sistema",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+			logicaPedido.imprimirReporte();
+		}
+	}
+	
 }

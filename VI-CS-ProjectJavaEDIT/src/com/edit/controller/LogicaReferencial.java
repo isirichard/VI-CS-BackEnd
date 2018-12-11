@@ -23,7 +23,11 @@ import com.edit.model.Tipo_Documento;
 import com.edit.model.Tipo_Pago;
 import com.edit.model.Tipo_Producto;
 
-
+/**
+ * 
+ * @author Andre Cruz
+ *@version 1.0
+ */
 public class LogicaReferencial extends JFrame{
 
 	private String Ssql="";
@@ -32,7 +36,11 @@ public class LogicaReferencial extends JFrame{
 		
 		
 	}
-	
+	/**
+	 * 
+	 * @param btn recibe un JButon para que activa el ActionListener
+	 * @param r, recibe Referencial para que pueda llamarse a cualquier clase heredada de la clase Referencial
+	 */
 	public void insert(JButton btn,Referencial r) {
 		btn.addActionListener(new ActionListener() {
 			
@@ -44,7 +52,12 @@ public class LogicaReferencial extends JFrame{
 		});
 	}
 	
-	
+	/**
+	 * 
+	 * @param tabla, Recibe el Nombre de la Tabla referencial de la BD (Tabla: Tipo_Pago)
+	 * @param iniciales, Recibe las 3 inciales de las tablas referenciales (Iniciales TipPag)
+	 * @return un DefaultTableModel para que pueda realizar un setModel en el JTable
+	 */
 	
 	public DefaultTableModel mostrarTodoReferencial(String tabla,String iniciales) {
 		DefaultTableModel modelo;
@@ -73,6 +86,10 @@ public class LogicaReferencial extends JFrame{
 		return modelo;
 	}
 	
+	/**
+	 * 
+	 * @param Inserta cualquier tipo de la clase Referencial a guardar 
+	 */
 	public void btnGuardar(Referencial a) {
 		if(a instanceof Acceso) {
 			Ssql="insert into ACCESO (AccDes,EstCod) values (?,?)";
@@ -214,6 +231,13 @@ public class LogicaReferencial extends JFrame{
 		// TODO Auto-generated method stub
 		return arr;
 	}
+	
+	/**
+	 * 
+	 * @param tabla, llama la tabla Referencial de la BD
+	 * @param ini, las 3 primeras iniciales de las tablasReferenciales
+	 * @param jc, asigna al JComboBox una tabla referencial para que sea mostrado 
+	 */
 	public void mostrarJCombo(String tabla,String ini,JComboBox jc) {
 		ArrayList<String> arr=MostrarJCombo(tabla, ini);
 		

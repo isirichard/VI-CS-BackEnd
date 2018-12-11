@@ -4,5 +4,16 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="D:/Universidad/workspace/CS/VI-CS-ProjectJavaEDIT/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar"/>
 	<classpathentry kind="lib" path="D:/Universidad/workspace/CS/VI-CS-ProjectJavaEDIT/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/jasperreports-6.7.0-project/jasperreports-6.7.0/dist/jasperreports-6.7.0.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/jasperreports-6.7.0-project/jasperreports-6.7.0/dist/jasperreports-fonts-6.7.0.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/jasperreports-6.7.0-project/jasperreports-6.7.0/dist/jasperreports-javaflow-6.7.0.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/commons-collections-3.2.1-1.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/jasperreports-6.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/jasperreports-fonts-6.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/jasperreports-functions-6.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/jasperreports-javaflow-6.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/joda-time-2.9.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

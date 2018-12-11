@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PRUEBA" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bf0d164a-d7d8-4cab-9b2d-4956ec4050bb">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cHJ1ZWJhLnByb3ZlZWRvciAsMzUwLDE1LGQyNmExNDAzLTQ3NTMtNDNiNC1iOGFlLTFkM2E4OTEy
+MjI2YTtwcnVlYmEubm90YV9wZWRpZG9fZGV0ICwxNSwxNTAsZDFiMTliNWMtMDdmMS00ZDkxLTk3
+MjEtMGQyN2U1MWUxMTQ1O3BydWViYS50aXBvX3BhZ28gLDc3OCwxNjgsZjU5NmE4MzItMDFkYy00
+NjAwLWIzMjgtMzI2YjBlNmEwYjJmO3BydWViYS5wcm9kdWN0byAsOTIyLDE5NixmMDA3MDZjZC0z
+MjI3LTRmODMtOWI5MC0xODJkZmEwOTJlNjU7cHJ1ZWJhLnRpcG9fZG9jdW1lbnRvICw2MzMsODIs
+OTgxNTliNjQtMDE4Mi00NmJkLWExMDktYjc1YzYyZjAxY2Y4O3BydWViYS5ub3RhX3BlZGlkb19j
+YWIgLDE2NCwxOCxjZjQzNTRjOS1lNjRlLTRhMzItYWQ3My1jYTg2Y2YwOWQ2MWY7cHJ1ZWJhLnBl
+cnNvbmEgLDQ4OCwxNixkOWQzOTVkOC1hZmVhLTQ5OTctOWVhNC1mYWUwZWE3YjI0MDI7
+]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdAdapter"/>
+	<parameter name="NroPedido" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT prueba.nota_pedido_det.`NotPedCan`,
+	prueba.nota_pedido_det.`NotPedTot`,
+	prueba.nota_pedido_det.`NotPedPrePar`,
+	prueba.nota_pedido_det.`NotPedSaldo`,
+	prueba.nota_pedido_det.`NotPedPreCom`,
+	prueba.nota_pedido_det.`NotPedPreVen`,
+	prueba.tipo_pago.`TipPagDes`,
+	prueba.nota_pedido_cab.`NotPedNro`,
+	prueba.nota_pedido_cab.`NotPedFecEmiDia`,
+	prueba.nota_pedido_cab.`NotPedFecEmiMes`,
+	prueba.nota_pedido_cab.`NotPedFecEmiAno`,
+	prueba.nota_pedido_cab.`NotPedFecPagDia`,
+	prueba.nota_pedido_cab.`NotPedFecPagMes`,
+	prueba.producto.`ProSKU`,
+	prueba.producto.`ProdDes`,
+	prueba.tipo_documento.`TipDocDes`,
+	prueba.persona.`PerNro`,
+	prueba.persona.`PerNom`,
+	prueba.persona.`PerDir`,
+	prueba.persona.`PerTel`,
+	prueba.persona.`PerCel`,
+	prueba.nota_pedido_cab.`RecCod`,
+	prueba.nota_pedido_cab.`PagCod`,
+	prueba.nota_pedido_cab.`NotPedFecPagAno`
+FROM prueba.nota_pedido_det
+	INNER JOIN prueba.nota_pedido_cab ON 
+	 prueba.nota_pedido_det.`NotPedNro` = prueba.nota_pedido_cab.`NotPedNro` 
+	INNER JOIN prueba.proveedor ON 
+	 prueba.nota_pedido_cab.`ProvCod` = prueba.proveedor.`ProvCod` 
+	INNER JOIN prueba.persona ON 
+	 prueba.proveedor.`PerCod` = prueba.persona.`PerCod` 
+	INNER JOIN prueba.tipo_documento ON 
+	 prueba.persona.`TipDocCod` = prueba.tipo_documento.`TipDocCod` 
+	INNER JOIN prueba.tipo_pago ON 
+	 prueba.nota_pedido_cab.`TipPagCod` = prueba.tipo_pago.`TipPagCod` ,
+	prueba.producto
+WHERE 
+	 prueba.nota_pedido_det.`ProdCod` = prueba.producto.`ProdCod` 
+	 AND prueba.nota_pedido_cab.`NotPedNro` = $P{NroPedido}]]>
+	</queryString>
+	<field name="NotPedCan" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedCan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_det"/>
+	</field>
+	<field name="NotPedTot" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedTot"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_det"/>
+	</field>
+	<field name="NotPedPrePar" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedPrePar"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_det"/>
+	</field>
+	<field name="NotPedSaldo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedSaldo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_det"/>
+	</field>
+	<field name="NotPedPreCom" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedPreCom"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_det"/>
+	</field>
+	<field name="NotPedPreVen" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedPreVen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_det"/>
+	</field>
+	<field name="TipPagDes" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TipPagDes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_pago"/>
+	</field>
+	<field name="NotPedNro" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedNro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="NotPedFecEmiDia" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedFecEmiDia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="NotPedFecEmiMes" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedFecEmiMes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="NotPedFecEmiAno" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedFecEmiAno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="NotPedFecPagDia" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedFecPagDia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="NotPedFecPagMes" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedFecPagMes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="ProSKU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ProSKU"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="producto"/>
+	</field>
+	<field name="ProdDes" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ProdDes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="producto"/>
+	</field>
+	<field name="TipDocDes" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TipDocDes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_documento"/>
+	</field>
+	<field name="PerNro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PerNro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="PerNom" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PerNom"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="PerDir" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PerDir"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="PerTel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PerTel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="PerCel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PerCel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="RecCod" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="RecCod"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="PagCod" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="PagCod"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<field name="NotPedFecPagAno" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="NotPedFecPagAno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nota_pedido_cab"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<rectangle>
+				<reportElement x="450" y="0" width="231" height="75" uuid="017467e2-320f-4340-854f-ea1154c40b24"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="0" width="171" height="75" uuid="28b1fc7f-560f-4fe2-ac8a-8b953a0131f4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-10" y="0" width="291" height="75" uuid="7d895dfe-e038-490f-b0c3-7e5a717997e7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="15" width="80" height="15" uuid="c5a9ef0f-76d7-4485-a9b1-ebb156044613"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="80" height="15" uuid="689e0011-3aa0-43a6-8660-0aa1f9be53bd"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direccion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="80" height="15" uuid="3443292a-91e6-4231-b9b8-dda86b6a7034"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Celular:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="80" height="15" uuid="963ca93d-e1ce-4f1c-a3cc-d419c4cb40e9"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="0" width="70" height="15" uuid="f06b6d09-733b-46e2-8c79-f807d4d9c0b7"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Pago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="15" width="70" height="15" uuid="0f4c9c16-1123-4b37-bde9-4c5d9b1a712d"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="30" width="70" height="15" uuid="fa3dc879-437b-44d5-8ed3-c7507fa3e86a"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pagado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="45" width="70" height="15" uuid="0e088d6f-30cd-44db-8cd8-8dfd264282fd"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Emision:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="60" width="70" height="15" uuid="fbfa8937-69b2-4a3b-b0c3-6730d6b784d6"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Pago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="30" width="220" height="45" uuid="0439248a-a69b-4560-a03f-44b779fc68dc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMERCIALIZADORA EDITH E.I.R.L.
+DIRECCION: CAL. SANTO DOMINGO
+TELEFONO: 953464927]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="121" height="30" uuid="45f54cba-072b-4d5b-9748-9601cf60f06a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA PEDIDO
+NRO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="15" uuid="a125f00e-15d2-47f8-a389-22880f469009"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="40" height="15" uuid="b9b63c2f-f18a-4c2b-96ac-83e84146186a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NRO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="15" uuid="1ded4241-f186-47ba-86d9-580f6d2a0356"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PerNro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="60" height="15" uuid="316a4fee-6208-482a-90ac-b35b696d3bb4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TipDocDes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="15" width="200" height="15" uuid="f9f0260a-efc2-4649-9ac7-77f4564a786b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PerNom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="30" width="200" height="15" uuid="de25c5f8-e9bd-4082-bb1f-852de4b43e35"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PerDir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="60" width="200" height="15" uuid="1a7cfb96-13dd-41df-962d-b96cfc3a76b4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PerTel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="45" width="200" height="15" uuid="9958133d-9192-450a-9453-6b0f3dc5735d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PerCel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="90" height="15" uuid="36d311d8-bdd4-4d18-8244-7bc36092fa99"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TipPagDes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="15" width="90" height="15" uuid="20a4645b-c721-4cb7-96b8-3c36537c5b11"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RecCod}==1?"Recibido":"No Recibido"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="30" width="90" height="15" uuid="6e023c4a-71aa-427d-b3c0-2530c666ac77"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PagCod}==1?"Pagado":"No Pagado"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="45" width="90" height="15" uuid="f74d5843-86ea-4ddb-83ec-f6a4406e2255"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedFecEmiDia}+"/"+$F{NotPedFecEmiMes}+"/"+$F{NotPedFecEmiAno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="60" width="90" height="15" uuid="a023f6c5-fd01-43cf-9867-fc034d87c00d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedFecPagDia}+"/"+$F{NotPedFecPagMes}+"/"+$F{NotPedFecPagAno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="581" y="0" width="100" height="30" uuid="a0f3817d-5ece-4d9f-990c-60975600a1a7"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedNro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="ca0758a3-765a-4a48-a27f-fc6bbd1e2d4d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e12c5241-33ab-44f6-8a71-3a6eb5aa9ee2"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ProSKU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="a630e595-d1e2-45f1-b83e-7860b71e431d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="89ce7d1a-45bd-4f1a-84da-0c1650160f7b"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NotPedCan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="3a332487-d88a-48b8-ac42-8dbcda832f74">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="04408a06-0194-44a9-91e6-862f5d5d05d0"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NotPedPreCom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="3c8d1a58-dbf5-4819-96bd-305d8c8589bd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ddfccbe8-5f9e-4a80-92f4-dd9deb277c12"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ProdDes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20" uuid="d5540dc3-a95f-4f77-a34e-24d022127829">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b08ea320-029e-462a-8071-86154cfce8c5"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NotPedPrePar]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="0" width="501" height="20" uuid="1541d4ed-4df3-4505-a840-a8c041fe64a1"/>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="897e744b-fe70-4be6-bd46-25ffacac24a1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e12c5241-33ab-44f6-8a71-3a6eb5aa9ee2"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProSKU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="3c6de6d1-13fb-4c8c-86b0-c12497705570">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="89ce7d1a-45bd-4f1a-84da-0c1650160f7b"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedCan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="e8b9a2c8-12a4-4fb6-9dda-f74a2d2cd7f2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="04408a06-0194-44a9-91e6-862f5d5d05d0"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedPreCom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="542be6d0-3af6-4433-9fbb-3a962df128c4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ddfccbe8-5f9e-4a80-92f4-dd9deb277c12"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProdDes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="9f2ddfc3-b215-4855-a19e-df0c5168e2dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b08ea320-029e-462a-8071-86154cfce8c5"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedPrePar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="300" y="20" width="100" height="20" uuid="d9b48216-c994-4b0c-a412-18df3c720306">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fa25214e-ad2c-402b-861f-a275636e26ba"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NotPedSaldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="7accbb94-2705-4052-b93a-bdfd15445fca">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7bff0b3-6152-4ff3-8514-60877fbda502"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NotPedTot]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="b5218dae-61cc-42a0-a0eb-45be32a331c9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c7bff0b3-6152-4ff3-8514-60877fbda502"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedTot}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="20" width="100" height="20" uuid="dd37c51b-5436-4849-970d-41c40ce4544a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fa25214e-ad2c-402b-861f-a275636e26ba"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NotPedSaldo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

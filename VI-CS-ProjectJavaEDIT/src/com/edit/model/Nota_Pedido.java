@@ -4,14 +4,31 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Nota_Pedido extends Documento{
+	
 	private int CodNotPed;
 	private int FecRecepcionDia,FecRecepcionMes,FecRecepcionAño;
 	private int FecPagoDia,FecPagoMes,FecPagoAño;
-	
-	
+	private Proveedor provCod;
+	private Recibido recibido;
 	
 
 	
+
+	@Override
+	public String toString() {
+		return super.toString()+ " Nota_Pedido [CodNotPed=" + CodNotPed + ", FecRecepcionDia=" + FecRecepcionDia + ", FecRecepcionMes="
+				+ FecRecepcionMes + ", FecRecepcionAño=" + FecRecepcionAño + ", FecPagoDia=" + FecPagoDia
+				+ ", FecPagoMes=" + FecPagoMes + ", FecPagoAño=" + FecPagoAño + ", provCod=" + provCod + ", recibido="
+				+ recibido + "]";
+	}
+
+	public Proveedor getProvCod() {
+		return provCod;
+	}
+
+	public void setProvCod(Proveedor provCod) {
+		this.provCod = provCod;
+	}
 
 	public int getFecRecepcionDia() {
 		return FecRecepcionDia;
@@ -78,12 +95,7 @@ public class Nota_Pedido extends Documento{
 	public void setDocCod(int docCod) {
 		super.setDocCod(docCod);
 	}
-	public Proveedor getCliCod() {
-		return (Proveedor) super.getCliCod();
-	}
-	public void setCliCod(Proveedor cliCod) {
-		super.setCliCod(cliCod);
-	}
+	
 	public Colaborador getColCod() {
 		return super.getColCod();
 	}
@@ -114,12 +126,15 @@ public class Nota_Pedido extends Documento{
 	public void setPagCod(Tipo_Pago pagCod) {
 		super.setPagCod(pagCod);
 	}
-	public Entregado getEntRecCod() {
-		return (Entregado)(super.getEntRecCod());
+	
+	public Recibido getRecibido() {
+		return recibido;
 	}
-	public void setEntRecCod(Entregado entRecCod) {
-		super.setEntRecCod(entRecCod);
+
+	public void setRecibido(Recibido recibido) {
+		this.recibido = recibido;
 	}
+
 	public Estado getEstCod() {
 		return super.getEstCod();
 	}
@@ -153,4 +168,12 @@ public class Nota_Pedido extends Documento{
 	public double getIGV() {
 		return super.getIGV();
 	}
+	public Estado_Pago getEstadoPago() {
+		return super.getEstadoPago();
+	}
+	public void setEstadoPago(Estado_Pago estadoPago) {
+		super.setEstadoPago(estadoPago);
+	}
+
+	
 }

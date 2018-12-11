@@ -7,6 +7,12 @@ public class Inventario {
 	private double ProPreVen;
 	private int stock;
 	
+	@Override
+	public String toString() {
+		return "Inventario [ProvCod=" + ProvCod.getProvCod() + ", ProdCod=" + ProdCod.getProdCod() + ", ProPreCom=" + ProPreCom + ", ProPreVen="
+				+ ProPreVen + ", stock=" + stock + "]";
+	}
+
 	public Inventario() {
 		ProvCod=new Proveedor();
 		ProdCod=new Producto();

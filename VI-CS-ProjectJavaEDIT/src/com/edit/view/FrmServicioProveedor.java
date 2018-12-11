@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Handler;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import com.edit.dao.BusquedaProveedorDAOImpl;
+import com.edit.model.Proveedor;
+
 public class FrmServicioProveedor extends JFrame{
 	private JButton btnHistorialProveedor, btnBloquearProveedor,btnHistorialCambios,btnBuscar,btnGuardar,btnSalir;
 	private JPanel JPDatosProveedor, JPInformacionCuenta,JPInformacionSaldo,JPDeuda,JPDireccion;
@@ -26,8 +30,13 @@ public class FrmServicioProveedor extends JFrame{
 	private JTextField txtTipoDoc,txtDocumento,txtNombres,txtApellidos,txtTelefono,txtCelular;
 	private JComboBox JCDepartamento,JCProvincia,JCDistrito;
 	private JTextArea JTADireccion;
-
+    private BusquedaProveedorDAOImpl busqueda;
+    private FrmBuscarProveedor nuevaBusqueda;
+    private Proveedor proveedor;
 	public FrmServicioProveedor() {
+		proveedor = new Proveedor();
+		nuevaBusqueda = new FrmBuscarProveedor();
+		busqueda = new BusquedaProveedorDAOImpl();
 		Image logo=new ImageIcon(getClass().getResource("/Imagenes/logo.jpg")).getImage();
 		setTitle("Servicio Al Proveedor");
 		setResizable(false);
@@ -89,6 +98,12 @@ public class FrmServicioProveedor extends JFrame{
 		btnBuscar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/buscar.png")));
 		btnBuscar.setBounds(200, 16, 33, 25);
 		JPDatosProveedor.add(btnBuscar);
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnBuscarAction(e);
+				
+			}
+		});
 
 		lblProveedor = new JLabel("Proveedor:");
 		lblProveedor.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -218,17 +233,6 @@ public class FrmServicioProveedor extends JFrame{
 		getContentPane().add(JPDireccion);
 		JPDireccion.setLayout(null);
 
-		JCDepartamento = new JComboBox();
-		JCDepartamento.setBounds(10, 23, 126, 25);
-		JPDireccion.add(JCDepartamento);
-
-		JCProvincia = new JComboBox();
-		JCProvincia.setBounds(163, 23, 126, 25);
-		JPDireccion.add(JCProvincia);
-
-		JCDistrito = new JComboBox();
-		JCDistrito.setBounds(322, 23, 126, 25);
-		JPDireccion.add(JCDistrito);
 
 		JTADireccion = new JTextArea();
 		JTADireccion.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -261,46 +265,102 @@ public class FrmServicioProveedor extends JFrame{
 		btnGuardar.setIcon(new ImageIcon(getClass().getResource("/Imagenes/guardar.png")));
 		btnGuardar.setBounds(202, 445, 80, 42);
 		getContentPane().add(btnGuardar);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnGuardarAction(e);
+				
+			}
+		});
+		
 
 		btnSalir = new JButton("");
 		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/logout.png")));
 		btnSalir.setBounds(368, 445, 80, 42);
 		getContentPane().add(btnSalir);
+		btnSalir = new JButton("");
+		btnSalir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/guardar.png")));
+		btnSalir.setBounds(202, 445, 80, 42);
+		getContentPane().add(btnSalir);
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSalirAction(e);
+				
+			}
+		});
 
 		btnHistorialProveedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnHistorialProveedor(e);
 			}
 		});
-		btnHistorialCambios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnHistorialCambios(e);
-			}
-		});
-		btnBloquearProveedor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnBloquearProveedor(e);
-			}
-		});
+	
 
 
-
+//actualizarProveedor
 	}
 	private void btnHistorialProveedor(ActionEvent e) {
 		FrmHistorialProveedor principal = new FrmHistorialProveedor();
+		principal.llenarText(proveedor);
 		principal.setVisible(true);
 		setLocationRelativeTo(null);
+		
 	}
-	private void btnHistorialCambios(ActionEvent e) {
-		FrmHistorialCambiosProveedor h = new FrmHistorialCambiosProveedor();
-		h.setVisible(true);
-		setLocationRelativeTo(null);
-	}
-	private void btnBloquearProveedor(ActionEvent e) {
-		FrmBloqueoProveedor principal = new FrmBloqueoProveedor();
-		principal.setVisible(true);
-		setLocationRelativeTo(null);
+	private void btnSalirAction(ActionEvent e) {
+		dispose();
+		
 
+	}
+	private void btnBuscarAction(ActionEvent e) {
+      String RUC="";
+		//busqueda.redirigirBusqueda();
+		//this.llenarText(busqueda.dirigirServicioProveedor());
+		
+		
+		//System.out.println(RUC);
+		nuevaBusqueda.setVisible(true);
+		RUC = nuevaBusqueda.getRuc();
+	    try {
+		Proveedor proveedor = new Proveedor();
+		proveedor =  busqueda.obtenerDatos(RUC);
+		this.llenarText(proveedor);
+		}catch(Exception ee) {
+			
+		}
+	
+	}
+	
+	private void btnGuardarAction(ActionEvent e) {
+		    try {
+		    	proveedor.setPerDir(JTADireccion.getText());
+		    	proveedor.setPerTel(txtTelefono.getText());
+		    	proveedor.setPerCel(txtCelular.getText());
+		    	
+	
+			busqueda.actualizarProveedor(proveedor);
+			}catch(Exception e2) {
+				e2.getMessage();
+			}
+		
+		}
+	private void llenarText(Proveedor proveedor) {
+	    //System.out.println(proveedor.getPerNom());
+		//this.txtTipoDoc.setText(proveedor.getPerTipDoc().getDescripcion());
+		this.proveedor=proveedor;
+		this.txtDocumento.setText(proveedor.getPerNumDoc());
+		this.txtNombres.setText(proveedor.getPerNom());
+		this.txtTelefono.setText(proveedor.getPerTel());
+		this.txtCelular.setText(proveedor.getPerCel());
+		this.JTADireccion.setText(proveedor.getPerDir());
+		this.lblDeudaAtrasada.setText(""+proveedor.getProDeuAtr());
+	    this.lblDeudaActual.setText(""+proveedor.getProDeuAct());
+		this.lblDeudaTotal.setText(""+proveedor.getProDeuTot());
+		if(proveedor.getProDeuAtr()<=0){
+		    lblCalificacionDeuda.setText("SIN DEUDA");
+	    }else {
+	    	lblCalificacionDeuda.setText("DEUDA ATRASADA");
+	    }
+		
+	
 	}
 
 }

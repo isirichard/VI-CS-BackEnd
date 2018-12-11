@@ -6,6 +6,14 @@ import java.util.Date;
 public class Nota_Venta extends Documento {
 	private int CodNotVen;
 	private Date FecPago,FecEntrega;
+	private Cliente CliCod;
+	private Entregado entregado;
+	
+	//detalle
+	private double montoParcial;
+	private double montoTotal;
+	private int cantidad;
+	
 	public Date getFecPago() {
 		return FecPago;
 	}
@@ -38,10 +46,10 @@ public class Nota_Venta extends Documento {
 		super.setDocCod(docCod);
 	}
 	public Cliente getCliCod() {
-		return (Cliente) super.getCliCod();
+		return CliCod;
 	}
 	public void setCliCod(Cliente cliCod) {
-		super.setCliCod(cliCod);
+		this.CliCod=cliCod;
 	}
 	public Colaborador getColCod() {
 		return super.getColCod();
@@ -74,12 +82,15 @@ public class Nota_Venta extends Documento {
 	public void setPagCod(Tipo_Pago pagCod) {
 		super.setPagCod(pagCod);
 	}
-	public Entregado getEntRecCod() {
-		return (Entregado)(super.getEntRecCod());
+	
+	public Entregado getEntregado() {
+		return entregado;
 	}
-	public void setEntRecCod(Entregado entRecCod) {
-		super.setEntRecCod(entRecCod);
+
+	public void setEntregado(Entregado entregado) {
+		this.entregado = entregado;
 	}
+
 	public Estado getEstCod() {
 		return super.getEstCod();
 	}

@@ -6,12 +6,12 @@ import java.util.Date;
 public abstract class Documento {
 	//cabecera
 	private int DocCod;
-	private Persona CliCod;
+	private Estado_Pago estadoPago;
 	private Colaborador ColCod;
 	private int DocFecEmiDia,DocFecEmiMes,DocFecEmiAño;
 	
 	private Tipo_Pago PagCod;
-	private Referencial_booleano EntRecCod;//entregado/recibidocodigo
+	
 	private Estado estCod;
 	
 	//detalle
@@ -23,8 +23,30 @@ public abstract class Documento {
 	private double montoTotal;
 	private int cantidad;
 	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Documento [DocCod=" + DocCod + ", estadoPago=" + estadoPago + ", ColCod=" + ColCod + ", DocFecEmiDia="
+				+ DocFecEmiDia + ", DocFecEmiMes=" + DocFecEmiMes + ", DocFecEmiAño=" + DocFecEmiAño + ", PagCod="
+				+ PagCod + ", estCod=" + estCod + ", IGV=" + IGV + ", inventario=" + inventario + ", montoParcial="
+				+ montoParcial + ", montoTotal=" + montoTotal + ", cantidad=" + cantidad + "]";
+	}
+
+
 	public int getCantidad() {
 		return cantidad;
+	}
+	
+
+	public Estado_Pago getEstadoPago() {
+		return estadoPago;
+	}
+
+
+	public void setEstadoPago(Estado_Pago estadoPago) {
+		this.estadoPago = estadoPago;
 	}
 
 
@@ -45,12 +67,7 @@ public abstract class Documento {
 	public void setDocCod(int docCod) {
 		DocCod = docCod;
 	}
-	public Persona getCliCod() {
-		return CliCod;
-	}
-	public void setCliCod(Persona cliCod) {
-		CliCod = cliCod;
-	}
+	
 	public Colaborador getColCod() {
 		return ColCod;
 	}
@@ -99,12 +116,7 @@ public abstract class Documento {
 	public void setPagCod(Tipo_Pago pagCod) {
 		PagCod = pagCod;
 	}
-	public Referencial_booleano getEntRecCod() {
-		return EntRecCod;
-	}
-	public void setEntRecCod(Referencial_booleano entRecCod) {
-		EntRecCod = entRecCod;
-	}
+	
 	public Estado getEstCod() {
 		return estCod;
 	}
