@@ -17,6 +17,11 @@ public class Estado_pagoDAOImpl implements Estado_pagoDAO{
 		cx = Conexion.conectar();
 	}
 
+	/**
+	 * Este metodo sirve para mostrar el parametro descripcion de la tabla Estado pago
+	 * @param id - valor del parametro id de la tabla estado pago
+	 * @return - retorna la descripcion de la tabla estado pago
+	 */
 	public int getEstadoPagoDescripcionPorId(int id) {
 		int descripcion=-1;
 		try {

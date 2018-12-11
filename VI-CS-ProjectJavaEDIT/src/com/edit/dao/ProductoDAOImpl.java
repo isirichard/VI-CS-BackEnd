@@ -15,7 +15,11 @@ public class ProductoDAOImpl implements ProductoDAO{
 		cx = Conexion.conectar();
 	}
 
-	
+	/**
+	 * Este metodo sirve para mostrar el parametro descripcion de la tabla producto
+	 * @param id - valor del parametro id de la tabla producto
+	 * @return - retorna la descripcion de la tabla producto
+	 */
 	public String getProductoDescripcionPorId(int id) {
 		String descripcion="a";
 		try {

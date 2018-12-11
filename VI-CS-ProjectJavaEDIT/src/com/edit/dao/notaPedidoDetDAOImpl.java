@@ -16,6 +16,11 @@ public class notaPedidoDetDAOImpl implements notaPedidoDetDAO{
 		cx = Conexion.conectar();
 	}
 
+	/**
+	 * Este metodo muestra todo los movimientos anteriores de un proveedor
+	 * @param id - valor que representa el id del proveedor
+	 * @return - retorna una lista de los movimientos anteriores del proveedor
+	 */
 	public List<NotaPedidoDet> listarPorIdProv(int id) {
 		// TODO Auto-generated method stub
 		List<NotaPedidoDet> notapedidosDet = new ArrayList<NotaPedidoDet>();
@@ -45,7 +50,9 @@ public class notaPedidoDetDAOImpl implements notaPedidoDetDAO{
 		return notapedidosDet;
 	}
 	
-	
+	/**
+	 * Este metodo lista todo los nota pedido detalle
+	 */
 	@Override
 	public List<NotaPedidoDet> listarTodos() {
 		// TODO Auto-generated method stub

@@ -14,6 +14,11 @@ public class Estado_recibidoDAOImpl implements Estado_recibidoDAO{
 		cx = Conexion.conectar();
 	}
 
+	/**
+	 * Este metodo sirve para mostrar el parametro descripcion de la tabla Estado recibido
+	 * @param id - valor del parametro id de la tabla estado recibido
+	 * @return - retorna la descripcion de la tabla estado recibido
+	 */
 	public int getEstadoRecibidoDescripcionPorId(int id) {
 		int descripcion=-1;
 		try {

@@ -18,70 +18,8 @@ public class notaPedidoCabDAOImpl  implements notaPedidoCabDAO{
 		cx = Conexion.conectar();
 	}
 
-	public void agregar(Persona persona) {
-		try {
-			String sql = "INSERT INTO PERSONA(nombres, apellidos) VALUES (?,?)";
-			PreparedStatement preparedStatement = cx.prepareStatement(sql);
-			//preparedStatement.setString(1, persona.getNombres());
-			//preparedStatement.setString(2, persona.getApellidos());
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	
-	public void eliminar(int id) {
-		try {
-			String sql = "DELETE FROM PERSONA WHERE ID = ?";
-			PreparedStatement preparedStatement = cx.prepareStatement(sql);
-			preparedStatement.setInt(1, id);
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	
-	public void actualizar(Persona persona) {
-		try {
-			String sql = "UPDATE PERSONA SET NOMBRES = ?, APELLIDOS = ? WHERE ID = ?";
-			PreparedStatement preparedStatement = cx.prepareStatement(sql);
-			//preparedStatement.setString(1, persona.getNombres());
-			//preparedStatement.setString(2, persona.getApellidos());
-			//preparedStatement.setInt(3, persona.getId());
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	
 	
 
-	
-	public Persona listarPorIrd(int id) {
-		Persona persona = new Persona();
-		try {
-			String query = "SELECT * FROM PERSONA WHERE ID =?";
-			PreparedStatement preparedStatement = cx.prepareStatement(query);
-			preparedStatement.setInt(1, id);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				//persona.setId(resultSet.getInt("id"));
-				//persona.setNombres(resultSet.getString("nombres"));
-				//persona.setApellidos(resultSet.getString("apellidos"));
-			}
-			resultSet.close();
-			preparedStatement.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return persona;
-	}
 
 	@Override
 	public NotaPedidoCab listarPorId(int id) {
@@ -101,6 +39,9 @@ public class notaPedidoCabDAOImpl  implements notaPedidoCabDAO{
 		
 	}
 
+	/**
+	 * Este metodo sirve para listar todos los pedidos cabecera
+	 */
 	@Override
 	public List<NotaPedidoCab> listarTodos() {
 		// TODO Auto-generated method stub
@@ -148,6 +89,11 @@ public class notaPedidoCabDAOImpl  implements notaPedidoCabDAO{
 		return notapedidosCab;
 	}
 	
+	/**
+	  * Este metodo muestra todo los movimientos anteriores en base al Colaborador
+	 * @param ColCod - valor que representa el id del colaborador
+	 * @return - retorna una lista de los movimientos anteriores en base al colaborador
+	 */
 	public List<NotaPedidoCab> listarTodosPorColId(int ColCod) {
 		// TODO Auto-generated method stub
 		List<NotaPedidoCab> notapedidosCab = new ArrayList<NotaPedidoCab>();
@@ -192,6 +138,15 @@ public class notaPedidoCabDAOImpl  implements notaPedidoCabDAO{
 			e.printStackTrace();
 		}
 		return notapedidosCab;
+	}
+
+
+
+
+	@Override
+	public void eliminar(int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
