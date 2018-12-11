@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -47,10 +49,10 @@ public class FrmRegistroPedido extends JFrame{
 
 	private JPanel JPDatosCliente,JPEmpresa,JPFecha,JPTipoPago,JPEntrega,JPProducto,JPPrecio;
 	private JLabel lblTipoDOC,lblNro,lblProveedor,lblDireccionPro,lblEmpresa,lblRUC,lblDireccionEmp,lblTelefono,lblEmpresaNom,lblRUCNom,lblDireccionNom,lblTelefonoNom,
-	lblFechaEmision,lblFechaPago,lblPago,lblSKU,lblProducto,lblCodigoVend,lblCantidad,lblPrecioUnitario,lblPrecioxCant,
-	lblPrecioCompra,lblIGV,lblPrecioTotal,lblLogo;
-	private JTextField txtNro,txtProveedor,txtDireccion,txtSKU,txtProducto,txtCodigoVend,txtCantidad,txtPrecioUnitario,txtPrecioxCant,txtPrecioVenta,
-	txtIGV,txtPrecioTotal;
+	lblFechaEmision,lblFechaPago,lblPago,lblSKU,lblProducto,lblCodigoVend,lblCantidad,lblPrecioCompra,lblPrecioxCant,
+	lblCompraParcial,lblIGV,lblPrecioTotal,lblLogo,lblPrecioVenta;
+	private JTextField txtNro,txtProveedor,txtDireccion,txtSKU,txtProducto,txtCodigoVend,txtCantidad,txtPrecioCompra,txtPrecioxCant,txtCompraParcial,
+	txtIGV,txtPrecioTotal,txtPrecioVenta;
 	private JComboBox JCTipoDOC,JCPago;
 	private JDateChooser JDEmision,JDPago;
 	private JRadioButton JRRecibido,JRNoRecibido;
@@ -324,24 +326,36 @@ public class FrmRegistroPedido extends JFrame{
 		JPProducto.add(btnAgregar);
 
 
-		lblPrecioUnitario = new JLabel("Precio Unitario:");
-		lblPrecioUnitario.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblPrecioUnitario.setBounds(190, 80, 79, 14);
-		JPProducto.add(lblPrecioUnitario);
+		lblPrecioCompra = new JLabel("Precio Compra:");
+		lblPrecioCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblPrecioCompra.setBounds(190, 80, 79, 14);
+		JPProducto.add(lblPrecioCompra);
 
-		txtPrecioUnitario = new JTextField();
-		txtPrecioUnitario.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtPrecioUnitario.setEditable(false);
-		txtPrecioUnitario.setBounds(279, 75, 80, 25);
-		JPProducto.add(txtPrecioUnitario);
-		txtPrecioUnitario.setColumns(10);
+		txtPrecioCompra = new JTextField();
+		txtPrecioCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtPrecioCompra.setEditable(true);
+		txtPrecioCompra.setBounds(279, 75, 80, 25);
+		JPProducto.add(txtPrecioCompra);
+		txtPrecioCompra.setColumns(10);
 
 
 		lblPrecioxCant = new JLabel("Precio x Cant:");
 		lblPrecioxCant.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPrecioxCant.setBounds(381, 80, 72, 14);
 		JPProducto.add(lblPrecioxCant);
-
+		
+		lblPrecioVenta=new JLabel("Precio Venta:");
+		lblPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblPrecioVenta.setBounds(564, 80, 72, 14);
+		JPProducto.add(lblPrecioVenta);
+		
+		txtPrecioVenta= new JTextField();
+		txtPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtPrecioVenta.setEditable(true);
+		txtPrecioVenta.setBounds(634, 77, 64, 25);
+		JPProducto.add(txtPrecioVenta);
+		txtPrecioVenta.setColumns(10);
+		
 		txtPrecioxCant = new JTextField();
 		txtPrecioxCant.setEditable(false);
 		txtPrecioxCant.setBounds(463, 77, 78, 25);
@@ -362,10 +376,10 @@ public class FrmRegistroPedido extends JFrame{
 		JPProducto.add(JPPrecio);
 		JPPrecio.setLayout(null);
 
-		lblPrecioCompra = new JLabel("Precio Compra:");
-		lblPrecioCompra.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblPrecioCompra.setBounds(10, 29, 73, 14);
-		JPPrecio.add(lblPrecioCompra);
+		lblCompraParcial = new JLabel("Compra Parcial:");
+		lblCompraParcial.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCompraParcial.setBounds(10, 29, 88, 14);
+		JPPrecio.add(lblCompraParcial);
 
 		lblIGV = new JLabel("IGV% :");
 		lblIGV.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -377,11 +391,11 @@ public class FrmRegistroPedido extends JFrame{
 		lblPrecioTotal.setBounds(10, 105, 73, 14);
 		JPPrecio.add(lblPrecioTotal);
 
-		txtPrecioVenta = new JTextField();
-		txtPrecioVenta.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtPrecioVenta.setBounds(85, 24, 58, 25);
-		JPPrecio.add(txtPrecioVenta);
-		txtPrecioVenta.setColumns(10);
+		txtCompraParcial = new JTextField();
+		txtCompraParcial.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtCompraParcial.setBounds(85, 24, 58, 25);
+		JPPrecio.add(txtCompraParcial);
+		txtCompraParcial.setColumns(10);
 
 		txtIGV = new JTextField();
 		txtIGV.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -412,9 +426,10 @@ public class FrmRegistroPedido extends JFrame{
 		radioButtonAccion();
 		buscarSKU();
 		AgregarProducto();
-		
-		Guardar();
 
+		Guardar();
+		SubirDatosTabla();
+		eliminarDatoTabla();
 
 		//		txtNro.addKeyListener(new KeyAdapter() {
 		//			@Override
@@ -427,7 +442,7 @@ public class FrmRegistroPedido extends JFrame{
 		//			}
 		//		});
 
-		
+
 		txtCantidad.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -513,7 +528,7 @@ public class FrmRegistroPedido extends JFrame{
 		txtDireccion.setText(proveedor.getPerDir());
 	}
 
-		public void calcularPrecioxCantidad() {
+	public void calcularPrecioxCantidad() {
 		double resultado=0.0;
 		try {
 			int cantidad=0;
@@ -522,7 +537,7 @@ public class FrmRegistroPedido extends JFrame{
 				txtPrecioxCant.setText("0.0");
 			}
 			cantidad=(Integer.parseInt(txtCantidad.getText()));
-			double precioVenta=(Double.parseDouble(txtPrecioUnitario.getText()));
+			double precioVenta=(Double.parseDouble(txtPrecioCompra.getText()));
 			resultado=cantidad*precioVenta;
 			txtPrecioxCant.setText(""+resultado);
 		}catch (Exception e) {
@@ -541,12 +556,12 @@ public class FrmRegistroPedido extends JFrame{
 		det[0]=txtCantidad.getText();
 		det[1]=txtSKU.getText();
 		det[2]=txtProducto.getText();
-		det[3]=txtPrecioUnitario.getText();
+		det[3]=txtPrecioCompra.getText();
 		det[4]=txtPrecioxCant.getText();
-		
+
 		System.out.println(inventario);
-		
-		
+
+
 		modelo.addRow(det);
 		inventarios.add(inventario);
 		limpiar();
@@ -559,10 +574,10 @@ public class FrmRegistroPedido extends JFrame{
 		txtSKU.setText("");
 		txtProducto.setText("");
 		txtCantidad.setText("");
-		txtPrecioUnitario.setText("");
+		txtPrecioCompra.setText("");
 		txtPrecioxCant.setText("");
 	}
-	
+
 
 	//metodos
 
@@ -669,7 +684,7 @@ public class FrmRegistroPedido extends JFrame{
 				return false;
 			}
 		}catch (Exception e) {
-			
+
 			// TODO: handle exception
 		}
 		return true;
@@ -731,18 +746,18 @@ public class FrmRegistroPedido extends JFrame{
 				JOptionPane.showMessageDialog(null,"Ingrese Cantidad Permitida");
 				return false;
 			}
-				if(Integer.parseInt(txtCantidad.getText())==0) {
-					JOptionPane.showMessageDialog(null,"Ingrese Cantidad Permitida");
-					return false;
-				}
-			
+			if(Integer.parseInt(txtCantidad.getText())==0) {
+				JOptionPane.showMessageDialog(null,"Ingrese Cantidad Permitida");
+				return false;
+			}
+
 			if(Double.parseDouble(txtPrecioxCant.getText())==0.0 ) {
 				JOptionPane.showMessageDialog(null,"Precio No Permitido");
 				return false;
 			}
-			
-				
-			
+
+
+
 		}catch (Exception e) {
 			return false;
 			// TODO: handle exception
@@ -757,12 +772,12 @@ public class FrmRegistroPedido extends JFrame{
 				if(validarAgregarProducto()) {
 					JTabla.setModel(agregarATabla());
 					llenarPrecioTotal();
-					
+
 				}
 			}
 		});
 	}
-	
+
 	private void btnEnterSKU(KeyEvent e){
 		inventario.getProdCod().setProSKU(txtSKU.getText());
 
@@ -771,7 +786,7 @@ public class FrmRegistroPedido extends JFrame{
 		if(tecla==KeyEvent.VK_ENTER) {
 			logicaPedido.buscarSKU(inventario);
 			txtProducto.setText(inventario.getProdCod().getProdDes());
-			txtPrecioUnitario.setText(""+inventario.getProPreVen());
+			txtPrecioCompra.setText(""+inventario.getProPreVen());
 
 
 		}
@@ -794,7 +809,7 @@ public class FrmRegistroPedido extends JFrame{
 			for(int i=0;i<fila;i++) {
 				precioVenta+=(Double.parseDouble(JTabla.getValueAt(i, 4).toString()));
 			}
-			txtPrecioVenta.setText(""+precioVenta);
+			txtCompraParcial.setText(""+precioVenta);
 			precioTotal=precioVenta+(precioVenta*0.18);
 			txtPrecioTotal.setText(""+precioTotal);
 
@@ -819,14 +834,75 @@ public class FrmRegistroPedido extends JFrame{
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Registro no se completo");
+					Finalizado();
 				}
-				
-				
+
+
 
 
 			}
 		});
 
 	}
+	public void SubirDatosTabla() {
+		JTabla.addMouseListener(new MouseAdapter() {
+			//		@Override
+			public void mousePressed(MouseEvent e) {
+				JTable jt=(JTable) e.getSource();
+				Point point=e.getPoint();
+				int row=jt.rowAtPoint(point);
+				if(e.getClickCount()==2) {
+					txtCantidad.setText(JTabla.getValueAt(JTabla.getSelectedRow(),0).toString());
+					txtSKU.setText(JTabla.getValueAt(JTabla.getSelectedRow(), 2).toString());
+					txtProducto.setText(JTabla.getValueAt(JTabla.getSelectedRow(), 3).toString());
+					txtPrecioCompra.setText(JTabla.getValueAt(JTabla.getSelectedRow(), 4).toString());
 
+					//					
+
+				}
+			}
+		});
+	}
+
+	public void eliminarDatoTabla() {
+		JTabla.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				btnEliminar(e);
+			}
+		});
+		
+	}
+	public void btnEliminar(KeyEvent e) {
+		
+
+		char tecla=e.getKeyChar();
+
+		if(tecla==KeyEvent.VK_DELETE) {
+			JTabla.setModel(quitarTabla());
+
+
+		}
+
+			
+		
+	}
+	public DefaultTableModel quitarTabla() {
+		System.out.println(JTabla.getSelectedRow());
+		inventarios.remove(JTabla.getSelectedRow());
+		modelo.removeRow(JTabla.getSelectedRow());
+		System.out.println(inventario);
+		
+		
+		
+		return modelo;
+
+	}
+	
+	public void Finalizado() {
+		if(JOptionPane.showConfirmDialog(rootPane, "Desea salir del sistema","Salir del sistema",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+			logicaPedido.imprimirReporte();
+		}
+	}
+	
 }

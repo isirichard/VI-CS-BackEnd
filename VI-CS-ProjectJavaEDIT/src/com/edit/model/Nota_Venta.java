@@ -9,6 +9,11 @@ public class Nota_Venta extends Documento {
 	private Cliente CliCod;
 	private Entregado entregado;
 	
+	//detalle
+	private double montoParcial;
+	private double montoTotal;
+	private int cantidad;
+	
 	public Date getFecPago() {
 		return FecPago;
 	}

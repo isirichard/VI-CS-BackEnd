@@ -20,13 +20,21 @@ import com.edit.model.Tipo_Cliente;
 import com.edit.model.Tipo_Documento;
 
 
-
+/**
+ * 
+ * @author Andre Cruz, Esta clase Realiza toda la clase Logica acerca de la Clase Persona
+ *@version 1.1
+ */
 public class LogicaPersona {
 	private Connection con=Conexion.conectar();
 	private String Sql="";
 	public LogicaPersona() {
 
 	}
+	/**
+	 * este metodo asigna los datos de la persona a la clase persona, la persona debe tener el nro de Documento y asi obtiene los demas datos de la clase persona
+	 * @param p,
+	 */
 	public void asignarDatosPersona(Persona p) {
 		Sql="select TipDocCod,PerNro,PerNom,PerDir,PerTel,PerCel"
 				+ " From Persona where PerCod='"+p.getPerCod()+"'";
@@ -51,6 +59,10 @@ public class LogicaPersona {
 			// TODO: handle exception
 		}
 	}
+	/**
+	 * este metodo asigna los datos del cliente a partir de la asignacion de la clase persona
+	 * @param c , 
+	 */
 	public void asignarDatosCliente(Cliente c) {
 		asignarDatosPersona(c);
 		Sql="select TipCliCod,CliCup From Cliente where CliCod='"+c.getCliCod()+"'";
@@ -72,10 +84,18 @@ public class LogicaPersona {
 			// TODO: handle exception
 		}
 	}
+	/**
+	 * este metodo asigna los datos del proveedor
+	 * @param p
+	 */
 	public void asignarDatosProveedor(Proveedor p) {
 		asignarDatosPersona(p);
 
 	}
+	/**
+	 * este metodo asigna los datos del colaborador de la clase colaborador
+	 * @param c
+	 */
 	public void asignarDatosColaborador(Colaborador c) {
 		asignarDatosPersona(c);
 		Sql="Select ColUsu,ColPas,AccCod From Colaborador where ColCod='"+c.getColCod()+"'";
@@ -96,7 +116,11 @@ public class LogicaPersona {
 		}
 
 	}
-
+/**
+ * En este metodo se Inserta un cliente en el caso la Persona no existiece
+ * @param c
+ * @return un booleano si esque en verdad se inserta un cliente
+ */
 	public boolean InsertarCliente(Cliente c) {
 
 		Sql="insert into Persona(PerNro,PerNom,PerDir,PerTel,PerCel,TipDocCod, EstCod)"
@@ -142,7 +166,11 @@ public class LogicaPersona {
 		}
 		return false;
 	}
-
+	/**
+	 * Este metodo inserta un proveedor a la base de datos si es que esta Persona no existe
+	 * @param c
+	 * @return
+	 */
 	public boolean InsertarProveedor(Proveedor c) {
 		Sql="insert into Persona(PerNro,PerNom,PerDir,PerTel,PerCel,TipDocCod, EstCod)"
 				+ " values (?,?,?,?,?,?,?)";
@@ -189,7 +217,11 @@ public class LogicaPersona {
 		}
 		return false;
 	}
-
+/**
+ * este metodo inserta un colaborador en caso no existiece la persona
+ * @param c
+ * @return
+ */
 	public boolean InsertarColaborador(Colaborador c) {
 		Sql="insert into Persona(PerNro,PerNom,PerDir,PerTel,PerCel,TipDocCod, EstCod)"
 				+ " values (?,?,?,?,?,?,?)";
@@ -237,7 +269,10 @@ public class LogicaPersona {
 		}
 		return false;
 	}
-
+	/**
+	 * este metodo asigna el codigo del cliente a un codigo de persona
+	 * @param cliente
+	 */
 	public void asignarPerCod_PerCli(Cliente cliente) {
 
 		ValidarPersona(cliente);
@@ -268,7 +303,10 @@ public class LogicaPersona {
 			// TODO: handle exception
 		}
 	}
-
+/**
+ * este metodo asigna el codigo persona a la BD proveedor
+ * @param p
+ */
 	public void asignarPerCod_ProvCod(Proveedor p) {
 		ValidarPersona(p);
 		String Sql2="Insert into Proveedor(PerCod,EstCod) values(?,?)";
@@ -296,7 +334,10 @@ public class LogicaPersona {
 			// TODO: handle exception
 		}
 	}
-
+/**
+ * este metodo asigna a un colaborador una persona
+ * @param c
+ */
 	public void asignarPerCod_ColCod(Colaborador c) {
 
 		ValidarPersona(c);
@@ -327,7 +368,11 @@ public class LogicaPersona {
 			// TODO: handle exception
 		}
 	}
-
+/**
+ * este metodo valida la persona , en caso existiese dicha persona por medio del nro de documento returna true
+ * @param p
+ * @return
+ */
 	public boolean ValidarPersona(Persona p) {
 		int resultado=0;
 		String sql="select TipDocCod,PerNro, PerCod "
@@ -355,7 +400,11 @@ public class LogicaPersona {
 		return false;
 
 	}
-
+/**
+ * este metodo valida el cliente , en caso existiese dicho cliente por medio del nro de documento retorna true
+ * @param c
+ * @return
+ */
 	public boolean validarCliente(Cliente c) {
 		int resultado=0;
 		String sql1="select Persona.perCod,Cliente.PerCod, Persona.TipDocCod, Cliente.CliCod "
@@ -389,7 +438,11 @@ public class LogicaPersona {
 		return false;
 
 	}
-
+/**
+ * este metodo valida al proveedor , en caso existiese dicha proveedor por medio del nro de documento retorna true
+ * @param c
+ * @return
+ */
 	public boolean validarProveedor(Proveedor c) {
 		int resultado=0;
 		String sql1="select Persona.perCod,Proveedor.PerCod, Persona.TipDocCod, Proveedor.ProvCod "
@@ -422,7 +475,11 @@ public class LogicaPersona {
 		}
 		return false;
 	}
-
+/**
+ * este metodo valida al Colaborador , en caso existiese dicha Colaborador por medio del nro de documento retorna true
+ * @param c
+ * @return
+ */
 
 
 	public boolean validarColaborador(Colaborador c) {
@@ -460,7 +517,11 @@ public class LogicaPersona {
 	}
 
 	
-	
+	/**
+	 * este metodo modifica la tabla persona de la BD .
+	 * @param p
+	 * @return
+	 */
 	public boolean ModificarPersona(Persona p) {
 		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerCel=?,PerTel=? where PerCod="+p.getPerCod();
 		try {
@@ -481,6 +542,10 @@ public class LogicaPersona {
 		}
 		return false;
 	}
+	/**
+	 * este metodo modifica la tabla persona de la BD y la tabla cliente
+	 * @param cliente
+	 */
 	public void ModificarCliente(Cliente cliente) {
 		ModificarPersona(cliente);
 //		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerTel=?,PerCel=? where PerCod=?";
@@ -516,7 +581,10 @@ public class LogicaPersona {
 		// TODO Auto-generated method stub
 
 	}
-
+/**
+ * este metodo modifica la tabla persona de la BD y la tabla Colaborador
+ * @param c
+ */
 	public void ModificarColaborador(Colaborador c) {
 		String sql="UPDATE Persona set PerNom=?, PerDir=?,PerCel=?,PerTel=? where PerCod=?";
 		String sql2="UPDATE Colaborador set ColUsu=?,ColPas=?,AccCod=? where ColCod=?";
@@ -550,7 +618,10 @@ public class LogicaPersona {
 	}
 
 	
-
+/**
+ * este metodo modifica la tabla persona de la BD y la tabla Proveedor
+ * @param p
+ */
 	public void ModificarProveedor(Proveedor p) {
 		ModificarPersona(p);
 	}
