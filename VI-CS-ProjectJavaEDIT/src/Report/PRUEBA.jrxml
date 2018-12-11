@@ -9,8 +9,7 @@ NjAwLWIzMjgtMzI2YjBlNmEwYjJmO3BydWViYS5wcm9kdWN0byAsOTIyLDE5NixmMDA3MDZjZC0z
 MjI3LTRmODMtOWI5MC0xODJkZmEwOTJlNjU7cHJ1ZWJhLnRpcG9fZG9jdW1lbnRvICw2MzMsODIs
 OTgxNTliNjQtMDE4Mi00NmJkLWExMDktYjc1YzYyZjAxY2Y4O3BydWViYS5ub3RhX3BlZGlkb19j
 YWIgLDE2NCwxOCxjZjQzNTRjOS1lNjRlLTRhMzItYWQ3My1jYTg2Y2YwOWQ2MWY7cHJ1ZWJhLnBl
-cnNvbmEgLDQ4OCwxNixkOWQzOTVkOC1hZmVhLTQ5OTctOWVhNC1mYWUwZWE3YjI0MDI7
-]]>
+cnNvbmEgLDQ4OCwxNixkOWQzOTVkOC1hZmVhLTQ5OTctOWVhNC1mYWUwZWE3YjI0MDI7]]>
 	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdAdapter"/>
 	<parameter name="NroPedido" class="java.lang.Integer"/>
