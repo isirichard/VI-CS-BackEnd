@@ -20,7 +20,12 @@ import javax.swing.border.TitledBorder;
 
 import com.edit.dao.BusquedaProveedorDAOImpl;
 import com.edit.model.Proveedor;
-
+/**
+ * Esta clase sera la vista
+ * mostrara los servicios del proveedor (nombre, deduda, direccion etc)
+ * @author grupo
+ *
+ */
 public class FrmServicioProveedor extends JFrame{
 	private JButton btnHistorialProveedor, btnBloquearProveedor,btnHistorialCambios,btnBuscar,btnGuardar,btnSalir;
 	private JPanel JPDatosProveedor, JPInformacionCuenta,JPInformacionSaldo,JPDeuda,JPDireccion;
@@ -298,6 +303,11 @@ public class FrmServicioProveedor extends JFrame{
 
 //actualizarProveedor
 	}
+	/**
+	 * Este metodo redireccionara al historial del proveedor
+	 * pulsando el boton btnHistorialProveedor
+	 * @param e - evento que accionara este metodo
+	 */
 	private void btnHistorialProveedor(ActionEvent e) {
 		FrmHistorialProveedor principal = new FrmHistorialProveedor();
 		principal.llenarText(proveedor);
@@ -305,11 +315,20 @@ public class FrmServicioProveedor extends JFrame{
 		setLocationRelativeTo(null);
 		
 	}
+	/**
+	 * este metodo cerrara esta ventana
+	 * @param e - evento que accionara este metodo
+	 */
 	private void btnSalirAction(ActionEvent e) {
 		dispose();
 		
 
 	}
+	/**
+	 * Este metodo se encargara de buscar aperturar la ventana Buscar proveedor
+	 * buscara un proveedor filtrando por su nombre
+	 * @param e - evento que accionara este metodo
+	 */
 	private void btnBuscarAction(ActionEvent e) {
       String RUC="";
 		//busqueda.redirigirBusqueda();
@@ -328,7 +347,11 @@ public class FrmServicioProveedor extends JFrame{
 		}
 	
 	}
-	
+	/**
+	 * Este metodo se encargara de actualizar
+	 * los nuevos cambios en la base de datos para el proveedor
+	 * @param e - evento que accionara este metodo
+	 */
 	private void btnGuardarAction(ActionEvent e) {
 		    try {
 		    	proveedor.setPerDir(JTADireccion.getText());
@@ -342,6 +365,12 @@ public class FrmServicioProveedor extends JFrame{
 			}
 		
 		}
+	/**
+	 * este metodo se encargara de llenar las cajas de texto 
+	 * de es esta ventana con los datos del proveedor
+	 * seleccionado
+	 * @param proveedor - este parametro tendra los datos del proveedor seleccionado
+	 */
 	private void llenarText(Proveedor proveedor) {
 	    //System.out.println(proveedor.getPerNom());
 		//this.txtTipoDoc.setText(proveedor.getPerTipDoc().getDescripcion());

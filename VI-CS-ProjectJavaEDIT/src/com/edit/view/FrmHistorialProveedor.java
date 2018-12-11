@@ -421,6 +421,11 @@ public class FrmHistorialProveedor extends JFrame{
 		System.out.println("HECHO");
 		return datos;
 	}
+	/**
+	 * este metodo se encargara de llenar las ajas de texto
+	 * con los datos del proveedor seleccionado
+	 * @param proveedor - este parametro tendra todos los datos del proveedor seleccionado
+	 */
 	public void llenarText(Proveedor proveedor) {
 	    //System.out.println(proveedor.getPerNom());
 		//this.txtTipoDoc.setText(proveedor.getPerTipDoc().getDescripcion());

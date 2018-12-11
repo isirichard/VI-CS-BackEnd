@@ -16,7 +16,11 @@ import com.edit.model.Persona;
 import com.edit.model.Proveedor;
 import com.edit.view.FrmBuscarProveedor;
 import com.edit.view.FrmServicioProveedor;
-
+/**
+ *Esta clase buscara los datos del Proveedor
+ *en la base de datos, lo referente a sus datos, actualizacion 
+ *@author grupo
+ */
 public class BusquedaProveedorDAOImpl implements IBusquedaProveedorDAO {
 
 	private Connection cx;
@@ -24,12 +28,18 @@ public class BusquedaProveedorDAOImpl implements IBusquedaProveedorDAO {
 	private FrmBuscarProveedor nuevaBusqueda;
 	protected FrmServicioProveedor datosRecibidosBusqueda;
 	private Proveedor proveedor;
-
+    /**
+     * Este constructor iniciara una conexion
+     */
 	public BusquedaProveedorDAOImpl() {
 		cx = Conexion.conectar();
 		proveedor = new Proveedor();
 	}
-
+    /**
+     * Permite recibir una cadena la cual sera en numero de documento
+     * y buscar en la base de datos a traves del numero de documento del proveedor
+     * @param doc - este sera en numero de documento del proveedor
+     */
 	@Override
 	public Proveedor obtenerDatos(String doc) {
 		System.out.println(doc);
@@ -67,7 +77,11 @@ public class BusquedaProveedorDAOImpl implements IBusquedaProveedorDAO {
 		return proveedor;
 
 	}
-
+    /**
+     * Consultara el estado del proveedor en la base de datos
+     * @param id - sera el codigo de estado del proveedor
+     * @return - retornara la descripcion del estado
+     */
 	public String DescripcionEstado(int id) {
 		String descrip = null;
 		try {
@@ -87,7 +101,10 @@ public class BusquedaProveedorDAOImpl implements IBusquedaProveedorDAO {
 
 		return descrip;
 	}
-
+    /**
+     * Este metodo se encargara de actualizar un registro en la base de datos
+     * @param proveedor - este objeto contendra todos los datos a modificar
+     */
 	public void actualizarProveedor(Proveedor proveedor){
 		System.out.println(proveedor.getPerCod());
 			

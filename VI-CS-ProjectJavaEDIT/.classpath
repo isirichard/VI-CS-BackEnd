@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/jasperreports-functions-6.2.1.jar"/>
 	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/jasperreports-javaflow-6.2.1.jar"/>
 	<classpathentry kind="lib" path="D:/Universidad/CS/Jasperreport-jars/jars validate/jar/joda-time-2.9.3.jar"/>
+	<classpathentry kind="lib" path="D:/CS3/cs/VI-CS-ProjectJavaEDIT/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
